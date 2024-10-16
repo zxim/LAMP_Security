@@ -1,0 +1,159 @@
+/* 공통 설정 */
+* { 
+    padding: 0; 
+    margin: 0; 
+    box-sizing: border-box;
+}
+ul { 
+    list-style-type: none; 
+}
+a { 
+    display: inline-block; 
+    text-decoration: none; 
+    color: #0f0072; /* 파란색으로 변경 */
+}
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none; 
+    color: #0f0072; /* 파란색으로 통일 */
+}
+
+/* 버튼 */
+.buttons { 
+    text-align: right; 
+    margin: 20px 20px 0 0; 
+}
+.buttons li { 
+    display: inline; 
+}
+.buttons button { 
+    padding: 8px 20px; 
+    cursor: pointer; 
+    background-color: #0f0072; /* 파란색 배경 */
+    color: white; /* 흰색 글씨 */
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.buttons button:hover { 
+    background-color: white; /* 흰색 배경으로 변경 */
+    color: #0f0072; /* 파란색 글씨 */
+    border: 1px solid #0f0072;
+}
+
+/* 게시판 제목 */
+h2 { 
+    margin-top: 20px;	
+    padding: 10px; 
+    border-bottom: solid 3px #0f0072; /* 파란색 밑줄 */
+    color: #0f0072; /* 파란색 글씨 */
+}
+
+/* 게시판 글쓰기(form.php) */
+.board_form span { 
+    display: inline-block; 
+}
+.board_form .col1 { 
+    width: 15%; 
+    float: left; 
+    color: #0f0072; /* 파란색 글씨 */
+}
+.board_form .col2 { 
+    width: 85%; 
+    float: left; 
+}
+.board_form li { 
+    height: 50px; 
+    padding: 12px; 
+    border-bottom: solid 1px #dddddd; 
+}
+.board_form input { 
+    width: 100%; 
+    height: 25px; 
+    border: 1px solid #cccccc; 
+    border-radius: 3px;
+    padding: 5px;
+    background-color: white; /* 흰색 배경 */
+}
+.board_form input:focus {
+    border-color: #0f0072; /* 포커스 시 파란색 테두리 */
+}
+.board_form .area { 
+    height: 155px; 
+}
+.board_form textarea { 
+    width: 100%; 
+    height: 130px; 
+    border: 1px solid #cccccc; 
+    border-radius: 3px;
+    padding: 5px;
+    background-color: white; /* 흰색 배경 */
+}
+.board_form textarea:focus {
+    border-color: #0f0072; /* 포커스 시 파란색 테두리 */
+}
+.board_form .email input { 
+    width: 150px; 
+}
+
+/* 게시판 목록보기(list.php) */
+.board_list li { 
+    padding: 10px 0; 
+    border-bottom: solid 1px #dddddd; 
+    color: black; /* 검은색 글씨 */
+    font-family: 'Noto Sans', 'Pretendard', sans-serif; /* 현대적인 글꼴 */
+    font-weight: bold; /* 굵은 글씨 */
+}
+.board_list span { 
+    display: inline-block; 
+    text-align: center; 
+}
+.board_list .col1 { 
+    width: 10%; 
+}
+.board_list .col2 { 
+    width: 55%; 
+    text-align: left; 
+}
+.board_list .col3, .col4, .col5 { 
+    color: black; /* 검은색 글씨 */
+}
+
+/* 페이지 번호 */
+.page_num {	
+    text-align: center;	
+    margin-top: 20px; 
+}
+.page_num li { 
+    display: inline; 
+}
+
+/* 게시판 내용보기(view.php) */
+.board_view .row1 {	
+    padding: 15px; 
+    border-bottom: solid 1px #aaaaaa; 
+    background-color: #f4f7fa; /* 가벼운 배경색 */
+    color: #0f0072; /* 파란색 글씨 (제목과 작성자 정보) */
+}
+.board_view .row2 {	
+    padding: 15px 15px 80px 15px; 
+    border-bottom: solid 1px #cccccc; 
+    background-color: #f4f7fa; /* 가벼운 배경색 */
+    color: black; /* 글 내용 검은색으로 변경 */
+}
+.board_view .col2 { 
+    float: right; 
+    color: #0f0072; /* 파란색 글씨 (작성자 정보) */
+}
+
+/* 글씨체 적용을 위한 추가 설정 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .buttons {
+        text-align: center;
+    }
+    .board_form, .board_list, .board_view {
+        width: 100%;
+    }
+}
