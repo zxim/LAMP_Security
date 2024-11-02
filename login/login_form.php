@@ -9,7 +9,7 @@
 	{
     	if (!document.login.id.value) {
         	alert("아이디를 입력하세요");    
-        	document.login_form.id.focus();
+        	document.login.id.focus();
         	return;
     	}
 
@@ -20,6 +20,10 @@
     	}
     	document.login.submit();
 	}
+
+	function go_back() {
+      window.history.back();
+   }
 </script>	
 </head>
 <body> 
@@ -34,9 +38,11 @@
 				<span class="col1">비밀번호</span>
 				<span class="col2"><input type="password" name="pass" placeholder="비밀번호"></span>
 			</li>
+        </ul>
+		<ul class="buttons">
 			<li><button type="button" onclick="check_input()">로그인</button></li>
-        </ul>	    	
+			<li><button type="button" onclick="go_back()">나가기</button></li>
+		</ul>
 	</form>
 </body>
 </html>
-

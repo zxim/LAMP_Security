@@ -1,0 +1,158 @@
+/* 기본 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+}
+
+/* 현대 로고 글씨체 불러오기 */
+@font-face {
+    font-family: 'HyundaiLogoFont';
+    src: url('../../hyundai-logo-font.ttf') format('truetype');
+}
+
+a {
+    text-decoration: none;
+    color: #0f0072;
+}
+
+/* 현대 로고 스타일 적용 및 위치 조정 */
+.header h3 ul span:first-of-type {
+    margin-left: -200px;
+    margin-top: 10px;
+    font-family: 'HyundaiLogoFont', sans-serif;
+    color: white; /* 흰색으로 강제 적용 */
+    letter-spacing: 1px;
+}
+
+.header h3 ul span:nth-of-type(2) {
+    margin-left: -100px;
+    margin-top: 10px;
+    font-family: 'HyundaiLogoFont', sans-serif;
+    color: white; /* 흰색으로 강제 적용 */
+    letter-spacing: 1x;
+}
+
+/* 다른 스타일들 */
+.header h3 a:first-of-type {
+    margin-left: 150px;
+    margin-top: 10px;
+}
+
+.header h3 a:nth-of-type(2) {
+    margin-left: 100px;
+    margin-top: 10px;
+}
+
+.header h3 a:nth-of-type(3) {
+    margin-left: 100px;
+    margin-top: 10px ;
+}
+
+.header h3 .history-btn {
+    margin-left: 100px;
+    margin-top: 10px;
+}
+
+.header h3 a:first-child {
+    margin-right: 50px;
+}
+
+/* 로고 및 게시판 텍스트에 마우스를 올렸을 때 글씨가 커짐 */
+.logo a:hover,
+.memberboard-btn:hover {
+    font-size: 40px; /* 글씨 크기를 키움 */
+    transition: font-size 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+
+
+/* 헤더 스타일 */
+.header {
+    background-color: #0f0072; 
+    padding: 10px 0 ;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
+header a {
+    text-decoration: none;
+}
+
+/* 마우스를 올렸을 때 헤더가 밑으로 늘어남 */
+.header:hover {
+    padding: 60px 0; /* 패딩을 늘려서 밑으로 늘어나는 효과 */
+}
+
+/* 로고 스타일 */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.top {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: white;
+    color: #0f0072;
+    font-weight: bold;
+    border: 1px solid #0f0072;
+    transition: all 0.3s ease;
+}
+
+/* 마우스를 올렸을 때 버튼 스타일 */
+.btn:hover {
+    background-color: #0f0072;
+    color: white;
+}
+
+/* 로그인 정보 표시 스타일 */
+.logged {
+    color: white;
+    font-weight: bold;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-top: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.top a.btn {
+    margin-left: 10px;
+    color: #0f0072;
+    text-decoration: none;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.top a.btn:hover {
+    color: white;
+    background-color: #0f0072;
+    text-decoration: none;
+}

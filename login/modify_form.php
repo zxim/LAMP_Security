@@ -52,14 +52,22 @@
     </script>
 </head>
 <body>
-    <?php    
+    <?php 
         session_start();
         if (isset($_SESSION["userid"])) 
             $userid = $_SESSION["userid"];
         else 
             $userid = "";
 
-        $con = mysqli_connect("localhost", "min", "guseodhxhdpqj@", "project");
+        $config = require '../config.php';  // 루트에 있는 config.php 파일 불러옴
+        // config.php에서 가져온 정보를 변수에 저장
+        $db_host = $config['DB_HOST'];
+        $db_user = $config['DB_USER'];
+        $db_password = $config['DB_PASSWORD'];
+        $db_name = $config['DB_NAME'];
+
+
+        $con = mysqli_connect($db_host, $db_user, $db_password, $db_name);
         $sql    = "select * from members where id='$userid'";
         $result = mysqli_query($con, $sql);
         $row    = mysqli_fetch_assoc($result);

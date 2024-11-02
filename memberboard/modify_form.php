@@ -4,7 +4,15 @@
 	$num  = $_GET["num"];
 	$page = $_GET["page"];
 
-	$con = mysqli_connect("localhost", "min", "guseodhxhdpqj@", "project");
+	$config = require '../config.php';  // 루트에 있는 config.php 파일 불러옴
+
+   	// config.php에서 가져온 정보를 변수에 저장
+   	$db_host = $config['DB_HOST'];
+   	$db_user = $config['DB_USER'];
+   	$db_password = $config['DB_PASSWORD'];
+   	$db_name = $config['DB_NAME'];
+
+	$con = mysqli_connect($db_host, $db_user, $db_password, $db_name);
 	$sql = "select * from memberboard where num=$num";	// 레코드 검색
 	$result = mysqli_query($con, $sql);		// SQL 명령 실행
 
@@ -45,7 +53,7 @@
 		<span style="margin-left: 50px;"></span>
 		회원 게시판 > 글 수정하기
 	</h2>
-	<form name="board" method="post" action="modify.php?num=<?=$num?>&page=<?=$page?>">
+	<form name="board" method="post" action="/project/memberboard/modify.php?num=<?=$num?>&page=<?=$page?>">
 	    <ul class="board_form">
 			<li>
 				<span class="col1">이름 : </span>

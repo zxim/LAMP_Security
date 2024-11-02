@@ -16,6 +16,52 @@ a {
     color: #0f0072;
 }
 
+@font-face {
+    font-family: 'HyundaiLogoFont';
+    src: url('../../hyundai-logo-font.ttf') format('truetype');
+    letter-spacing: 1px;
+}
+
+.header h3 ul span:first-of-type {
+    margin-left: -200px;
+    margin-top: 10px;
+    font-family: 'HyundaiLogoFont', sans-serif;
+    letter-spacing: 1px;
+}
+
+.header h3 ul span:nth-of-type(2) {
+    margin-left: -100px;
+    margin-top: 10px;
+    font-family: 'HyundaiLogoFont', sans-serif;
+}
+
+.header h3 a:first-of-type {
+    margin-left: 150px;
+    margin-top: 10px;
+}
+.header h3 a:nth-of-type(2) {
+    margin-left: 100px;
+    margin-top: 10px;
+}
+.header h3 a:nth-of-type(3) {
+    margin-left: 100px;
+    margin-top: 10px;
+}
+.header h3 a:nth-of-type(4) {
+    margin-left: 100px;
+    margin-top: 10px;
+}
+.header h3 a:first-child {
+    margin-right: 50px; /* 홈과 게시판 사이의 간격을 50px로 설정 */
+}
+
+/* 로고 및 게시판 텍스트에 마우스를 올렸을 때 글씨가 커짐 */
+.logo a:hover,
+.memberboard-btn:hover {
+    font-size: 40px; /* 글씨 크기를 키움 */
+    transition: font-size 0.3s ease; /* 부드러운 전환 효과 */
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -25,10 +71,16 @@ a {
 /* 헤더 스타일 */
 .header {
     background-color: #0f0072; 
-    padding: 20px 0;
+    padding: 10px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
+/* 마우스를 올렸을 때 헤더가 밑으로 늘어남 */
+.header:hover {
+    padding: 60px 0; /* 패딩을 늘려서 밑으로 늘어나는 효과 */
 }
 
+/* 로고 스타일 */
 .logo {
     display: flex;
     align-items: center;
@@ -38,7 +90,7 @@ a {
     display: flex;
     align-items: center;
     color: white;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
 }
 
@@ -50,6 +102,7 @@ a {
     margin-top: 10px;
 }
 
+/* 버튼 스타일 */
 .btn {
     padding: 10px 20px;
     border-radius: 5px;
@@ -60,11 +113,13 @@ a {
     transition: all 0.3s ease;
 }
 
+/* 마우스를 올렸을 때 버튼 스타일 */
 .btn:hover {
     background-color: #0f0072;
     color: white;
 }
 
+/* 로그인 정보 표시 스타일 */
 .logged {
     color: white;
     font-weight: bold;
@@ -81,3 +136,7 @@ a {
         flex-direction: column;
     }
 }
+
+/* div .image-section {
+    margin-top: 300px;
+} */

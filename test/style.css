@@ -1,0 +1,363 @@
+/* 기본 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'HyundaiLogo';
+    src: url('../hyundai-logo-font.ttf') format('truetype');
+}
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+}
+
+/* 현대 로고 글씨체 불러오기 */
+@font-face {
+    font-family: 'HyundaiLogoFont';
+    src: url('../../hyundai-logo-font.ttf') format('truetype');
+}
+
+a {
+    text-decoration: none;
+    color: #0f0072;
+}
+
+/* 헤더 스타일 */
+.header {
+    background-color: #0f0072; 
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.header h3 ul span:first-of-type {
+    margin-left: -200px;
+    margin-top: 10px;
+    font-family: 'HyundaiLogoFont', sans-serif;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.header h3 ul span:nth-of-type(2) {
+    margin-left: -100px;
+    margin-top: 10px;
+    font-family: 'HyundaiLogoFont', sans-serif;
+    color: white;
+    letter-spacing: 1x;
+}
+
+.header h3 a:first-of-type {
+    margin-left: 150px;
+    margin-top: 10px;
+}
+
+.header h3 a:nth-of-type(2) {
+    margin-left: 100px;
+    margin-top: 10px;
+}
+
+.header h3 a:nth-of-type(3) {
+    margin-left: 100px;
+    margin-top: 10px;
+}
+
+.header h3 a:first-child {
+    margin-right: 50px;
+}
+
+.logo a:hover,
+.memberboard-btn:hover {
+    font-size: 40px;
+    transition: font-size 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.top {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: white;
+    color: #0f0072;
+    font-weight: bold;
+    border: 1px solid #0f0072;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0f0072;
+    color: white;
+}
+
+.logged {
+    color: white;
+    font-weight: bold;
+}
+
+.top a.btn {
+    margin-left: 10px;
+    color: #0f0072;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.top a.btn:hover {
+    color: white;
+    background-color: #0f0072;
+}
+
+/* 진단 결과 페이지 스타일 */
+body {
+    background-color: #f4f7fa;
+    font-family: 'Noto Sans', 'Pretendard', sans-serif;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #0f0072;
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 50px;
+}
+
+table {
+    margin: 0 auto;
+    width: 80%;
+    background-color: white;
+    border-collapse: collapse;
+}
+
+/* 표의 첫 번째 열(헤더)의 스타일 */
+table th {
+    background-color: #0f0072 !important; /* 첫 번째 열을 파란색으로 채움 */
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    vertical-align: middle; /* 위아래 가운데 정렬 */
+}
+
+/* 표 셀 스타일 */
+table td {
+    color: #333;
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+    vertical-align: middle; /* 위아래 가운데 정렬 */
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+div p {
+    font-size: 18px;
+    color: #555;
+    text-align: center;
+    margin: 10px 0;
+    border-bottom: 2px solid #0f0072;
+    margin-bottom: 20px;
+}
+
+.canvas-container {
+    width: 50%;
+    margin: 30px auto;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+}
+
+button, .custom-btn, .graph-button {
+    background-color: #0f0072;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+/* 마우스를 올렸을 때 */
+button:hover, .custom-btn:hover, .graph-button:hover {
+    background-color: white;
+    color: #0f0072;
+    border: 1px solid #0f0072; /* 테두리를 파란선으로 설정 */
+}
+
+.custom-btn {
+    background-color: #0f0072;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.custom-btn:hover, .graph-button:hover {
+    background-color: white;
+    color: #0f0072;
+    border: 1px solid #0f0072;
+}
+
+.custom-btn:focus {
+    outline: none;
+    box-shadow: 0 0 5px #0f0072;
+}
+
+/* 필터 드롭다운 스타일 */
+.filter-dropdown {
+    padding: 5px 10px;
+    padding-right: 30px; /* 오른쪽 패딩 추가로 글씨와 화살표 간격 유지 */
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #0f0072;
+    font-size: 14px;
+    font-weight: bold;
+    appearance: none;
+    -webkit-appearance: none; /* Safari */
+    -moz-appearance: none; /* Firefox */
+    background-image: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgY2xhc3M9Ii1mYSBmYS1jYXJlci1kb3duIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xMiAxNS4yOTVsNi42MTctNi42MTdhMSAxIDAgMCAwLTEuNDIxLTEuNDIxbC01LjIwOCA1LjIwOC01LjIwOC01LjIwOEExIDEgMCAwIDAgNC43NzMgOC42NzhsNi42MTcgNi42MTdhMSAxIDAgMCAwIDEuNDEuMDAzeiIvPjwvc3ZnPg==');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+
+
+
+/* 필터 옵션 스타일 */
+#systemFilter option, #vulnerabilityFilter option {
+    font-weight: bold;
+}
+
+#systemFilter option[value="Server(Linux)"] {
+    color: #63CC63;
+}
+
+#systemFilter option[value="Apache"] {
+    color: #CD426B;
+}
+
+#systemFilter option[value="Mysql"] {
+    color: #ffce56;
+}
+
+#systemFilter option[value="PHP"] {
+    color: #6482B9;
+}
+
+#vulnerabilityFilter option[value="V"] {
+    color: red;
+}
+
+#vulnerabilityFilter option[value="S"] {
+    color: green;
+}
+
+/* 그래프 및 필터 섹션 */
+.graph-container {
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.canvas-container {
+    width: 45%;
+}
+
+.results-hidden .graph-button {
+    margin-bottom: 10px;
+}
+
+.results-visible .graph-container {
+    display: flex;
+}
+
+.results-visible .graph-button {
+    margin-bottom: 40px;
+}
+
+.vulnerable-row {
+    background-color: #f0f0f0;
+}
+
+/* 부모 요소에서 가운데 정렬 */
+.parent-container {
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+}
+
+button.test-result-Btn, button.test-history-Btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0f0072;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-align: center;
+    outline: none;
+}
+
+button.test-result-Btn:hover, button.test-history-Btn:hover {
+    background-color: white;
+    color: #0f0072;
+    border: 2px solid #0f0072;
+}
+
+.parent-container::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #0f0072;
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+}
