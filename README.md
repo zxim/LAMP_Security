@@ -1,4 +1,4 @@
-## Cloud Security Automation Diagnostic Program
+# Cloud Security Automation Diagnostic Program
 ## 1. Development Environment
 Programming Languages: PHP, JavaScript
 Development Tools: Visual Studio Code, Vim
@@ -14,10 +14,10 @@ Development Period: October 15, 2024 - October 25, 2024
 My responsibilities included creating web pages and building infrastructure using the LAMP stack.
 
 ## 4. Stack
-## Environment
+### Environment
 <div> <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" /> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" /> <img src="https://img.shields.io/badge/Apache-D22128?style=for-the-badge&logo=apache&logoColor=white" /> <img src="https://img.shields.io/badge/AWS%20EC2-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white" /> <img src="https://img.shields.io/badge/Amazon%20Linux-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white" /> <img src="https://img.shields.io/badge/Ansible- red?style=for-the-badge&logo=ansible&logoColor=white" /> </div>
 
-## Others
+### Others
 <div> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /> <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white" /> <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white" /> </div>
 
 ## 5. Features
@@ -30,14 +30,14 @@ History: Stores diagnostic results in a database, allowing users to view their d
 Getting Started
 Follow the instructions below to set up and run the project locally.
 
-## Prerequisites
+### Prerequisites
 PHP
 Apache
 MySQL
 Ansible
 AWS Account (for cloud deployment)
 
-## Installation
+### Installation
 Clone the repository:
 bash
 git clone https://github.com/zxim/LAMP_Security.git
@@ -48,6 +48,6 @@ cd LAMP_Security
 Set up the environment variables in a .env file.
 Install dependencies.
 
-## Usage
+### Usage
 Run the server and access the application via your web browser.
 Utilize the provided features to perform vulnerability diagnostics.
