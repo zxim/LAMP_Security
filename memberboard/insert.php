@@ -2,15 +2,15 @@
 include "session.php"; // 세션 처리
 
 // 로그인 여부 확인
-if (!$userid) {
-    echo "
-        <script>
-        alert('게시판 글쓰기는 로그인 후 이용해 주세요!');
-        history.go(-1);
-        </script>
-    ";
-    exit;
-}
+// if (!$userid) {
+//     echo "
+//         <script>
+//         alert('게시판 글쓰기는 로그인 후 이용해 주세요!');
+//         history.go(-1);
+//         </script>
+//     ";
+//     exit;
+// }
 
 $subject = $_POST["subject"];
 $content = $_POST["content"];
