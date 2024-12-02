@@ -1,0 +1,434 @@
+/* 공통 설정 */
+* { 
+    padding: 0; 
+    margin: 0; 
+    box-sizing: border-box;
+}
+ul { 
+    list-style-type: none; 
+}
+a { 
+    display: inline-block; 
+    text-decoration: none; 
+    color: #0f0072; /* 파란색으로 변경 */
+}
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none; 
+    color: #0f0072; /* 파란색으로 통일 */
+}
+
+/* 버튼 */
+/* 버튼 스타일 */
+.btn {
+    padding: 10px 20px;
+    background-color: #0f0072;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0c005e;
+    color: white;
+}
+.buttons { 
+    text-align: right; 
+    margin: 20px 20px 0 0; 
+}
+.buttons li { 
+    display: inline; 
+}
+.buttons button { 
+    padding: 8px 20px; 
+    cursor: pointer; 
+    background-color: #0f0072; /* 파란색 배경 */
+    color: white; /* 흰색 글씨 */
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.buttons button:hover { 
+    background-color: white; /* 흰색 배경으로 변경 */
+    color: #0f0072; /* 파란색 글씨 */
+    border: 1px solid #0f0072;
+}
+
+/* 게시판 제목 */
+h2 { 
+    margin-top: 20px;	
+    padding: 10px; 
+    border-bottom: solid 3px #0f0072; /* 파란색 밑줄 */
+    color: #0f0072; /* 파란색 글씨 */
+}
+
+/* 게시판 글쓰기(form.php) */
+.board_form span { 
+    display: inline-block; 
+}
+.board_form .col1 { 
+    width: 15%; 
+    float: left; 
+    color: #0f0072; /* 파란색 글씨 */
+}
+.board_form .col2 { 
+    width: 85%; 
+    float: left; 
+}
+.board_form li { 
+    height: 50px; 
+    padding: 12px; 
+    border-bottom: solid 1px #dddddd; 
+}
+.board_form input { 
+    width: 100%; 
+    height: 25px; 
+    border: 1px solid #cccccc; 
+    border-radius: 3px;
+    padding: 5px;
+    background-color: white; /* 흰색 배경 */
+}
+.board_form input:focus {
+    border-color: #0f0072; /* 포커스 시 파란색 테두리 */
+}
+.board_form .area { 
+    height: 155px; 
+}
+.board_form textarea { 
+    width: 100%; 
+    height: 130px; 
+    border: 1px solid #cccccc; 
+    border-radius: 3px;
+    padding: 5px;
+    background-color: white; /* 흰색 배경 */
+}
+.board_form textarea:focus {
+    border-color: #0f0072; /* 포커스 시 파란색 테두리 */
+}
+.board_form .email input { 
+    width: 150px; 
+}
+
+/* 게시판 목록보기(list.php) */
+.board_list li {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: solid 1px #dddddd;
+    color: black;
+    font-family: 'Noto Sans', 'Pretendard', sans-serif;
+    font-weight: bold;
+    align-items: center;
+}
+
+.board_list span {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.board_list .col1 {
+    width: 10%;
+}
+
+.board_list .col2 {
+    width: 40%;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+/* 글쓴이 아이디 열 고정 너비 설정 */
+.board_list .col3 {
+    width: 15%; /* 글쓴이 열의 고정 너비 */
+    white-space: nowrap; /* 한 줄로 표시 */
+    overflow: hidden; /* 넘치는 내용 숨기기 */
+    text-overflow: ellipsis; /* 넘칠 경우 ... 표시 */
+    letter-spacing: 1px;
+    margin-right: 20px;
+}
+
+/* 첨부 파일 열 */
+.board_list .col4 {
+    width: 10%;
+    min-height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+}
+
+/* 이미지 크기 제한 */
+.col4 img {
+    max-width: 12px;
+    max-height: 15px;
+    object-fit: contain;
+}
+
+/* 날짜 열 */
+.board_list .col5 {
+    width: 10%;
+}
+
+
+
+/* 페이지 번호 */
+.page_num {	
+    text-align: center;	
+    margin-top: 20px; 
+}
+.page_num li { 
+    display: inline; 
+}
+
+/* 게시판 내용보기(view.php) */
+.board_view .row1 {	
+    padding: 15px; 
+    border-bottom: solid 1px #aaaaaa; 
+    background-color: #f4f7fa; /* 가벼운 배경색 */
+    color: #0f0072; /* 파란색 글씨 (제목과 작성자 정보) */
+}
+.board_view .row2 {	
+    padding: 15px 15px 80px 15px; 
+    border-bottom: solid 1px #cccccc; 
+    background-color: #f4f7fa; /* 가벼운 배경색 */
+    color: black; /* 글 내용 검은색으로 변경 */
+}
+.board_view .col2 { 
+    float: right; 
+    color: #0f0072; /* 파란색 글씨 (작성자 정보) */
+}
+
+/* 글씨체 적용을 위한 추가 설정 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .buttons {
+        text-align: center;
+    }
+    .board_form, .board_list, .board_view {
+        width: 100%;
+    }
+}
+
+/* 헤더 부분 */
+/* 기본 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+}
+
+/* 현대 로고 글씨체 불러오기 */
+@font-face {
+    font-family: 'HyundaiLogoFont';
+    src: url('../hyundai-logo-font.ttf') format('truetype');
+}
+
+a {
+    text-decoration: none;
+    color: #0f0072;
+}
+
+/* 현대 로고 스타일 적용 및 위치 조정 */
+.header h3 ul span:first-of-type {
+    margin-left: -200px;
+    margin-top: 10px;
+    font-family: 'HyundaiLogoFont', sans-serif;
+    color: white !important; /* 흰색으로 강제 적용 */
+}
+
+.header h3 ul span:nth-of-type(2) {
+    margin-left: -100px;
+    margin-top: 10px;
+    font-family: 'HyundaiLogoFont', sans-serif;
+    color: white !important; /* 흰색으로 강제 적용 */
+}
+
+/* 다른 스타일들 */
+.header h3 a:first-of-type {
+    margin-left: 150px;
+    margin-top: 10px;
+}
+
+.header h3 a:nth-of-type(2) {
+    margin-left: 100px;
+    margin-top: 10px;
+}
+
+.header h3 a:nth-of-type(3) {
+    margin-left: 100px;
+    margin-top: 10px;
+}
+.header h3 a:nth-of-type(4) {
+    margin-left: 100px;
+    margin-top: 10px;
+}
+
+.header h3 a:first-child {
+    margin-right: 50px;
+}
+
+/* 로고 및 게시판 텍스트에 마우스를 올렸을 때 글씨가 커짐 */
+.logo a:hover,
+.memberboard-btn:hover {
+    font-size: 40px; /* 글씨 크기를 키움 */
+    transition: font-size 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 헤더 스타일 */
+.header {
+    background-color: #0f0072; 
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+/* 마우스를 올렸을 때 헤더가 밑으로 늘어남 */
+.header:hover {
+    padding: 60px 0; /* 패딩을 늘려서 밑으로 늘어나는 효과 */
+}
+
+/* 로고 스타일 */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.top {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: white;
+    color: #0f0072;
+    font-weight: bold;
+    border: 1px solid #0f0072;
+    transition: all 0.3s ease;
+}
+
+/* 마우스를 올렸을 때 버튼 스타일 */
+.btn:hover {
+    background-color: #0f0072;
+    color: white;
+}
+
+/* 로그인 정보 표시 스타일 */
+.logged {
+    color: white;
+    font-weight: bold;
+}
+
+
+.container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-top: 20px;
+}
+.header {
+    /* background: rgba(15, 0, 114, 0.8);       배경 투명하게 하는거*/
+    padding: 20px;
+    color: white;
+}
+.top a.btn {
+    margin-left: 10px;
+    color: #0f0072;
+    text-decoration: none;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.top a.btn:hover {
+    color: white;
+    background-color: #0f0072;
+    text-decoration: none;
+}
+
+/* 파일 업로드 버튼 숨기기 */
+input[type="file"] {
+    display: none;
+}
+
+/* 파일 업로드 버튼 대체 */
+.file-upload-label {
+    display: inline-block;
+    padding: 5px 10px; 
+    background-color: #0f0072;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px; 
+    transition: background-color 0.3s ease;
+}
+
+
+/* 마우스를 올렸을 때 스타일 */
+.file-upload-label:hover {
+    background-color: #050043;
+}
+
+/* 첨부 파일 표시 텍스트 */
+.file-upload-text {
+    margin-left: 10px;
+    font-size: 12px; 
+    color: #555;
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 10px 20px;
+    background-color: #0f0072;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* 마우스를 올렸을 때 버튼 스타일 */
+.btn:hover {
+    background-color: #050043;
+}
+
+/* 버튼 그룹 정렬 */
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+ul.buttons button {
+    margin-right: 0; 
+}
