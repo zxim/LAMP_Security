@@ -10,37 +10,31 @@ $db_user = $config['DB_USER'];
 $db_password = $config['DB_PASSWORD'];
 $db_name = $config['DB_NAME'];
 
+// DB 연결
 $con = mysqli_connect($db_host, $db_user, $db_password, $db_name);
-$sql = "SELECT * FROM members WHERE id='$id'";
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM members WHERE id='$id' AND pass='$pass'";
 $result = mysqli_query($con, $sql);
 
-$num_match = mysqli_num_rows($result);
+if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    session_start();
+    $_SESSION["userid"] = $row["id"];
+    $_SESSION["username"] = $row["name"];
 
-if (!$num_match) {
     echo "<script>
-             window.alert('등록되지 않은 아이디입니다!')
-             history.go(-1)
+            alert('로그인 성공!');
+            location.href = 'index.php';
           </script>";
 } else {
-    $row = mysqli_fetch_assoc($result);
-    $db_pass = $row["pass"]; // 저장된 비밀번호 (평문 상태)
-
-    mysqli_close($con);
-
-    if ($pass !== $db_pass) {
-        echo "<script>
-                 window.alert('비밀번호가 틀립니다!')
-                 history.go(-1)
-              </script>";
-        exit;
-    } else {
-        session_start();
-        $_SESSION["userid"] = $row["id"];
-        $_SESSION["username"] = $row["name"];
-
-        echo "<script>
-                location.href = 'index.php';
-              </script>";
-    }
+    echo "<script>
+             alert('아이디 또는 비밀번호가 틀립니다.');
+             history.go(-1);
+          </script>";
 }
+
+mysqli_close($con);
 ?>
