@@ -24,9 +24,7 @@ $subject = $row["subject"]; // 제목
 $regist_day = $row["regist_day"]; // 작성일
 $content = $row["content"]; // 내용
 
-$content = str_replace(" ", "&nbsp;", $content); // 공백 변환
-$content = str_replace("\n", "<br>", $content); // 줄바꿈 변환
-
+// 공백 및 줄바꿈 변환 제거 (XSS 허용)
 $file_name    = $row["file_name"];
 $file_type    = $row["file_type"];
 $file_copied  = $row["file_copied"];
@@ -60,13 +58,13 @@ $userid = isset($_SESSION["userid"]) ? $_SESSION["userid"] : "";
 	</h2>
 	<ul class="board_view">
 		<li class="row1">
-			<span class="col1"><b>제목 :</b> <?=$subject?></span> <!-- 제목 출력 -->
-			<span class="col2"><?=$name?> | <?=$regist_day?></span> <!-- 이름, 작성일 출력 -->
+			<span class="col1"><b>제목 :</b> <?= $subject ?></span> <!-- 제목 출력 -->
+			<span class="col2"><?= $name ?> | <?= $regist_day ?></span> <!-- 이름, 작성일 출력 -->
 		</li>
 		<li class="row2">
 		<?php
 			if($file_name) {
-				$file_path = "./data/".$file_copied;
+				$file_path = "./data/" . $file_copied;
 				$file_size = filesize($file_path);
 
 				// 이미지 파일 타입 확인
@@ -81,31 +79,17 @@ $userid = isset($_SESSION["userid"]) ? $_SESSION["userid"] : "";
 			       	<a href='download.php?num=$num&file_copied=$file_copied&file_name=$file_name&file_type=$file_type'>[저장]</a><br><br>";
 				}
 			}	
-			echo $content; // 글 내용 출력
+			echo $content; // 글 내용 출력 (XSS 허용)
 		?>
 		</li>		
 	</ul>
 	<ul class="buttons">
-		<li><button onclick="location.href='list.php?page=<?=$page?>'">목록보기</button></li>
+		<li><button onclick="location.href='list.php?page=<?= $page ?>'">목록보기</button></li>
 		<?php
-			// 로그인한 사용자의 ID와 작성자의 ID가 일치하는 경우에만 수정/삭제 버튼을 표시
-			if ($userid === $id) {
+			// 수정/삭제 버튼: 로그인 사용자의 ID와 작성자 ID가 일치하지 않아도 표시 (CSRF 허용)
 		?>
-			<li><button onclick="location.href='modify_form.php?num=<?=$num?>&page=<?=$page?>'">수정하기</button></li>   
-			<li><button onclick="location.href='delete.php?num=<?=$num?>&page=<?=$page?>'">삭제하기</button></li>
-		<?php
-			} else {
-		?>
-			<script>
-				function alertNotAllowed() {
-					alert('본인의 글만 수정/삭제할 수 있습니다.');
-				}
-			</script>
-			<li><button onclick="alertNotAllowed()">수정하기</button></li>
-			<li><button onclick="alertNotAllowed()">삭제하기</button></li>
-		<?php
-			}
-		?>
+		<li><button onclick="location.href='modify_form.php?num=<?= $num ?>&page=<?= $page ?>'">수정하기</button></li>   
+		<li><button onclick="location.href='delete.php?num=<?= $num ?>&page=<?= $page ?>'">삭제하기</button></li>
 		<!-- 글쓰기 버튼 클릭 시 로그인 여부를 확인 -->
 		<li><button onclick="checkLoginBeforeWrite()">글쓰기</button></li>
 	</ul>

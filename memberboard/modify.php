@@ -27,16 +27,32 @@ $subject = htmlspecialchars($_POST["subject"], ENT_QUOTES); // HTML 특수문자
 $content = htmlspecialchars($_POST["content"], ENT_QUOTES); // HTML 특수문자 처리
 $regist_day = date("Y-m-d (H:i)");  // 수정 시간
 
-$config = require '../config.php';  // 루트에 있는 config.php 파일 불러옴
+$upload_dir = './data/'; // 업로드 디렉토리
 
-// config.php에서 가져온 정보를 변수에 저장
-$db_host = $config['DB_HOST'];
-$db_user = $config['DB_USER'];
-$db_password = $config['DB_PASSWORD'];
-$db_name = $config['DB_NAME'];
+// 파일 업로드 처리
+$upfile_name = $_FILES["upfile"]["name"];
+$upfile_tmp_name = $_FILES["upfile"]["tmp_name"];
+$upfile_error = $_FILES["upfile"]["error"];
+
+if ($upfile_name && !$upfile_error) {
+    $uploaded_file = $upload_dir . $upfile_name; // 파일명을 그대로 사용
+
+    // **취약점: 파일 크기 제한 없음, 확장자 검증 없음**
+    if (!move_uploaded_file($upfile_tmp_name, $uploaded_file)) {
+        echo "<script>
+        alert('파일 업로드에 실패했습니다.');
+        history.back();  // 업로드 실패 시 이전 페이지로 이동
+        </script>";
+        exit();
+    }
+} else {
+    $upfile_name = ""; // 파일이 없는 경우 처리
+}
+
+$config = require '../config.php';  // DB 설정 불러오기
 
 // DB 연결
-$con = mysqli_connect($db_host, $db_user, $db_password, $db_name);
+$con = mysqli_connect($config['DB_HOST'], $config['DB_USER'], $config['DB_PASSWORD'], $config['DB_NAME']);
 
 if (!$con) {
     echo "<script>
@@ -47,9 +63,9 @@ if (!$con) {
 }
 
 // 글 수정 쿼리 (Prepared statement 사용)
-$sql = "UPDATE memberboard SET subject = ?, content = ?, regist_day = ? WHERE num = ?";
+$sql = "UPDATE memberboard SET subject = ?, content = ?, regist_day = ?, file_name = ? WHERE num = ?";
 $stmt = mysqli_prepare($con, $sql);
-mysqli_stmt_bind_param($stmt, "sssi", $subject, $content, $regist_day, $num);
+mysqli_stmt_bind_param($stmt, "ssssi", $subject, $content, $regist_day, $upfile_name, $num);
 $execute_result = mysqli_stmt_execute($stmt);
 
 // 수정 성공 여부 확인
