@@ -20,19 +20,19 @@
 </head> 
 <body> 
     <?php include 'header.php'; ?>
-
-    <div>
+    <div class="title">
         <h1>현대오토에버</h1>
         <p class="sub-title">SW 모빌티리 스쿨</p>
     </div>
-    <div>
+    <div class="title">
         <h1>모의해킹 프로젝트</h1>
         <p class="sub-title">웹 취약점 진단 및 모의해킹</p>
     </div>
-    <div>
-        <h1>Made By 2Team</h1>
+    <div class="title" style="margin-bottom: 200px;">
+        <h1>2조의 취약한 웹사이트</h1>
+        <p class="sub-title">지금 바로 만나보세요</p>
     </div>
-    <div><img src="./images/hyundai.png" alt="hyundai"></div>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -40,17 +40,18 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.style.opacity = 1; // 요소 보이기
-                        observer.unobserve(entry.target); // 애니메이션 후 관찰 중지
-                    }
-                    else {
-                        entry.target.style.opacity = 0;
+                        entry.target.style.transform = 'translateY(0)'; // 제자리 이동
+                    } else {
+                        entry.target.style.opacity = 0; // 요소 숨기기
+                        entry.target.style.transform = 'translateY(50px)'; // 아래로 이동
                     }
                 });
             });
-
-            const divs = document.querySelectorAll('div'); // 모든 div 선택
-            divs.forEach(div => observer.observe(div)); // 각 div 관찰
+        
+            const divs = document.querySelectorAll('.title'); // 모든 .title 선택
+            divs.forEach(div => observer.observe(div)); // 각 .title 관찰
         });
+
     </script>
 </body> 
 </html>

@@ -10,18 +10,18 @@ ul {
 a { 
     display: inline-block; 
     text-decoration: none; 
-    color: #0f0072; /* 파란색으로 변경 */
+    color: black; /* 파란색으로 변경 */
 }
 a:link, a:visited, a:hover, a:active {
     text-decoration: none; 
-    color: #0f0072; /* 파란색으로 통일 */
+    color: black; /* 파란색으로 통일 */
 }
 
 /* 버튼 */
 /* 버튼 스타일 */
 .btn {
     padding: 10px 20px;
-    background-color: #0f0072;
+    background-color: black;
     color: white;
     border: none;
     border-radius: 5px;
@@ -32,7 +32,7 @@ a:link, a:visited, a:hover, a:active {
 
 .btn:hover {
     background-color: white;
-    color: #0f0072;
+    color: black;
 }
 .buttons { 
     text-align: right; 
@@ -44,7 +44,7 @@ a:link, a:visited, a:hover, a:active {
 .buttons button { 
     padding: 8px 20px; 
     cursor: pointer; 
-    background-color: #0f0072; /* 파란색 배경 */
+    background-color: black; /* 파란색 배경 */
     color: white; /* 흰색 글씨 */
     border: none;
     border-radius: 5px;
@@ -52,16 +52,16 @@ a:link, a:visited, a:hover, a:active {
 }
 .buttons button:hover { 
     background-color: white; /* 흰색 배경으로 변경 */
-    color: #0f0072; /* 파란색 글씨 */
-    border: 1px solid #0f0072;
+    color: black; /* 파란색 글씨 */
+    border: 1px solid black;
 }
 
 /* 게시판 제목 */
 h2 { 
     margin-top: 20px;	
     padding: 10px; 
-    border-bottom: solid 3px #0f0072; /* 파란색 밑줄 */
-    color: #0f0072; /* 파란색 글씨 */
+    border-bottom: solid 3px black; /* 파란색 밑줄 */
+    color: black; /* 파란색 글씨 */
 }
 
 /* 게시판 글쓰기(form.php) */
@@ -71,7 +71,7 @@ h2 {
 .board_form .col1 { 
     width: 15%; 
     float: left; 
-    color: #0f0072; /* 파란색 글씨 */
+    color: black; /* 파란색 글씨 */
 }
 .board_form .col2 { 
     width: 85%; 
@@ -91,7 +91,7 @@ h2 {
     background-color: white; /* 흰색 배경 */
 }
 .board_form input:focus {
-    border-color: #0f0072; /* 포커스 시 파란색 테두리 */
+    border-color: black; /* 포커스 시 파란색 테두리 */
 }
 .board_form .area { 
     height: 155px; 
@@ -105,7 +105,7 @@ h2 {
     background-color: white; /* 흰색 배경 */
 }
 .board_form textarea:focus {
-    border-color: #0f0072; /* 포커스 시 파란색 테두리 */
+    border-color: black; /* 포커스 시 파란색 테두리 */
 }
 .board_form .email input { 
     width: 150px; 
@@ -187,7 +187,7 @@ h2 {
     padding: 15px; 
     border-bottom: solid 1px #aaaaaa; 
     background-color: #f4f7fa; /* 가벼운 배경색 */
-    color: #0f0072; /* 파란색 글씨 (제목과 작성자 정보) */
+    color: black; /* 파란색 글씨 (제목과 작성자 정보) */
 }
 .board_view .row2 {	
     padding: 15px 15px 80px 15px; 
@@ -197,7 +197,7 @@ h2 {
 }
 .board_view .col2 { 
     float: right; 
-    color: #0f0072; /* 파란색 글씨 (작성자 정보) */
+    color: black; /* 파란색 글씨 (작성자 정보) */
 }
 
 /* 글씨체 적용을 위한 추가 설정 */
@@ -228,15 +228,15 @@ h2 {
     padding: 10px 20px;
     border-radius: 5px;
     background-color: white;
-    color: #0f0072;
+    color: black;
     font-weight: bold;
-    border: 1px solid #0f0072;
+    border: 1px solid black;
     transition: all 0.3s ease;
 }
 
 /* 마우스를 올렸을 때 버튼 스타일 */
 .btn:hover {
-    background-color: #0f0072;
+    background-color: black;
     color: white;
 }
 
@@ -260,7 +260,7 @@ h2 {
 }
 .top a.btn {
     margin-left: 10px;
-    color: #0f0072;
+    color: black;
     text-decoration: none;
     background-color: white;
     padding: 5px 10px;
@@ -268,7 +268,7 @@ h2 {
 }
 .top a.btn:hover {
     color: white;
-    background-color: #0f0072;
+    background-color: black;
     text-decoration: none;
 }
 
@@ -281,7 +281,7 @@ input[type="file"] {
 .file-upload-label {
     display: inline-block;
     padding: 5px 10px; 
-    background-color: #0f0072;
+    background-color: black;
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -305,7 +305,7 @@ input[type="file"] {
 /* 버튼 스타일 */
 .btn {
     padding: 10px 20px;
-    background-color: #0f0072;
+    background-color: black;
     color: white;
     border: none;
     border-radius: 5px;
@@ -334,7 +334,7 @@ ul.buttons button {
 
 .chat-btn {
     padding: 10px 20px;
-    background-color: #0f0072;
+    background-color: black;
     color: white;
     border: none;
     border-radius: 5px;
@@ -379,7 +379,7 @@ form[name="search"] input[type="text"]:focus {
 .comments h3 {
     font-size: 18px;
     font-weight: bold;
-    color: #0f0072;
+    color: black;
     margin-bottom: 15px;
 }
 
@@ -401,14 +401,14 @@ form[name="search"] input[type="text"]:focus {
 }
 
 .comment-form textarea:focus {
-    border-color: #0f0072;
+    border-color: black;
     outline: none;
 }
 
 .comment-form .chat-btn {
     align-self: flex-end;
     padding: 10px 20px;
-    background-color: #0f0072;
+    background-color: black;
     color: white;
     border: none;
     border-radius: 5px;
@@ -434,7 +434,7 @@ form[name="search"] input[type="text"]:focus {
 .comment-list h3 {
     font-size: 18px;
     font-weight: bold;
-    color: #0f0072;
+    color: black;
     margin-bottom: 15px;
 }
 
@@ -451,7 +451,7 @@ form[name="search"] input[type="text"]:focus {
 }
 
 .comment-item b {
-    color: #0f0072;
+    color: black;
 }
 
 /* 삭제 버튼 */
@@ -487,7 +487,7 @@ form[name="search"] input[type="text"]:focus {
 .comments h3 {
     font-size: 18px;
     font-weight: bold;
-    color: #0f0072;
+    color: black;
     margin-bottom: 15px;
 }
 
@@ -509,14 +509,14 @@ form[name="search"] input[type="text"]:focus {
 }
 
 .comment-form textarea:focus {
-    border-color: #0f0072;
+    border-color: black;
     outline: none;
 }
 
 .comment-form .chat-btn {
     align-self: flex-end;
     padding: 10px 20px;
-    background-color: #0f0072;
+    background-color: black;
     color: white;
     border: none;
     border-radius: 5px;
@@ -542,7 +542,7 @@ form[name="search"] input[type="text"]:focus {
 .comment-list h3 {
     font-size: 18px;
     font-weight: bold;
-    color: #0f0072;
+    color: black;
     margin-bottom: 15px;
 }
 
@@ -559,7 +559,7 @@ form[name="search"] input[type="text"]:focus {
 }
 
 .comment-item b {
-    color: #0f0072;
+    color: black;
 }
 
 /* 삭제 버튼 */
@@ -602,7 +602,7 @@ form[name="search"] input[type="text"]:focus {
 /* 댓글 작성 버튼 스타일 */
 .comment-btn {
     padding: 12px 20px; /* 버튼 크기 */
-    background-color: #0f0072; /*파란색 */
+    background-color: black; /*파란색 */
     color: white; /* 텍스트 색상 */
     border: none; /* 테두리 제거 */
     border-radius: 5px; /* 둥근 모서리 */

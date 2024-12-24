@@ -1,23 +1,19 @@
 body {
-    background: white;
-    height: 800px;
+    background: black;
+    height: 5500px;
     font-family: 'nanumsquare';
 }
 
-div {
+.title {
     margin-top: 1000px;
-    color: rgba(53, 53, 53, 0.99);
+    color: white;
     text-align: center;
     opacity: 0;
-    transition: all 0.5s;
-}
-
-div img {
-    width: 50%;
-    margin-bottom: 150px;
+    transition: all 1.5s;
+    font-size: 25px;
 }
 
 .sub-title {
-    color: rgb(86, 85, 85);
+    color: rgb(169, 169, 169);
 }
 
