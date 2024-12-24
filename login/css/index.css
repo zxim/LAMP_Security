@@ -1,19 +1,126 @@
 body {
     background: black;
-    height: 5500px;
-    font-family: 'nanumsquare';
+    font-family: 'NanumSquare', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.iphone-gallery {
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    height: 500px; /* 부모 요소의 높이 (필요 시 조정) */
+    margin: 50px auto; /* 상하 여백 및 좌우 중앙 정렬 */
+    text-align: center; /* 텍스트 정렬 */
+}
+
+.iphone-gallery img {
+    max-width: 80%; /* 이미지 크기를 적절히 제한 */
+    height: auto; /* 비율 유지 */
+    transition: opacity 1.5s ease, transform 1.5s ease; /* 애니메이션 효과 */
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.fade-in.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .title {
-    margin-top: 1000px;
+    display: flex; /* 플렉스박스 설정 */
+    flex-direction: column; /* 수직 정렬 */
+    justify-content: center; /* 세로 중앙 정렬 */
+    align-items: center; /* 가로 중앙 정렬 */
+    margin-bottom: 800px; /* 섹션 간 간격 */
+    margin-top: 200px; /* 상단 여백 */
     color: white;
     text-align: center;
     opacity: 0;
-    transition: all 1.5s;
-    font-size: 25px;
+    transition: opacity 1.5s ease, transform 1.5s ease;
+    font-size: 28px;
+    font-weight: bold;
+    transform: translateY(50px);
+}
+
+.title.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .sub-title {
     color: rgb(169, 169, 169);
+    font-size: 22px;
+    font-weight: 300;
+    margin: 10px 0; /* 텍스트 위아래 간격 */
+    text-align: center;
 }
 
+.iPhone16 {
+    margin-top: 20px; /* 이미지와 텍스트 간 간격 */
+    max-width: 600px; /* 이미지 최대 크기 */
+    height: auto; /* 비율 유지 */
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+.color-selectors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.color-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.color-btn::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
+}
+
+.color-btn.black::before {
+    background-color: black;
+}
+
+.color-btn.white::before {
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.color-btn.gold::before {
+    background-color: #d4af37;
+}
+
+.color-btn.silver::before {
+    background-color: #c0c0c0;
+}
+
+.color-btn:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.6);
+}
+
+.highlight {
+    color: white; /* 텍스트 색상을 흰색으로 설정 */
+    font-weight: bold; /* 텍스트를 강조하기 위해 굵게 설정 (선택 사항) */
+}
