@@ -70,7 +70,6 @@
     </div>
 
 
-
     <!-- <div class="title">
     <img class="camera" src="./images/camera.png" alt="camera" class="active fade-in" id="black" style="display: block;">
         <h1>전보다 더 선명해진 카메라</h1>
@@ -79,20 +78,24 @@
     </div> -->
     
     <div class="title" style="margin-bottom: 200px;">
-    <img class="camera" src="./images/audio.jpg" alt="audio" class="active fade-in" id="black" style="display: block;">
-    <h1>
-        오디오 믹스<br>
-        더욱 또렷하게 들리는 목소리.
-    </h1>
-    <p class="sub-title"><br>
-        첨단 지능 및 공간 음향 캡처 기술로 구현되는 ‘오디오 믹스’는<br>
-        세 가지 <span class="highlight">비디오 속 음성 재생 방식</span>을 사용해 비디오 속 음성 재생 방식을 조정할 수 있게 해줍니다.<br>
-        배경 사운드를 줄이고 싶나요? 아니면 프레임에 잡힌 피사체의 음성에만 집중하고 싶나요?<br>
-        비디오를 촬영한 후에 원하는 믹스 방식을 선택하고,<br>
-        마음에 드는 사운드가 되도록 강도를 조절하면 된답니다.
-    </p>
-</div>
+        <img class="camera" src="./images/audio.jpg" alt="audio" class="active fade-in" id="black" style="display: block;">
+        <h1>
+            오디오 믹스<br>
+            더욱 또렷하게 들리는 목소리.
+        </h1>
+        <p class="sub-title"><br>
+            첨단 지능 및 공간 음향 캡처 기술로 구현되는 ‘오디오 믹스’는<br>
+            세 가지 <span class="highlight">비디오 속 음성 재생 방식</span>을 사용해 비디오 속 음성 재생 방식을 조정할 수 있게 해줍니다.<br>
+            배경 사운드를 줄이고 싶나요? 아니면 프레임에 잡힌 피사체의 음성에만 집중하고 싶나요?<br>
+            비디오를 촬영한 후에 원하는 믹스 방식을 선택하고,<br>
+            마음에 드는 사운드가 되도록 강도를 조절하면 된답니다.
+        </p>
+    </div>
 
+    <div class="title" style="margin-top: 900px">
+        <img class="iPhone16" src="./images/apple.png" alt="apple" class="active fade-in" id="black" style="display: block;">
+        <p class="sub-title">iPhone 16</p>
+    </div>
 
     <script>
         function showImage(colorId) {
