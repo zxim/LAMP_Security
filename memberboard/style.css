@@ -444,3 +444,27 @@ ul.buttons button {
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
+
+
+/*  */
+form[name="search"] {
+    display: flex; /* 입력란과 버튼을 가로로 정렬 */
+    align-items: center; /* 입력란과 버튼을 수직 중앙 정렬 */
+    gap: 10px; /* 입력란과 버튼 사이 간격 */
+    margin-top: 30px; /* 상단 여백 */
+    margin-bottom: 15px;
+}
+
+form[name="search"] input[type="text"] {
+    width: 300px; /* 검색 입력란 너비 */
+    padding: 10px; /* 내부 여백 */
+    border: 1px solid #ccc; /* 테두리 색상 */
+    border-radius: 5px; /* 모서리를 둥글게 */
+    font-size: 14px; /* 글자 크기 */
+    outline: none; /* 포커스 시 기본 테두리 제거 */
+    transition: border-color 0.3s ease; /* 테두리 색 전환 효과 */
+}
+
+form[name="search"] input[type="text"]:focus {
+    border-color: #007BFF; /* 포커스 시 테두리 색상 변경 */
+}
