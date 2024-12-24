@@ -5,7 +5,7 @@ include "session.php"; 	// 세션 처리
 <html>
 <head> 
 <meta charset="utf-8">
-<title>오토에버 붙여조</title>
+<title>오토에버</title>
 <link rel="stylesheet" href="style.css">
 <script>
   	function check_input() {	

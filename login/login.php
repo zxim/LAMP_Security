@@ -24,6 +24,7 @@ if (mysqli_num_rows($result) > 0) {
     session_start();
     $_SESSION["userid"] = $row["id"];
     $_SESSION["username"] = $row["name"];
+    $_SESSION["user_num"] = $row["num"];
 
     echo "<script>
             alert('로그인 성공!');

@@ -3,7 +3,7 @@
 <head> 
     <meta charset="utf-8">
     <title>게시판</title>
-    <link rel="stylesheet" href="style.css"> <!-- 외부 스타일 시트 연결 -->
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body> 
     <?php 
