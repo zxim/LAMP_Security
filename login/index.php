@@ -33,24 +33,21 @@
         </h1>
     </div>
 
-    <div class="title">
+    <div class="title iphone-section">
         <h1>네 가지 색상</h1>
         <p class="sub-title">블랙 티타늄부터 새로운 데저트 티타늄까지</p>
-    </div>
-
-    <div class="iphone-gallery">
-        <img src="./images/iphone_black.jpg" alt="Black iPhone" class="fade-in active" id="black-img">
-        <img src="./images/iphone_white.jpg" alt="White iPhone" class="fade-in" id="white-img" style="display: none;">
-        <img src="./images/iphone_desert.jpg" alt="Gold iPhone" class="fade-in" id="gold-img" style="display: none;">
-        <img src="./images/iphone_natural.jpg" alt="Silver iPhone" class="fade-in" id="silver-img" style="display: none;">
-    </div>
-
-
-    <div class="color-selectors" style="margin-bottom: 1000px;">
-        <button class="color-btn black" onclick="showImage('black-img')"></button>
-        <button class="color-btn white" onclick="showImage('white-img')"></button>
-        <button class="color-btn gold" onclick="showImage('gold-img')"></button>
-        <button class="color-btn silver" onclick="showImage('silver-img')"></button>
+        <div class="iphone-gallery">
+            <img src="./images/iphone_black.jpg" alt="Black iPhone" class="fade-in active" id="black-img">
+            <img src="./images/iphone_white.jpg" alt="White iPhone" class="fade-in" id="white-img" style="display: none;">
+            <img src="./images/iphone_desert.jpg" alt="Gold iPhone" class="fade-in" id="gold-img" style="display: none;">
+            <img src="./images/iphone_natural.jpg" alt="Silver iPhone" class="fade-in" id="silver-img" style="display: none;">
+        </div>
+        <div class="color-selectors">
+            <button class="color-btn black" onclick="showImage('black-img')"></button>
+            <button class="color-btn white" onclick="showImage('white-img')"></button>
+            <button class="color-btn gold" onclick="showImage('gold-img')"></button>
+            <button class="color-btn silver" onclick="showImage('silver-img')"></button>
+        </div>
     </div>
 
     <div class="title">
