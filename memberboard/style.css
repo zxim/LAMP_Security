@@ -31,8 +31,8 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .btn:hover {
-    background-color: #0c005e;
-    color: white;
+    background-color: white;
+    color: #0f0072;
 }
 .buttons { 
     text-align: right; 
@@ -431,4 +431,16 @@ input[type="file"] {
 
 ul.buttons button {
     margin-right: 0; 
+}
+
+
+.chat-btn {
+    padding: 10px 20px;
+    background-color: #0f0072;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }

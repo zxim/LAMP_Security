@@ -93,5 +93,13 @@ $userid = isset($_SESSION["userid"]) ? $_SESSION["userid"] : "";
 		<!-- 글쓰기 버튼 클릭 시 로그인 여부를 확인 -->
 		<li><button onclick="checkLoginBeforeWrite()">글쓰기</button></li>
 	</ul>
+
+	<div class="chat">
+		<div class="chat_board">
+			<p>댓글 작성</p>
+			<textarea name="content">댓글을 작성해주세요</textarea>
+		</div>
+		<button id="chat-button" class="chat-btn">버튼</button>
+	</div>
 </body>
 </html>

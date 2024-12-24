@@ -13,6 +13,10 @@
     <h2>
         <a href="../login/index.php">홈</a>
         <span style="margin-left: 50px;"></span> 회원 게시판 > 목록보기
+        <form name="login" method="get" action="list.php">	
+            <input type="text" name="search" placeholder="검색하기">
+            <button class="btn">검색</button>
+        </form>
     </h2>
 
     <ul class="board_list">
@@ -29,6 +33,8 @@
         // 페이지 번호 처리
         $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
+        $search = isset($_GET["search"]) ? $_GET["search"] : "";
+
         $config = require '../config.php';  // 루트에 있는 config.php 파일 불러옴
 
         // config.php에서 가져온 정보를 변수에 저장
@@ -39,7 +45,21 @@
 
         // DB 연결
         $con = mysqli_connect($db_host, $db_user, $db_password, $db_name);
-        $sql = "SELECT * FROM memberboard ORDER BY num DESC";
+
+        if (!empty($search)) {
+            // 검색어를 안전하게 처리
+            $search = mysqli_real_escape_string($con, $search);
+        
+            // SQL 쿼리 수정: 제목(subject) 또는 내용(content)에 검색어가 포함된 경우 조회
+            $sql = "SELECT * FROM memberboard 
+                    WHERE subject LIKE '%$search%' OR content LIKE '%$search%' 
+                    ORDER BY num DESC";
+        } else {
+            // 검색어가 없는 경우 모든 게시글 조회
+            $sql = "SELECT * FROM memberboard ORDER BY num DESC";
+        }
+
+        //$sql = "SELECT * FROM memberboard ORDER BY num DESC";
         $result = mysqli_query($con, $sql);
 
         $total_record = mysqli_num_rows($result); // 전체 글 수
