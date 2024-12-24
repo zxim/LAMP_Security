@@ -52,7 +52,7 @@ if (!$con) {
 
 // 데이터 삽입 (XSS 허용)
 $sql = "INSERT INTO memberboard (id, name, subject, content, regist_day, file_name)
-        VALUES ('$userid', '$username', \"" . $_POST['subject'] . "\", \"$content\", '$regist_day', '$upfile_name')";
+        VALUES ('$userid', '$username', '$subject', '$content', '$regist_day', '$upfile_name')";
 
 
 if (!mysqli_query($con, $sql)) {

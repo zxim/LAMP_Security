@@ -117,21 +117,21 @@
                 <a href="../memberboard/list.php" class="memberboard-btn">게시판</a>
             </h3> 
             <nav class="top">
-<?php 
-    if(!$userid) { 
-?>                 
-                <a href="form.php" class="btn">회원가입</a>
-                <a href="login_form.php" class="btn">로그인</a>
-<?php 
-    } else { 
-        $logged = $username."(".$userid.")"; 
-?> 
-                <span class="logged"><?=$logged?> </span>
-                <a href="logout.php" class="btn">로그아웃</a>
-                <a href="modify_form.php" class="btn">정보수정</a>
-<?php 
-    } 
-?> 
+                <?php 
+                    if(!$userid) { 
+                ?>                 
+                                <a href="form.php" class="btn">회원가입</a>
+                                <a href="login_form.php" class="btn">로그인</a>
+                <?php 
+                    } else { 
+                        $logged = $username."(".$userid.")"; 
+                ?> 
+                                <span class="logged"><?=$logged?> </span>
+                                <a href="logout.php" class="btn">로그아웃</a>
+                                <a href="modify_form.php" class="btn">정보수정</a>
+                <?php 
+                    } 
+                ?> 
             </nav> 
         </div>
     </header> 
@@ -149,7 +149,7 @@
         <br><br><br><br>
         <p style="margin-bottom: 20px;">현대 오토에버 모빌리티 SW 스쿨</p>
         <p style="margin-bottom: 40px;">IT 보안 프로젝트</p>
-        <p style="font-size: 20px; color: #999;">퍼블릭 클라우드 보안 구축</p>
+        <p style="font-size: 20px; color: #999;">모의 해킹</p>
         <br><br><br> 
     </div>
 
