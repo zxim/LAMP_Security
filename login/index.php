@@ -53,11 +53,30 @@
     </div>
 
     <div class="title">
+        <!-- 아이폰 프레임 -->
+        <div class="phone-frame">
+            <!-- 속이 빈 PNG 프레임 -->
+            <img class="frame" src="./images/frame.png" alt="iPhone Frame">
+            <!-- 동영상 삽입 -->
+            <video class="video" autoplay loop muted>
+                <source src="./videos/horse.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    
+        <!-- 텍스트 내용 -->
+        <h1>전보다 더 선명해진 카메라</h1>
+        <p class="sub-title">초당 120 프레임의 4K Dolby Vision.<br>그야말로 시네마틱.</p>
+    </div>
+
+
+
+    <!-- <div class="title">
     <img class="camera" src="./images/camera.png" alt="camera" class="active fade-in" id="black" style="display: block;">
         <h1>전보다 더 선명해진 카메라</h1>
         <p class="sub-title">초당 120 프레임의 4K Dolby Vision.<br>
         그야말로 시네마틱.</p>
-    </div>
+    </div> -->
     
     <div class="title" style="margin-bottom: 200px;">
     <img class="camera" src="./images/audio.jpg" alt="audio" class="active fade-in" id="black" style="display: block;">

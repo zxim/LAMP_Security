@@ -162,3 +162,37 @@ body {
     height: auto; /* 비율 유지 */
     transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
 }
+
+/* 아이폰 프레임 컨테이너 */
+.phone-frame {
+    position: relative; /* 자식 요소를 상대적으로 배치 */
+    width: 700px; /* 가로 크기 */
+    height: 350px; /* 세로 크기 */
+    margin-bottom: 30px; /* 하단 여백 */
+    overflow: hidden; /* 프레임 밖으로 넘치지 않도록 설정 */
+}
+
+/* 아이폰 프레임 이미지 */
+.frame {
+    position: absolute; /* 동영상 위에 겹치도록 설정 */
+    top: 0; /* 프레임 상단 위치 */
+    left: 0; /* 프레임 좌측 위치 */
+    width: 100%; /* 프레임 크기에 맞추기 */
+    height: 100%; /* 프레임 크기에 맞추기 */
+    transform-origin: center; /* 회전 중심을 중앙으로 설정 */
+    z-index: 2; /* 동영상 위로 배치 */
+}
+
+/* 동영상 스타일 */
+.video {
+    position: absolute; /* 프레임 안에 위치 */
+    top: 3%; /* 아래로 조금 이동 */
+    left: 2.5%; /* 오른쪽으로 조금 이동 */
+    width: 95.5%; /* 프레임 내부 크기에 맞춤 */
+    height: 94%; /* 프레임 내부 크기에 맞춤 */
+    object-fit: cover; /* 동영상이 프레임에 꽉 차도록 */
+    border-radius: 30px; /* 동영상 모서리를 둥글게 설정 */
+    transform-origin: center; /* 회전 중심을 중앙으로 설정 */
+    z-index: 1; /* PNG 프레임 아래로 배치 */
+}
+
