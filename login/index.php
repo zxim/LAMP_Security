@@ -29,9 +29,11 @@
 
     <div class="title">
         <h1>견고함. 아름다움.<br>
-            티타늄
+            <span class="subtle-golden">티타늄</span>
         </h1>
     </div>
+
+
 
     <div class="title iphone-section">
         <h1>네 가지 색상</h1>
@@ -51,12 +53,14 @@
     </div>
 
     <div class="title">
+    <img class="camera" src="./images/camera.png" alt="camera" class="active fade-in" id="black" style="display: block;">
         <h1>전보다 더 선명해진 카메라</h1>
         <p class="sub-title">초당 120 프레임의 4K Dolby Vision.<br>
         그야말로 시네마틱.</p>
     </div>
     
     <div class="title" style="margin-bottom: 200px;">
+    <img class="camera" src="./images/audio.jpg" alt="audio" class="active fade-in" id="black" style="display: block;">
     <h1>
         오디오 믹스<br>
         더욱 또렷하게 들리는 목소리.
