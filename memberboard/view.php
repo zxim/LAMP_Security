@@ -97,7 +97,7 @@ $userid = isset($_SESSION["userid"]) ? $_SESSION["userid"] : "";
 	<div class="chat">
 		<div class="chat_board">
 			<p>댓글 작성</p>
-			<textarea name="content">댓글을 작성해주세요</textarea>
+			<textarea name="content" placeholder="댓글을 작성해주세요!"></textarea>
 		</div>
 		<button id="chat-button" class="chat-btn">버튼</button>
 	</div>
