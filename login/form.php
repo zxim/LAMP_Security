@@ -2,90 +2,185 @@
 <html lang="ko">
 <head> 
     <meta charset="utf-8">
-    <title>오토에버 불여조</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <title>회원가입</title>
+    <style>
+        /* 기본 스타일 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* 배경 회색 */
+            font-family: 'Noto Sans', Arial, sans-serif;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        /* 폼 컨테이너 스타일 */
+        .join_form {
+            width: 90%;
+            max-width: 600px; /* 박스를 넓게 조정 */
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .join_form li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* 입력 필드와 레이블 간격 균일화 */
+            margin-bottom: 20px; /* 필드 간 간격 */
+            position: relative;
+        }
+
+        .join_form .col1 {
+            flex: 1;
+            color: #333;
+            font-weight: bold;
+            text-align: right; /* 레이블 오른쪽 정렬 */
+            margin-right: 20px; /* 레이블과 입력 필드 간격 */
+        }
+
+        .join_form .col2 {
+            flex: 3;
+            position: relative;
+        }
+
+        .join_form .col2 input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .join_form .col2 input:focus {
+            border-color: #333; /* 포커스 시 테두리 검정 */
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 중복체크 버튼 */
+        .check-btn {
+            position: absolute;
+            top: 50%; /* 입력 필드와 겹치도록 위로 올림 */
+            right: 10px; /* 오른쪽 여백 조정 */
+            transform: translateY(-50%);
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            font-size: 12px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .check-btn:hover {
+            background-color: white;
+            color: #333;
+            border: 1px solid #333;
+        }
+
+        /* 버튼 스타일 */
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .buttons button:hover {
+            background-color: white;
+            color: #333;
+            border: 1px solid #333;
+        }
+
+        .buttons button:last-child {
+            margin-right: 0;
+        }
+    </style>
     <script>
-        var isIdChecked = false; // 아이디 중복 체크 여부 플래그
+        var isIdChecked = false;
 
         function check_input() {
-            if (!document.member.id.value) {
-                alert("아이디를 입력하세요!");    
-                document.member.id.focus();
+            const form = document.member;
+
+            if (!form.id.value) {
+                alert("아이디를 입력하세요!");
+                form.id.focus();
                 return;
             }
-            if (!document.member.pass.value) {
-                alert("비밀번호를 입력하세요!");    
-                document.member.pass.focus();
+            if (!form.pass.value) {
+                alert("비밀번호를 입력하세요!");
+                form.pass.focus();
                 return;
             }
-            if (!document.member.pass_confirm.value) {
-                alert("비밀번호확인을 입력하세요!");    
-                document.member.pass_confirm.focus();
+            if (!form.pass_confirm.value) {
+                alert("비밀번호 확인을 입력하세요!");
+                form.pass_confirm.focus();
                 return;
             }
-            if (!document.member.name.value) {
-                alert("이름을 입력하세요!");    
-                document.member.name.focus();
+            if (!form.name.value) {
+                alert("이름을 입력하세요!");
+                form.name.focus();
                 return;
             }
-            if (!document.member.email.value) {
-                alert("이메일 주소를 입력하세요!");    
-                document.member.email.focus();
+            if (!form.email.value) {
+                alert("이메일 주소를 입력하세요!");
+                form.email.focus();
                 return;
             }
-            if (document.member.pass.value != document.member.pass_confirm.value) {
-                alert("비밀번호가 일치하지 않습니다.\n다시 입력해 주세요!");
-                document.member.pass.focus();
-                document.member.pass.select();
+            if (form.pass.value !== form.pass_confirm.value) {
+                alert("비밀번호가 일치하지 않습니다.");
+                form.pass.focus();
                 return;
             }
             if (!isIdChecked) {
                 alert("아이디 중복 체크를 해주세요.");
                 return;
             }
-            document.member.submit();
+
+            form.submit();
         }
 
-        // 팝업 창을 열어서 아이디 중복 체크
         function check_id() {
-            var id = document.member.id.value;
-            var idPattern = /^(?=.*[a-zA-Z])[a-zA-Z0-9_!@#\$%\^&\*]{5,15}$/;
+            const id = document.member.id.value;
 
             if (!id) {
                 alert("아이디를 입력하세요!");
-                document.member.id.focus();
                 return;
             }
 
-            // 유효성 검사: 5~15자, 영문 포함
-            if (!idPattern.test(id)) {
-                alert("아이디는 영문자를 포함하고, 숫자, 밑줄(_), 특수기호(!@#$%^&*)를 포함한 5~15자리여야 합니다.");
-                document.member.id.focus();
-                return;
-            }
-
-            // 팝업 창 열기: 중복 체크 후 부모 창에 값 전달
-            var popup = window.open('check_id.php?id=' + encodeURIComponent(id), 'checkId', 'width=400,height=300');
-            popup.onunload = function() {
-                if (popup.closed) {
-                    if (popup.success) {
-                        isIdChecked = true; // 중복 체크 성공 시 isIdChecked 업데이트
-                    } else {
-                        isIdChecked = false; // 중복 체크 실패
-                    }
-                }
+            const popup = window.open(`check_id.php?id=${encodeURIComponent(id)}`, 'checkId', 'width=400,height=300');
+            popup.onload = function () {
+                isIdChecked = true;
             };
         }
 
         function reset_form() {
-            document.member.id.value = "";  
-            document.member.pass.value = "";
-            document.member.pass_confirm.value = "";
-            document.member.name.value = "";
-            document.member.email.value = "";
-            isIdChecked = false; 
-            document.member.id.focus();
-            return;
+            document.member.reset();
+            isIdChecked = false;
         }
 
         function go_back() {
@@ -93,39 +188,49 @@
         }
     </script>
 </head>
-<body> 
+<body>
+    <?php include "header.php"; ?>
     <form name="member" action="insert.php" method="post">
         <h2>회원 가입</h2>
         <ul class="join_form">
             <li>
                 <span class="col1">아이디</span>
-                <span class="col2"><input type="text" name="id"></span>
-                <span class="col3"><button type="button" onclick="check_id()">중복체크</button></span>                    
+                <div class="col2">
+                    <input type="text" name="id">
+                    <button type="button" class="check-btn" onclick="check_id()">중복체크</button>
+                </div>
             </li>
             <li>
                 <span class="col1">비밀번호</span>
-                <span class="col2"><input type="password" name="pass"></span>               
+                <div class="col2">
+                    <input type="password" name="pass">
+                </div>
             </li>
             <li>
                 <span class="col1">비밀번호 확인</span>
-                <span class="col2"><input type="password" name="pass_confirm"></span>               
-            </li>            
+                <div class="col2">
+                    <input type="password" name="pass_confirm">
+                </div>
+            </li>
             <li>
                 <span class="col1">이름</span>
-                <span class="col2"><input type="text" name="name"></span>               
+                <div class="col2">
+                    <input type="text" name="name">
+                </div>
             </li>
             <li>
                 <span class="col1">이메일</span>
-                <span class="col2"><input type="text" name="email"></span>               
-            </li>                        
-        </ul>                       
-
-        <ul class="buttons">
-            <li><button type="button" onclick="check_input()">저장하기</button></li>
-            <li><button type="button" onclick="reset_form()">지우기</button></li>
-            <li><button type="button" onclick="go_back()">나가기</button></li>
+                <div class="col2">
+                    <input type="text" name="email">
+                </div>
+            </li>
         </ul>
+
+        <div class="buttons">
+            <button type="button" onclick="check_input()">저장하기</button>
+            <button type="button" onclick="reset_form()">지우기</button>
+            <button type="button" onclick="go_back()">나가기</button>
+        </div>
     </form>
 </body>
 </html>
-

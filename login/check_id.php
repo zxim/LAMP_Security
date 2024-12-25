@@ -56,7 +56,7 @@
         }
         ?>
         <div class="close">
-            <button type="button" onclick="window.close()">창 닫기</button>
+            <button type="button" onclick="window.close()" class="btn">창 닫기</button>
         </div>
     </div>
 </body>

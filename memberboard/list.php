@@ -7,8 +7,8 @@
 </head>
 <body> 
     <?php 
-    include "session.php"; // 세션 처리
-    include '../login/header.php'; // 헤더 파일 포함 ?>
+    include "session.php";
+    include '../login/header.php'; ?>
 
     <h2>
         <a href="../login/index.php">홈</a>

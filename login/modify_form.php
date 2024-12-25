@@ -41,6 +41,7 @@
     </script>
 </head>
 <body>
+    <?php include "header.php" ?>
     <?php
         // 데이터베이스 연결
         $config = require '../config.php';
@@ -100,4 +101,4 @@
         </form>
     </div>
 </body>
-</html>
+</html> 

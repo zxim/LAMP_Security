@@ -1,281 +1,155 @@
-/* 글씨체 적용을 위한 추가 설정 */
+/* 글씨체 및 공통 설정 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
 
-/* 공통 설정 */
-* { 
-    padding: 0; 
-    margin: 0; 
-    box-sizing: border-box;
-    font-family: 'Noto Sans', 'Pretendard', sans-serif; /* 현대적인 글씨체 적용 */
-}
-ul { 
-    list-style-type: none; 
-}
-a { 
-    display: inline-block; 
-    text-decoration: none; 
-    color: black; /* 파란색으로 변경 */
-}
-a:link, a:visited, a:hover, a:active {
-    text-decoration: none; 
-    color: black; /* 파란색으로 변경 */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* 밝은 회색 배경 */
+    font-family: 'Noto Sans', Arial, sans-serif;
+    color: #333; /* 기본 글자색 회색 */
 }
 
-/* 버튼 */
-.buttons { 
-    width: 600px; 
-    text-align: right; 
-    margin: 20px auto; 
-}
-.buttons li { 
-    display: inline; 
-}
-.buttons button { 
-    padding: 8px 20px; 
-    cursor: pointer; 
-    background-color: black; /* 파란색 배경 */
-    color: white; /* 흰색 글씨 */
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    font-family: 'Noto Sans', 'Pretendard', sans-serif; /* 현대적인 글씨체 적용 */
-}
-.buttons button:hover { 
-    background-color: white; /* 흰색 배경으로 변경 */
-    color: black; /* 파란색 글씨 */
-    border: 1px solid black;
+a {
+    text-decoration: none;
+    color: #333; /* 링크 기본 색상 */
 }
 
-/* 제목 */
-h2 { 
-    width: 600px; 
-    margin-top: 20px; 
-    margin: 0 auto; 
-    padding: 10px; 
-    border-bottom: solid 3px black; /* 파란색 밑줄 */
-    color: black; /* 파란색 글씨 */
-    font-family: 'Noto Sans', 'Pretendard', sans-serif; /* 현대적인 글씨체 적용 */
+a:hover {
+    color: #000; /* 호버 시 검정색 */
 }
 
-/* 회원가입 폼(member_form.php) */
-.join_form { 
-    width: 600px; 
-    height: 235px; 
-    margin: 0 auto; 
-    border-bottom: solid 1px #cccccc; 
-    padding-top: 20px; 
-    font-family: 'Noto Sans', 'Pretendard', sans-serif; /* 현대적인 글씨체 적용 */
-}
-.join_form li {	
-    height: 40px; 
-    padding: 20px 10px;
-}
-.join_form button { 
-    padding: 3px 10px; 
-    background-color: black; /* 파란색 버튼 */
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-.join_form .col1 { 
-    width: 130px; 
-    color: black; /* 파란색 글씨 */
-}
-.join_form .col2 { 
-    width: 360px; 
-}
-.join_form input { 
-    width: 360px; 
-    height: 30px; 
-    border: 1px solid #cccccc; 
-    border-radius: 3px;
-    padding: 5px;
-    background-color: white; /* 흰색 배경 */
-}
-.join_form input:focus {
-    border-color: black; /* 포커스 시 파란색 테두리 */
-}
-.join_form span { 
-    display: inline-block; 
+/* 헤더 스타일 */
+.site-header {
+    background-color: #333; /* 헤더 배경 검정색 */
+    color: #fff; /* 텍스트 흰색 */
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* 로그인 폼 (login_form.php) */
-.login_title { 
-    width: 400px; 
-    margin: 0 auto; 
-    color: black; /* 파란색 제목 */
-    font-family: 'Noto Sans', 'Pretendard', sans-serif; /* 현대적인 글씨체 적용 */
-}
-.login_form { 
-    width: 400px; 
-    height: 210px; 
-    margin: 0 auto; 
-    border-bottom: solid 1px #cccccc; 
-    padding-top: 15px; 
-    font-family: 'Noto Sans', 'Pretendard', sans-serif; /* 현대적인 글씨체 적용 */
-}
-.login_form li { 
-    height: 50px; 
-    padding: 20px 20px; 
-}
-.login_form span { 
-    display: inline-block; 
-}
-.login_form .col1 { 
-    width: 100px; 
-    color: black; /* 파란색 글씨 */
-}
-.login_form .col2 { 
-    width: 250px; 
-}
-.login_form input { 
-    width: 250px; 
-    height: 30px; 
-    border: 1px solid #cccccc; 
-    border-radius: 3px;
-    padding: 5px;
-    background-color: white; /* 흰색 배경 */
-}
-.login_form input:focus {
-    border-color: black; /* 포커스 시 파란색 테두리 */
-}
-.login_form button { 
-    padding: 8px 156px; 
-    cursor: pointer; 
-    background-color: black; /* 파란색 버튼 */
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
-.login_form button:hover { 
-    background-color: white; /* 흰색 배경 */
-    color: black; /* 파란색 글씨 */
-    border: 1px solid black;
+.site-header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
 }
 
-/* 메인 화면(index.php) */
-.header { 
-    width: 450px; 
-    margin: 0 auto; 
-    background-color: black; /* 파란색 배경 */
-    color: white; /* 흰색 글씨 */
-    padding: 20px;
-    border-radius: 8px;
-    font-family: 'Noto Sans', 'Pretendard', sans-serif; /* 현대적인 글씨체 적용 */
+.site-header .top nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
 }
-.header .logo { 
-    float: left; 
-    margin-top: 30px; 
-    color: white; /* 흰색 로고 */
-    font-size: 24px; 
+
+.site-header .top nav ul li {
+    display: inline;
+}
+
+.site-header .top nav ul li a {
+    color: #fff;
     font-weight: bold;
 }
-.header .top { 
-    float: right; 
-    margin-top: 30px; 
-    color: white; /* 흰색 글씨 */
+
+.site-header .top nav ul li a:hover {
+    color: #ddd; /* 호버 시 연한 회색 */
+}
+
+/* 버튼 스타일 */
+.buttons {
+    text-align: center;
+    margin: 20px auto;
+}
+
+.buttons button {
+    padding: 10px 20px;
+    background-color: #333; /* 기본 검정 */
+    color: #fff; /* 기본 흰색 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.buttons button:hover {
+    background-color: #fff; /* 흰색으로 반전 */
+    color: #333; /* 검정색 글씨 */
+    border: 1px solid #333;
+}
+
+/* 제목 스타일 */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* 폼 스타일 */
+.join_form {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.join_form li {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.join_form .col1 {
+    flex: 1;
+    color: #333;
+}
+
+.join_form .col2 input {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.join_form input:focus {
+    border-color: #333; /* 포커스 시 검정색 테두리 */
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
-    .buttons {
-        width: 100%;
+    .join_form {
+        width: 90%;
+    }
+
+    .site-header {
+        flex-direction: column;
         text-align: center;
     }
-    .header {
-        width: 100%;
+
+    .site-header .top nav ul {
+        flex-direction: column;
+        gap: 10px;
     }
-    .join_form, .login_form {
-        width: 100%;
-    }
 }
 
-/* 중복 체크 팝업 스타일 */
-.check_form {
-    width: 400px; 
-    margin: 20px auto; 
-    text-align: center;
-    padding: 20px;
-    background-color: #f9f9f9; /* 연한 배경색 */
-    border: 1px solid #cccccc; 
-    border-radius: 10px;
-    font-family: 'Noto Sans', 'Pretendard', sans-serif; /* 현대적인 글씨체 적용 */
+.btn {
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px;
 }
 
-
-.check_form p {
-    color: #333333; /* 검은색 텍스트 */
-    margin: 10px 0;
-    font-size: 16px;
+.btn:hover {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #333;
 }
-
-.check_form .close button {
-    padding: 10px 20px;
-    background-color: black; /* 파란색 버튼 */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.check_form .close button:hover {
-    background-color: white; /* 흰색 배경 */
-    color: black; /* 파란색 글씨 */
-    border: 1px solid black;
-}
-
-/* 숫자, 밑줄, 특수기호 부분에 적용될 스타일 */
-.highlight {
-    color: #ff0000; /* 빨간색 */
-    font-weight: bold; /* 진하게 */
-}
-
-/* 창닫기 버튼 스타일 */
-.close button {
-    padding: 10px 20px;
-    background-color: black; /* 기본 파란색 배경 */
-    color: white; /* 흰색 글씨 */
-    border: 2px solid black; /* 파란색 테두리 */
-    border-radius: 5px; /* 둥근 모서리 */
-    font-size: 16px; /* 글자 크기 */
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-.close button:hover {
-    background-color: white; /* 마우스 오버 시 흰색 배경 */
-    color: black; /* 파란색 글씨 */
-    border-color: black; /* 파란색 테두리 유지 */
-}
-
-/* 중복 체크 제목 스타일 */
-.check_form h3 {
-    color: black; /* 파란색 제목 */
-    font-weight: bold; /* 볼드체 적용 */
-    text-align: center; /* 가운데 정렬 */
-    margin-bottom: 15px;
-    font-size: 24px; /* 제목 크기 설정 */
-}
-
-
-
-/* 버튼에 마우스를 올렸을 때 */
-.join_form button:hover { 
-    background-color: white; /* 마우스 오버 시 흰색 배경 */
-    color: black; /* 파란색 글씨 */
-    border: 1px solid black; /* 파란색 테두리 */
-}
-
-.button_group button {
-    margin-top: 5px;  /* 위쪽 간격 */
-    margin-bottom: 5px;  /* 아래쪽 간격 */
-}
-
-/* 마지막 버튼의 아래쪽 여백을 없애기 위해 추가 */
-.button_group button:last-child {
-    margin-bottom: 0;  /* 마지막 버튼의 아래 여백 제거 */
-}
-
-

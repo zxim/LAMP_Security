@@ -56,6 +56,7 @@ $userid = isset($_SESSION["userid"]) ? $_SESSION["userid"] : "";
 </script>
 </head>
 <body>
+<?php include "../login/header.php"; ?> 
 <h2><a href="../login/index.php">홈</a>
         <span style="margin-left: 50px;"></span>
         회원 게시판 > 내용보기
