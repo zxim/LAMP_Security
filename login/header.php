@@ -37,7 +37,7 @@
                     <a href="#" style="text-decoration: none; color: #fff; font-size: 20px; padding: 10px 15px; display: block;">Setting</a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#" style="color: #fff;">프로필 수정 (임시)</a>
+                            <a href="/project/login/modify_form.php" style="color: #fff;">계정 설정</a>
                         </li>
                         <li>
                             <a href="#" style="color: #fff;">보안 설정 (임시)</a>

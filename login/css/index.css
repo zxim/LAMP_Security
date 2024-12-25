@@ -160,7 +160,7 @@ body {
     margin-top: 20px; /* 이미지와 텍스트 간 간격 */
     max-width: 800px; /* 이미지 최대 크기 */
     height: auto; /* 비율 유지 */
-    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    transition: opacity 1.5s ease-in-out, transform 2s ease-in-out;
 }
 
 /* 아이폰 프레임 컨테이너 */

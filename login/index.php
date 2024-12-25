@@ -22,9 +22,9 @@
     <?php include 'header.php'; ?>
 
     <div class="title">
-        <h1>새로워진 iPhone 16</h1>
+        <h1>새로워진 iPhone 16 Pro</h1>
         <p class="sub-title">지금 바로 만나보시죠</p>
-        <img class="iPhone16" src="./images/iphone_intel.jpg" alt="iPhone16" class="active fade-in" id="black" style="display: block;">
+        <img class="iPhone16 Pro" src="./images/iphone_intel.jpg" alt="iPhone16" class="active fade-in" id="black" style="display: block;">
     </div>
 
     <div class="title">
@@ -94,7 +94,7 @@
 
     <div class="title" style="margin-top: 900px">
         <img class="iPhone16" src="./images/apple.png" alt="apple" class="active fade-in" id="black" style="display: block;">
-        <p class="sub-title">iPhone 16</p>
+        <p class="sub-title">iPhone</p>
     </div>
 
     <script>
