@@ -18,7 +18,7 @@
                             <a href="/project/memberboard/list.php" style="color: #fff;">게시판</a>
                         </li>
                         <li>
-                            <a href="#" style="color: #fff;">공지사항 (임시)</a>
+                            <a href="/project/memberboard/notices.php" style="color: #fff;">공지사항</a>
                         </li>
                     </ul>
                 </li>
@@ -51,13 +51,18 @@
                             <a href="/project/login/form.php" style="color: #fff;">회원가입</a>
                         </li>
                         <li>
+                            <a href="#" style="color: #fff;">계정 정보 찾기</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" style="position: relative;">
+                    <a href="#" style="text-decoration: none; color: #fff; font-size: 20px; padding: 10px 15px; display: block;">Login</a>
+                    <ul class="dropdown-menu">
+                        <li>
                             <a href="/project/login/login_form.php" style="color: #fff;">로그인</a>
                         </li>
                         <li>
-                            <a href="#" style="color: #fff;">아이디 찾기</a>
-                        </li>
-                        <li>
-                            <a href="#" style="color: #fff;">비밀번호 찾기</a>
+                            <a href="/project/login/logout.php" style="color: #fff;">로그아웃</a>
                         </li>
                     </ul>
                 </li>

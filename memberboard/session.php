@@ -21,4 +21,11 @@ if (isset($_SESSION["user_num"])) {
 } else {
     $user_num = 0; // 기본값 설정
 }
+
+// 관리자 여부 (admin)
+if (isset($_SESSION["admin"])) {
+    $isAdmin = $_SESSION["admin"]; // 세션에 저장된 관리자 값
+} else {
+    $isAdmin = 0; 
+}
 ?>
