@@ -51,7 +51,7 @@
                             <a href="/project/login/form.php" style="color: #fff;">회원가입</a>
                         </li>
                         <li>
-                            <a href="#" style="color: #fff;">계정 정보 찾기</a>
+                            <a href="#" style="color: #fff;">계정 정보 찾기 (임시)</a>
                         </li>
                     </ul>
                 </li>

@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("ss", $title, $content);
 
     if ($stmt->execute()) {
+        // 작성 성공 시 목록으로 리디렉션
         echo "<script>alert('공지사항이 작성되었습니다.'); location.href = 'notices.php';</script>";
     } else {
         echo "<script>alert('공지사항 작성에 실패했습니다. 다시 시도하세요.'); history.back();</script>";
@@ -46,23 +47,96 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="utf-8">
     <title>공지사항 작성</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .notice-write-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .notice-write-container h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        .notice-write-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .notice-write-form label {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .notice-write-form input[type="text"],
+        .notice-write-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .notice-write-form input[type="text"]:focus,
+        .notice-write-form textarea:focus {
+            border-color: #555;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .notice-write-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .notice-write-buttons .btn {
+            width: 120px;
+            padding: 10px 0;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .notice-write-buttons .btn:hover {
+            background-color: #444;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
     <?php include '../login/header.php'; ?>
 
-    <div class="container">
+    <div class="notice-write-container">
         <h1>공지사항 작성</h1>
-        <form method="post" action="notice_write.php">
+        <form class="notice-write-form" method="post" action="notice_write.php">
             <div>
                 <label for="title">제목</label>
-                <input type="text" id="title" name="title" required>
+                <input type="text" id="title" name="title" placeholder="공지사항 제목을 입력하세요" required>
             </div>
             <div>
                 <label for="content">내용</label>
-                <textarea id="content" name="content" rows="10" required></textarea>
+                <textarea id="content" name="content" rows="10" placeholder="공지사항 내용을 입력하세요" required></textarea>
             </div>
-            <button type="submit" class="btn">작성</button>
+            <div class="notice-write-buttons">
+                <button type="submit" class="btn">작성</button>
+                <button type="button" class="btn" onclick="location.href='notices.php'">목록으로</button>
+            </div>
         </form>
     </div>
 </body>
