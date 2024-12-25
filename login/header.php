@@ -54,10 +54,10 @@
                             <a href="/project/login/login_form.php" style="color: #fff;">로그인</a>
                         </li>
                         <li>
-                            <a href="/project/login/find_id.php" style="color: #fff;">아이디 찾기</a>
+                            <a href="#" style="color: #fff;">아이디 찾기</a>
                         </li>
                         <li>
-                            <a href="/project/login/find_pw.php" style="color: #fff;">비밀번호 찾기</a>
+                            <a href="#" style="color: #fff;">비밀번호 찾기</a>
                         </li>
                     </ul>
                 </li>
