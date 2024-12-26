@@ -17,7 +17,7 @@
     <!-- 카테고리 버튼 -->
     <div class="category-container">
         <button onclick="showProducts('iPhone')">
-            <img src="/project/shop/images/iphone.png" alt="iPhone">
+            <img src="/project/shop/images/iPhone.png" alt="iPhone">
             <span>iPhone</span>
         </button>
         <button onclick="showProducts('Mac')">
