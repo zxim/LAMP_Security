@@ -13,19 +13,20 @@ body {
     font-weight: bold;
     margin-top: 50px;
     background: linear-gradient(to right, 
-        #007aff 0%, #007aff 30%, /* 파랑: 0~30% */
-        #6a0dad 30%, #6a0dad 60%, /* 보라: 30~60% */
-        #ff1493 60%, #ff1493 100% /* 핑크: 60~100% */
+        #007aff 0%, #007aff 33%, /* 파랑: 0~33% */
+        #6a0dad 33%, #6a0dad 66%, /* 보라: 33~66% */
+        #ff1493 66%, #ff1493 100% /* 핑크: 66~100% */
     );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
+    letter-spacing: 1px; /* 글자 간격 추가 */
 }
 
 /* 카테고리 스타일 */
 .category-container {
-    margin: 30px auto;
+    margin: 40px auto;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -34,30 +35,42 @@ body {
 
 .category-container a {
     text-decoration: none;
-    color: #007aff; /* Apple 블루 컬러 */
+    color: #007aff; /* 기본 텍스트 컬러 */
     font-size: 20px;
     font-weight: bold;
-    padding: 10px 20px;
+    padding: 12px 25px;
     border: 2px solid transparent;
-    border-radius: 5px;
+    border-radius: 8px;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 약간의 그림자 효과 */
 }
 
 .category-container a:hover {
-    text-decoration: none;
-    color: white;
+    color: white; /* 호버 시 텍스트 색상 */
     background-color: #007aff; /* 호버 시 배경색 */
     border: 2px solid #007aff;
+    box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4); /* 호버 시 그림자 증가 */
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .gradient-text {
-        font-size: 36px;
+        font-size: 36px; /* 작은 화면에서 글자 크기 감소 */
     }
 
     .category-container a {
         font-size: 16px;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gradient-text {
+        font-size: 28px; /* 더 작은 화면에서 글자 크기 감소 */
+    }
+
+    .category-container a {
+        font-size: 14px;
         padding: 8px 15px;
     }
 }
