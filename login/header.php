@@ -37,7 +37,7 @@
                     <a href="#" style="text-decoration: none; color: #fff; font-size: 20px; padding: 10px 15px; display: block;">Account</a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#" style="color: #fff;">구매 목록</a>
+                            <a href="/project/shop/orders.php" style="color: #fff;">구매 목록</a>
                         </li>
                         <li>
                             <a href="#" style="color: #fff;">계정 정보 찾기 (임시)</a>
