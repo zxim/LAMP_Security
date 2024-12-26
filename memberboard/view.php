@@ -69,7 +69,7 @@ $userid = isset($_SESSION["userid"]) ? $_SESSION["userid"] : "";
                 $file_size = filesize($file_path);
 
                 // 이미지 파일 타입 확인
-                $img_types = array('image/jpeg', 'image/png', 'image/gif');
+                $img_types = array('image/jpeg', 'image/png', 'image/gif', 'image/PNG', 'image/jpg');
                 if (in_array($file_type, $img_types)) {
                     // 이미지 파일일 경우
                     echo "▷ 첨부파일 : $file_name ($file_size Byte) <br>";

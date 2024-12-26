@@ -12,6 +12,8 @@ if (!$userid) {
     exit;
 }
 
+$username = isset($_SESSION["username"]) ? $_SESSION["username"] : ""; // 세션에서 username 가져오기
+
 $subject = $_POST["subject"];
 $content = $_POST["content"];
 
@@ -23,10 +25,14 @@ $upload_dir = './data/';
 // 파일 정보
 $upfile_name = $_FILES["upfile"]["name"];
 $upfile_tmp_name = $_FILES["upfile"]["tmp_name"];
+$upfile_type = $_FILES["upfile"]["type"];
 $upfile_error = $_FILES["upfile"]["error"];
 
+$copied_file_name = "";
+
 if ($upfile_name && !$upfile_error) {
-    $uploaded_file = $upload_dir . $upfile_name;
+    $copied_file_name = date("YmdHis") . "_" . $upfile_name; // 유니크한 파일 이름 생성
+    $uploaded_file = $upload_dir . $copied_file_name;
 
     if (!move_uploaded_file($upfile_tmp_name, $uploaded_file)) {
         echo "<script>
@@ -37,6 +43,8 @@ if ($upfile_name && !$upfile_error) {
     }
 } else {
     $upfile_name = "";
+    $upfile_type = "";
+    $copied_file_name = "";
 }
 
 $config = require '../config.php';
@@ -54,8 +62,8 @@ mysqli_begin_transaction($con);
 
 try {
     // 데이터 삽입 (게시글 저장)
-    $sql = "INSERT INTO memberboard (id, name, subject, content, regist_day, file_name)
-            VALUES ('$userid', '$username', '$subject', '$content', '$regist_day', '$upfile_name')";
+    $sql = "INSERT INTO memberboard (id, name, subject, content, regist_day, file_name, file_type, file_copied)
+            VALUES ('$userid', '$username', '$subject', '$content', '$regist_day', '$upfile_name', '$upfile_type', '$copied_file_name')";
 
     if (!mysqli_query($con, $sql)) {
         throw new Exception("게시글 저장 오류: " . mysqli_error($con));
