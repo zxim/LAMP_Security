@@ -45,12 +45,50 @@
             <div class="product-image">
                 <img id="productImg" src="/project/shop/images/iPhone/iphone_16_pro.jpg" alt="iPhone 16">
             </div>
-            <div class="color-options">
-                <button onclick="changeImage('black')">Black</button>
-                <button onclick="changeImage('natural')">Natural</button>
-                <button onclick="changeImage('white')">White</button>
-                <button onclick="changeImage('desert')">Desert</button>
+            <div class="color-selectors">
+                <button class="color-btn black" onclick="showImage('black-img', 'black', 'Black Titanium')"></button>
+                <button class="color-btn white" onclick="showImage('white-img', 'white', 'White Titanium')"></button>
+                <button class="color-btn gold" onclick="showImage('gold-img', 'desert', 'Desert Titanium')"></button>
+                <button class="color-btn silver" onclick="showImage('silver-img', 'natural', 'Natural Titanium')"></button>
             </div>
+
+
+            <p class="selected-color">선택된 색상: <span id="selectedColor">None</span></p>
+
+            <div class="options">
+                <div class="option-group">
+                    <label for="model">모델</label>
+                    <select id="model" onchange="updatePrice()">
+                        <option value="1550000">iPhone 16 Pro (₩1,550,000)</option>
+                        <option value="1900000">iPhone 16 Pro Max (₩1,900,000)</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label for="storage">저장 용량</label>
+                    <select id="storage" onchange="updatePrice()">
+                        <option value="0">128GB (+₩0)</option>
+                        <option value="40000">256GB (+₩40,000)</option>
+                        <option value="75000">512GB (+₩75,000)</option>
+                        <option value="150000">1TB (+₩150,000)</option>
+                    </select>
+                </div>
+
+                <p class="price-display">총 금액 : ₩ <span id="totalPrice">1,550,000</span></p>
+            </div>
+
+            <div class="color-options">
+                <form action="purchase.php" method="POST" id="purchaseForm">
+                    <input type="hidden" name="productName" id="formProductName">
+                    <input type="hidden" name="selectedColor" id="formSelectedColor">
+                    <input type="hidden" name="storage" id="formStorage">
+                    <input type="hidden" name="additionalPrice" id="formAdditionalPrice">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="button" onclick="preparePurchase()">Buy</button>
+                </form>
+                <button>Cart</button>
+            </div>
+
         </div>
     </div>
 
@@ -71,10 +109,24 @@
     </div>
 
     <script>
-        // 페이지 로드 시 초기 상태 설정
+       // 페이지 로드 시 초기 설정
         document.addEventListener("DOMContentLoaded", () => {
             showProducts("iPhone");
+            setProductName(); // 초기 상품 이름 설정
         });
+
+        // 선택한 상품 이름 동적으로 설정
+        function setProductName() {
+            const modelElement = document.getElementById('model');
+            const selectedModel = modelElement.options[modelElement.selectedIndex].text;
+
+            // 모델 이름에서 상품 이름만 추출
+            const productName = selectedModel.split('(')[0].trim();
+            document.getElementById('formProductName').value = productName;
+        }
+
+        document.getElementById('model').addEventListener('change', setProductName);
+
 
         function showProducts(categoryId) {
             // 모든 카테고리 숨기기
@@ -88,7 +140,23 @@
             }
         }
 
-        function changeImage(color) {
+        function showImage(colorId, color, colorName) {
+            // 모든 이미지 숨기기
+            document.querySelectorAll('.iphone-gallery img').forEach(img => {
+                img.style.display = 'none';
+                img.classList.remove('fade-in');
+            });
+        
+            // 선택된 이미지 표시
+            const selectedImg = document.getElementById(colorId);
+            if (selectedImg) {
+                selectedImg.style.display = 'block';
+                setTimeout(() => {
+                    selectedImg.classList.add('fade-in');
+                }, 0);
+            }
+        
+            // 메인 이미지 변경
             const productImg = document.getElementById("productImg");
             const images = {
                 black: "/project/shop/images/iPhone/black.png",
@@ -96,7 +164,42 @@
                 white: "/project/shop/images/iPhone/white.png",
                 desert: "/project/shop/images/iPhone/desert.png",
             };
-            productImg.src = images[color];
+            if (color && productImg) {
+                productImg.src = images[color];
+            }
+        
+            // 선택된 색상 업데이트
+            const selectedColorElement = document.getElementById("selectedColor");
+            selectedColorElement.textContent = colorName;
+        }
+
+
+        // 가격 업데이트
+        function updatePrice() {
+            const modelPrice = parseInt(document.getElementById('model').value); // 모델 가격
+            const storagePrice = parseInt(document.getElementById('storage').value); // 저장 용량 추가 가격
+        
+            // 총 금액 계산
+            const totalPrice = modelPrice + storagePrice;
+        
+            // 표시 업데이트
+            document.getElementById('totalPrice').textContent = totalPrice.toLocaleString();
+        }
+
+        // 구매 처리
+        function preparePurchase() {
+            // 선택된 옵션 가져오기
+            const selectedColor = document.getElementById('selectedColor').textContent;
+            const storage = document.getElementById('storage').options[document.getElementById('storage').selectedIndex].text;
+            const additionalPrice = parseInt(document.getElementById('storage').value);
+
+            // 폼 데이터 설정
+            document.getElementById('formSelectedColor').value = selectedColor;
+            document.getElementById('formStorage').value = storage;
+            document.getElementById('formAdditionalPrice').value = additionalPrice;
+
+            // 폼 제출
+            document.getElementById('purchaseForm').submit();
         }
     </script>
 </body>

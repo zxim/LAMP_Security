@@ -1,68 +1,76 @@
 <?php
-include "session.php"; // 세션 처리
-$config = require '../config.php'; // DB 설정
+// DB 연결 정보 설정
+$config = require '../config.php';
+
+$db_host = $config['DB_HOST'];
+$db_user = $config['DB_USER'];
+$db_password = $config['DB_PASSWORD'];
+$db_name = $config['DB_NAME'];
 
 // DB 연결
-$con = mysqli_connect($config['DB_HOST'], $config['DB_USER'], $config['DB_PASSWORD'], $config['DB_NAME']);
+$con = mysqli_connect($db_host, $db_user, $db_password, $db_name);
 if (!$con) {
-    echo "<script>alert('데이터베이스 연결 실패: " . mysqli_connect_error() . "'); history.back();</script>";
-    exit;
+    die("DB 연결 실패: " . mysqli_connect_error());
 }
 
-// POST 요청 확인
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo "<script>alert('잘못된 요청입니다. POST 요청만 허용됩니다.'); history.back();</script>";
-    exit;
+// POST 데이터 가져오기
+$productName = isset($_POST['productName']) ? $_POST['productName'] : '';
+$selectedColor = isset($_POST['selectedColor']) ? $_POST['selectedColor'] : '';
+$storage = isset($_POST['storage']) ? $_POST['storage'] : '';
+$additionalPrice = isset($_POST['additionalPrice']) ? intval($_POST['additionalPrice']) : 0;
+$quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
+$user_num = 1; // 테스트용 회원 ID
+
+// 상품 기본 가격 가져오기
+$productQuery = "SELECT product_id, price FROM products WHERE name = ?";
+$productStmt = mysqli_prepare($con, $productQuery);
+if (!$productStmt) {
+    die("쿼리 준비 실패: " . mysqli_error($con));
+}
+mysqli_stmt_bind_param($productStmt, "s", $productName);
+mysqli_stmt_execute($productStmt);
+$productResult = mysqli_stmt_get_result($productStmt);
+
+if ($row = mysqli_fetch_assoc($productResult)) {
+    $product_id = $row['product_id'];
+    $base_price = $row['price'];
+} else {
+    die("상품 정보를 찾을 수 없습니다.");
 }
 
-// 입력값 가져오기
-$product_id = intval($_POST['product_id']);
-$member_id = $_SESSION['user_num'];
+// 총 결제 금액 계산
+$total_price = ($base_price + $additionalPrice) * $quantity;
 
-// 상품 정보 가져오기
-$product_query = "SELECT * FROM products WHERE product_id = $product_id";
-$product_result = mysqli_query($con, $product_query);
-$product = mysqli_fetch_assoc($product_result);
+// 사용자 포인트 확인 (테스트용 값 설정)
+$currentPoints = 5000000; // 테스트용 회원 포인트
 
-if (!$product) {
-    echo "<script>alert('상품 정보를 찾을 수 없습니다.'); history.back();</script>";
-    exit;
+// 포인트 부족 여부 확인
+if ($currentPoints < $total_price) {
+    die("포인트가 부족합니다.");
 }
 
-// 사용자 포인트 확인
-$member_query = "SELECT points FROM members WHERE num = $member_id";
-$member_result = mysqli_query($con, $member_query);
-$member = mysqli_fetch_assoc($member_result);
+// 포인트 차감 (테스트 환경에서는 DB 업데이트 생략)
+$newPoints = $currentPoints - $total_price;
 
-if ($member['points'] < $product['price']) {
-    echo "<script>alert('포인트가 부족합니다.'); history.back();</script>";
-    exit;
+// 구매 정보 저장
+$orderQuery = "INSERT INTO orders (member_id, product_id, quantity, total_price) 
+               VALUES (?, ?, ?, ?)";
+$orderStmt = mysqli_prepare($con, $orderQuery);
+if (!$orderStmt) {
+    die("쿼리 준비 실패: " . mysqli_error($con));
+}
+mysqli_stmt_bind_param($orderStmt, "iiii", $user_num, $product_id, $quantity, $total_price);
+
+if (mysqli_stmt_execute($orderStmt)) {
+    echo "<script>
+        alert('구매가 성공적으로 완료되었습니다!');
+        location.href = '/project/shop/categories.php';
+    </script>";
+} else {
+    die("구매 처리 중 오류: " . mysqli_error($con));
 }
 
-// 트랜잭션 시작
-mysqli_begin_transaction($con);
-
-try {
-    // 포인트 차감
-    $update_points = "UPDATE members SET points = points - {$product['price']} WHERE num = $member_id";
-    if (!mysqli_query($con, $update_points)) {
-        throw new Exception("포인트 차감 실패: " . mysqli_error($con));
-    }
-
-    // 주문 기록 추가
-    $insert_order = "INSERT INTO orders (member_id, product_id) VALUES ($member_id, $product_id)";
-    if (!mysqli_query($con, $insert_order)) {
-        throw new Exception("주문 기록 추가 실패: " . mysqli_error($con));
-    }
-
-    // 트랜잭션 커밋
-    mysqli_commit($con);
-    echo "<script>alert('구매가 완료되었습니다!'); location.href = 'products.php';</script>";
-} catch (Exception $e) {
-    // 트랜잭션 롤백
-    mysqli_rollback($con);
-    echo "<script>alert('" . $e->getMessage() . "'); history.back();</script>";
-} finally {
-    mysqli_close($con);
-}
+// DB 연결 종료
+mysqli_stmt_close($orderStmt);
+mysqli_close($con);
 ?>

@@ -81,7 +81,7 @@ include "../memberboard/session.php"; // 세션 포함
     $result = $stmt->get_result();
 
     if ($result->num_rows === 0) {
-        die("회원 정보를 찾을 수 없습니다.");
+        die("로그인을 해주세요.");
     }
 
     $row = $result->fetch_assoc();

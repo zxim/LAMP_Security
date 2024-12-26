@@ -119,3 +119,115 @@ body {
         width: 150px;
     }
 }
+
+.color-selectors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.color-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.color-btn::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
+}
+
+.color-btn.black::before {
+    background-color: black;
+}
+
+.color-btn.white::before {
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.color-btn.gold::before {
+    background-color: #d4af37;
+}
+
+.color-btn.silver::before {
+    background-color: #c0c0c0;
+}
+
+.color-btn:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.6);
+}
+
+
+/* 옵션선택 */
+/* 선택된 옵션 섹션 스타일 */
+.selected-color,
+.option-group label,
+.price-display {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.selected-color span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007BFF;
+}
+
+.option-group {
+    margin-bottom: 15px;
+}
+
+.option-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+select:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.price-display {
+    font-size: 18px;
+    color: #007BFF;
+    text-align: right;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.price-display span {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}

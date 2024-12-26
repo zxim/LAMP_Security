@@ -57,11 +57,7 @@ $userid = isset($_SESSION["userid"]) ? $_SESSION["userid"] : "";
 </head>
 <body>
 <?php include "../login/header.php"; ?> 
-<h2><a href="../login/index.php">홈</a>
-        <span style="margin-left: 50px;"></span>
-        회원 게시판 > 내용보기
-    </h2>
-    <ul class="board_view">
+    <ul class="board_view" style="margin-top: 30px;">
         <li class="row1">
             <span class="col1"><b>제목 :</b> <?= $subject ?></span> <!-- 제목 출력 -->
             <span class="col2"><?= $name ?> | <?= $regist_day ?></span> <!-- 이름, 작성일 출력 -->

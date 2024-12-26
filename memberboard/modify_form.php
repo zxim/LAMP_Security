@@ -30,7 +30,7 @@
 <html>
 <head> 
 <meta charset="utf-8">
-<title>오토에버 불여조</title>
+<title>게시판</title>
 <link rel="stylesheet" href="style.css">
 <script>
   	function check_input() {		
@@ -50,33 +50,29 @@
 </head>
 <body> 	
 <?php include "../login/header.php"; ?> 
-<h2><a href="../login/index.php">홈</a>
-		<span style="margin-left: 50px;"></span>
-		회원 게시판 > 글 수정하기
-	</h2>
-	<form name="board" method="post" action="/project/memberboard/modify.php?num=<?=$num?>&page=<?=$page?>">
+	<form name="board" method="post" action="/project/memberboard/modify.php?num=<?=$num?>&page=<?=$page?>" style="margin-top: 30px;">
 	    <ul class="board_form">
 			<li>
-				<span class="col1">이름 : </span>
-				<span class="col2"><?=$name?></span>
+				<span class="col1" style="font-weight: bold";>이름 : </span>
+				<span class="col2" style="font-weight: bold";><?=$name?></span>
 			</li>			
 	    	<li>
-	    		<span class="col1">제목 : </span>
-	    		<span class="col2"><input name="subject" type="text" value="<?=$subject?>"></span>
+	    		<span class="col1" style="font-weight: bold";>제목 : </span>
+	    		<span class="col2"><input name="subject" type="text" style="font-weight: bold"; value="<?=$subject?>" ></span>
 	    	</li>	    	
 	    	<li class="area">	
-	    		<span class="col1">내용 : </span>
+	    		<span class="col1" style="font-weight: bold";>내용 : </span>
 	    		<span class="col2">
 	    			<textarea name="content"><?=$content?></textarea>
 	    		</span>
 	    	</li>
 			<li>
-			        <span class="col1"> 첨부 파일 : </span>
+			        <span class="col1" style="font-weight: bold";> 첨부 파일 : </span>
 			        <span class="col2"><?=$file_name?></span>
 			</li>	
 	    </ul>
 	    <ul class="buttons">
-			<li><button type="button" onclick="check_input()">저장하기</button></li>
+			<li><button type="button" onclick="check_input()" >저장하기</button></li>
 			<li><button type="button" onclick="location.href='list.php'">목록보기</button></li>
 		</ul>
 	</form>

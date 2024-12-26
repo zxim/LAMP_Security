@@ -11,8 +11,6 @@
         include '../login/header.php'; ?>
 
         <h2>
-            <a href="../login/index.php">홈</a>
-            <span style="margin-left: 50px;"></span> 회원 게시판 > 목록보기
             <form name="search" method="get" action="list.php">	
                 <input type="text" name="search" placeholder="검색하기">
                 <button class="btn">검색</button>
