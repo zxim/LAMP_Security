@@ -79,18 +79,22 @@ mysqli_close($con);
         .notice-buttons button {
             width: 120px; /* 버튼 너비 고정 */
             height: 40px; /* 버튼 높이 고정 */
-            background-color: black;
-            color: white;
-            border: none;
+            background-color: #fff;
+            font-weight: bold;
+            color: #007aff;
+            border: #fff;
             border-radius: 5px;
             font-size: 14px;
             cursor: pointer;
             text-align: center;
-            transition: all 0.3s ease; /* 부드러운 전환 효과 */
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 약간의 그림자 */
         }
         .notice-buttons button:hover {
-            background-color: #444;
-            transform: scale(1.05); /* 약간 확대 효과 */
+            background-color: #007aff; 
+            color: #fff; /* 글씨 파란색으로 변경 */
+            border: 1px solid #007aff;
+            box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4); /* 강조된 그림자 */
         }
     </style>
 </head>

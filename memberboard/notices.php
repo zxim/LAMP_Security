@@ -94,16 +94,20 @@ if (!$result) {
         }
         .notice-search button {
             padding: 10px 20px;
-            background-color: black;
-            color: white;
-            border: none;
+            background-color: #fff;
+            color: #007aff;
+            border: #fff;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
         .notice-search button:hover {
-            background-color: #333;
+            background-color: #007aff; 
+            color: #fff; /* 글씨 파란색으로 변경 */
+            border: 1px solid #007aff;
+            box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4); /* 강조된 그림자 */
         }
         .notice-list {
             list-style: none;
@@ -133,18 +137,23 @@ if (!$result) {
             text-align: right;
         }
         .notice-btn {
-            background-color: black;
-            color: white;
+            background-color: #fff;
+            color: #007aff;
             padding: 10px 20px;
-            border: none;
+            border: #fff;
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
             font-size: 14px;
             font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 약간의 그림자 */
         }
         .notice-btn:hover {
-            background-color: #333;
+            background-color: #007aff; 
+            color: #fff; /* 글씨 파란색으로 변경 */
+            border: 1px solid #007aff;
+            box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4); /* 강조된 그림자 */
         }
         .pagination {
             margin-top: 20px;
@@ -154,22 +163,29 @@ if (!$result) {
         }
         .pagination a {
             padding: 10px 15px;
-            background-color: black;
-            color: white;
+            background-color: #fff;
+            color: #007aff;
+            border: #fff;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 약간의 그림자 */
         }
         .pagination a:hover {
-            background-color: #333;
+            background-color: #007aff; 
+            color: #fff; /* 글씨 파란색으로 변경 */
+            border: 1px solid #007aff;
+            box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4); /* 강조된 그림자 */
         }
         .pagination .current {
             padding: 10px 15px;
-            border: 1px solid black;
+            border: 1px solid #007aff;
             background-color: white;
-            color: black;
+            color: #007aff;
             font-weight: bold;
             border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 122, 255, 0.2); 
         }
     </style>
 </head>
@@ -202,7 +218,7 @@ if (!$result) {
 
         <div class="pagination">
             <?php if ($page > 1): ?>
-                <a href="?page=<?= $page - 1 ?>&search=<?= urlencode($search) ?>">◀ 이전</a>
+                <a href="?page=<?= $page - 1 ?>&search=<?= urlencode($search) ?>">이전</a>
             <?php endif; ?>
 
             <?php for ($i = 1; $i <= $total_pages; $i++): ?>
@@ -214,7 +230,7 @@ if (!$result) {
             <?php endfor; ?>
 
             <?php if ($page < $total_pages): ?>
-                <a href="?page=<?= $page + 1 ?>&search=<?= urlencode($search) ?>">다음 ▶</a>
+                <a href="?page=<?= $page + 1 ?>&search=<?= urlencode($search) ?>">다음</a>
             <?php endif; ?>
         </div>
     </div>

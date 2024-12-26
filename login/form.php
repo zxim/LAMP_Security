@@ -4,122 +4,128 @@
     <meta charset="utf-8">
     <title>회원가입</title>
     <style>
-        /* 기본 스타일 */
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5; /* 배경 회색 */
-            font-family: 'Noto Sans', Arial, sans-serif;
-            color: #333;
-        }
+    /* 기본 스타일 */
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5; /* 배경 회색 */
+        font-family: 'Noto Sans', Arial, sans-serif;
+        color: #333;
+    }
 
-        h2 {
-            text-align: center;
-            color: #333;
-            font-size: 28px;
-            font-weight: bold;
-            margin: 20px 0;
-        }
+    h2 {
+        text-align: center;
+        color: #333;
+        font-size: 28px;
+        font-weight: bold;
+        margin: 20px 0;
+    }
 
-        /* 폼 컨테이너 스타일 */
-        .join_form {
-            width: 90%;
-            max-width: 600px; /* 박스를 넓게 조정 */
-            margin: 20px auto;
-            padding: 30px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
-        }
+    /* 폼 컨테이너 스타일 */
+    .join_form {
+        width: 90%;
+        max-width: 600px; /* 박스를 넓게 조정 */
+        margin: 20px auto;
+        padding: 30px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 그림자 추가 */
+    }
 
-        .join_form li {
-            display: flex;
-            align-items: center;
-            justify-content: space-between; /* 입력 필드와 레이블 간격 균일화 */
-            margin-bottom: 20px; /* 필드 간 간격 */
-            position: relative;
-        }
+    .join_form li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* 입력 필드와 레이블 간격 균일화 */
+        margin-bottom: 20px; /* 필드 간 간격 */
+        position: relative;
+    }
 
-        .join_form .col1 {
-            flex: 1;
-            color: #333;
-            font-weight: bold;
-            text-align: right; /* 레이블 오른쪽 정렬 */
-            margin-right: 20px; /* 레이블과 입력 필드 간격 */
-        }
+    .join_form .col1 {
+        flex: 1;
+        color: #333;
+        font-weight: bold;
+        text-align: right; /* 레이블 오른쪽 정렬 */
+        margin-right: 20px; /* 레이블과 입력 필드 간격 */
+    }
 
-        .join_form .col2 {
-            flex: 3;
-            position: relative;
-        }
+    .join_form .col2 {
+        flex: 3;
+        position: relative;
+    }
 
-        .join_form .col2 input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
+    .join_form .col2 input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
 
-        .join_form .col2 input:focus {
-            border-color: #333; /* 포커스 시 테두리 검정 */
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
+    .join_form .col2 input:focus {
+        border-color: #007aff; /* 포커스 시 파란색 테두리 */
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 122, 255, 0.3);
+    }
 
-        /* 중복체크 버튼 */
-        .check-btn {
-            position: absolute;
-            top: 50%; /* 입력 필드와 겹치도록 위로 올림 */
-            right: 10px; /* 오른쪽 여백 조정 */
-            transform: translateY(-50%);
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: #333;
-            color: white;
-            cursor: pointer;
-            font-size: 12px;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-        }
+    /* 중복체크 버튼 */
+    .check-btn {
+        position: absolute;
+        top: 50%; /* 입력 필드와 겹치도록 위로 올림 */
+        right: 10px; /* 오른쪽 여백 조정 */
+        transform: translateY(-50%);
+        padding: 8px 15px;
+        border: #fff;
+        border-radius: 5px;
+        background-color: #fff; /* 기본 파란색 */
+        color: #007aff;
+        cursor: pointer;
+        font-size: 12px;
+        white-space: nowrap;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+        height: 37px;
+    }
 
-        .check-btn:hover {
-            background-color: white;
-            color: #333;
-            border: 1px solid #333;
-        }
+    .check-btn:hover {
+        background-color: #007aff;
+        color: #fff;
+        border: 1px solid #007aff;
+    }
 
-        /* 버튼 스타일 */
-        .buttons {
-            text-align: center;
-            margin-top: 30px;
-        }
+    /* 버튼 스타일 */
+    .buttons {
+        text-align: center;
+        margin-top: 30px;
+    }
 
-        .buttons button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #333;
-            color: white;
-            cursor: pointer;
-            margin-right: 10px;
-            transition: all 0.3s ease;
-        }
+    .buttons button {
+        padding: 10px 20px;
+        border: #fff;
+        border-radius: 5px;
+        background-color: #fff; 
+        color: #007aff;
+        font-weight: bold;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 그림자 추가 */
+    }
 
-        .buttons button:hover {
-            background-color: white;
-            color: #333;
-            border: 1px solid #333;
-        }
+    .buttons button:hover {
+        background-color: #007aff;
+        color: #fff;
+        border: 1px solid #007aff;
+        box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4); /* 강조된 그림자 */
+    }
 
-        .buttons button:last-child {
-            margin-right: 0;
-        }
-    </style>
+    .buttons button:last-child {
+        margin-right: 0;
+    }
+</style>
     <script>
         var isIdChecked = false;
 
@@ -161,6 +167,7 @@
                 return;
             }
 
+            alert("회원가입에 성공했습니다!");
             form.submit();
         }
 
@@ -197,7 +204,7 @@
                 <span class="col1">아이디</span>
                 <div class="col2">
                     <input type="text" name="id">
-                    <button type="button" class="check-btn" onclick="check_id()">중복체크</button>
+                    <button type="button" class="check-btn" onclick="check_id()" style="font-weight: bold;">중복체크</button>
                 </div>
             </li>
             <li>
@@ -224,13 +231,12 @@
                     <input type="text" name="email">
                 </div>
             </li>
+            <div class="buttons">
+                <button type="button" onclick="check_input()">저장하기</button>
+                <button type="button" onclick="reset_form()">지우기</button>
+                <button type="button" onclick="go_back()">나가기</button>
+            </div>
         </ul>
-
-        <div class="buttons">
-            <button type="button" onclick="check_input()">저장하기</button>
-            <button type="button" onclick="reset_form()">지우기</button>
-            <button type="button" onclick="go_back()">나가기</button>
-        </div>
     </form>
 </body>
 </html>

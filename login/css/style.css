@@ -54,28 +54,37 @@ a:hover {
     color: #ddd; /* 호버 시 연한 회색 */
 }
 
-/* 버튼 스타일 */
+/* 버튼 컨테이너 중앙 정렬 */
 .buttons {
-    text-align: center;
-    margin: 20px auto;
+    display: flex; /* Flexbox 활성화 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    height: 100px; /* 컨테이너 높이 설정 (선택) */
+    margin: 10px auto; /* 페이지 전체에서 중앙 배치 */
+    gap: 20px;
 }
 
-.buttons button {
+/* 버튼 스타일 */
+.buttons button, .btn {
     padding: 10px 20px;
-    background-color: #333; /* 기본 검정 */
-    color: #fff; /* 기본 흰색 */
-    border: none;
+    background-color: #fff; /* 기본 흰색 배경 */
+    color: #007aff; /* 기본 파란색 글씨 */
+    border: 2px solid #fff; /* 파란색 테두리 */
     border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
     font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 기본 그림자 */
 }
 
-.buttons button:hover {
-    background-color: #fff; /* 흰색으로 반전 */
-    color: #333; /* 검정색 글씨 */
-    border: 1px solid #333;
+.buttons button:hover, .btn:hover {
+    background-color: #007aff; /* 호버 시 파란색 배경 */
+    color: #fff; /* 호버 시 흰색 글씨 */
+    border: 2px solid #007aff; /* 테두리 유지 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 강조된 그림자 */
 }
+
 
 /* 제목 스타일 */
 h2 {
@@ -97,7 +106,7 @@ h2 {
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .join_form li {
@@ -122,7 +131,7 @@ h2 {
 }
 
 .join_form input:focus {
-    border-color: #333; /* 포커스 시 검정색 테두리 */
+    border-color: #007aff; /* 포커스 시 파란색 테두리 */
 }
 
 /* 반응형 디자인 */
@@ -140,16 +149,4 @@ h2 {
         flex-direction: column;
         gap: 10px;
     }
-}
-
-.btn {
-    background-color: #333;
-    color: #fff;
-    border-radius: 4px;
-}
-
-.btn:hover {
-    background-color: #fff;
-    color: #333;
-    border: 1px solid #333;
 }

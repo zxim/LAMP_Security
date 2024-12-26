@@ -16,45 +16,39 @@ a:link, a:visited, a:hover, a:active {
     text-decoration: none; 
     color: black; /* 파란색으로 통일 */
 }
-
-/* 버튼 */
-/* 버튼 스타일 */
-.btn {
+/* 공통 버튼 스타일 */
+.btn, .buttons button, .chat-btn, .comment-form .chat-btn, .comment-form .comment-btn, .comment-delete-form .delete-btn, .file-upload-label {
     padding: 10px 20px;
-    background-color: black;
-    color: white;
-    border: none;
+    background-color: #fff;
+    color: #007aff; 
+    border: #fff;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 15px;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 약간의 그림자 */
 }
 
-.btn:hover {
-    background-color: white;
-    color: black;
+.btn:hover, .buttons button:hover, .chat-btn:hover, .comment-form .chat-btn:hover, .comment-form .comment-btn:hover, .comment-delete-form .delete-btn:hover {
+    background-color: #007aff; 
+    color: #fff; /* 글씨 파란색으로 변경 */
+    border: 1px solid #007aff;
+    box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4); /* 강조된 그림자 */
 }
-.buttons { 
-    text-align: right; 
-    margin: 20px 20px 0 0; 
+
+/* 삭제 버튼 (특수 스타일) */
+.comment-delete-form .delete-btn {
+    background-color: #d9363e; /* 기본 빨간색 */
 }
-.buttons li { 
-    display: inline; 
+
+.comment-delete-form .delete-btn:hover {
+    background-color: #ff4d4d; /* 밝은 빨간색으로 변경 */
+    color: white; /* 글씨는 흰색 유지 */
+    border: 1px solid #d9363e;
+    transform: scale(1.05); /* 약간의 확대 효과 */
 }
-.buttons button { 
-    padding: 8px 20px; 
-    cursor: pointer; 
-    background-color: black; /* 파란색 배경 */
-    color: white; /* 흰색 글씨 */
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-.buttons button:hover { 
-    background-color: white; /* 흰색 배경으로 변경 */
-    color: black; /* 파란색 글씨 */
-    border: 1px solid black;
-}
+
 
 /* 게시판 제목 */
 h2 { 
@@ -223,22 +217,6 @@ h2 {
     margin-top: 10px;
 }
 
-/* 버튼 스타일 */
-.btn {
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: white;
-    color: black;
-    font-weight: bold;
-    border: 1px solid black;
-    transition: all 0.3s ease;
-}
-
-/* 마우스를 올렸을 때 버튼 스타일 */
-.btn:hover {
-    background-color: black;
-    color: white;
-}
 
 /* 로그인 정보 표시 스타일 */
 .logged {
@@ -258,42 +236,12 @@ h2 {
     padding: 20px;
     color: white;
 }
-.top a.btn {
-    margin-left: 10px;
-    color: black;
-    text-decoration: none;
-    background-color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-.top a.btn:hover {
-    color: white;
-    background-color: black;
-    text-decoration: none;
-}
 
 /* 파일 업로드 버튼 숨기기 */
 input[type="file"] {
     display: none;
 }
 
-/* 파일 업로드 버튼 대체 */
-.file-upload-label {
-    display: inline-block;
-    padding: 5px 10px; 
-    background-color: black;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px; 
-    transition: background-color 0.3s ease;
-}
-
-
-/* 마우스를 올렸을 때 스타일 */
-.file-upload-label:hover {
-    background-color: #050043;
-}
 
 /* 첨부 파일 표시 텍스트 */
 .file-upload-text {
@@ -301,48 +249,6 @@ input[type="file"] {
     font-size: 12px; 
     color: #555;
 }
-
-/* 버튼 스타일 */
-.btn {
-    padding: 10px 20px;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-/* 마우스를 올렸을 때 버튼 스타일 */
-.btn:hover {
-    background-color: #000000;
-}
-
-/* 버튼 그룹 정렬 */
-.buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-ul.buttons button {
-    margin-right: 0; 
-}
-
-
-.chat-btn {
-    padding: 10px 20px;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
 
 /*  */
 form[name="search"] {
@@ -464,3 +370,12 @@ form[name="search"] input[type="text"]:focus {
     transform: scale(1.05);
 }
 
+/* 버튼 그룹 중앙 정렬 */
+.buttons {
+    display: flex; /* Flexbox 활성화 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    margin-top: 20px; /* 상단 여백 */
+    list-style: none; /* 리스트 스타일 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    gap: 15px;
+}

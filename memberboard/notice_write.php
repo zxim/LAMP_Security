@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         .notice-write-form textarea:focus {
             border-color: #555;
             outline: none;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
         }
         .notice-write-buttons {
             display: flex;
@@ -103,19 +103,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         .notice-write-buttons .btn {
             width: 120px;
             padding: 10px 0;
-            background-color: black;
-            color: white;
-            border: none;
+            background-color: #fff;
+            color: #007aff;
+            border: #fff;
             border-radius: 5px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             text-align: center;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 약간의 그림자 */
         }
         .notice-write-buttons .btn:hover {
-            background-color: #444;
-            transform: scale(1.05);
+            background-color: #007aff; 
+            color: #fff; /* 글씨 파란색으로 변경 */
+            border: 1px solid #007aff;
+            box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4); /* 강조된 그림자 */
         }
     </style>
 </head>

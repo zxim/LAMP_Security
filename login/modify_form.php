@@ -117,11 +117,11 @@ include "../memberboard/session.php"; // 세션 포함
                     <span class="col1">이메일</span>
                     <span class="col2"><input type="text" name="email" value="<?= $email ?>"></span>
                 </li>
-            </ul>
-            <ul class="buttons">
-                <button type="button" onclick="check_input()">저장하기</button>
-                <button type="button" onclick="reset_form()">지우기</button>
-                <button type="button" onclick="go_back()">나가기</button>
+                    <ul class="buttons">
+                    <button type="button" onclick="check_input()">저장하기</button>
+                    <button type="button" onclick="reset_form()">지우기</button>
+                    <button type="button" onclick="go_back()">나가기</button>
+                </ul>
             </ul>
         </form>
     </div>

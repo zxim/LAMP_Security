@@ -31,7 +31,7 @@ h2 {
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* 폼 그룹 */
@@ -56,7 +56,7 @@ h2 {
 }
 
 .form-group input:focus {
-    border-color: #333;
+    border-color: #007aff; /* 포커스 시 파란색 테두리 */
     outline: none;
 }
 
@@ -75,17 +75,26 @@ h2 {
     transition: all 0.3s ease;
 }
 
+/* 버튼 공통 스타일 */
 .btn {
-    background-color: #333;
-    color: #fff;
+    padding: 10px 20px;
+    background-color: #fff; /* 기본 흰색 배경 */
+    color: #007aff; /* 기본 파란색 글씨 */
+    border: 2px solid #007aff; /* 파란색 테두리 */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+    font-size: 14px;
+    font-weight: bold; /* 글씨 볼드체 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 기본 그림자 */
 }
 
 .btn:hover {
-    background-color: #fff;
-    color: #333;
-    border: 1px solid #333;
+    background-color: #007aff; /* 호버 시 파란색 배경 */
+    color: #fff; /* 호버 시 흰색 글씨 */
+    border: 2px solid #007aff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* 강조된 그림자 */
 }
-
 
 </style>
 <script>
