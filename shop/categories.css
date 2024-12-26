@@ -31,9 +31,9 @@ body {
     font-weight: bold;
     padding: 12px 25px;
     border: 2px solid transparent;
-    border-radius: 8px;
+    border-radius: 12px; /* 둥근 모서리 */
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 약간의 그림자 효과 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 */
     background-color: white; /* 기본 배경 */
 }
 
@@ -41,7 +41,7 @@ body {
     color: white; /* 호버 시 텍스트 색상 */
     background-color: #007aff; /* 호버 시 배경색 */
     border: 2px solid #007aff;
-    box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4); /* 호버 시 그림자 증가 */
+    box-shadow: 0 6px 10px rgba(0, 122, 255, 0.3); /* 호버 시 그림자 증가 */
 }
 
 .category-container button img {
@@ -52,12 +52,49 @@ body {
 /* 상품 컨테이너 */
 .product {
     display: none; /* 기본적으로 숨김 */
-    margin: 20px;
+    margin: 20px auto;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border: 1px solid #ffffff; /* 흰색 테두리 */
+    border-radius: 12px; /* 둥근 모서리 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
     background-color: white;
+    width: 90%; /* 최대 너비 설정 */  
+}
+
+.product-image {
+    margin-bottom: 20px;
+}
+
+.product-image img {
+    width: 300px;
+    height: auto;
+    border-radius: 12px; /* 이미지도 둥글게 */
+}
+
+.color-options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.color-options button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 12px; /* 둥근 모서리 */
+    border: 2px solid #fff;
+    background-color: white;
+    color: #007aff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.color-options button:hover {
+    background-color: #007aff;
+    color: white;
+    border: #007aff;
 }
 
 /* 반응형 디자인 */
@@ -66,6 +103,10 @@ body {
         font-size: 16px;
         padding: 10px 20px;
     }
+
+    .product-image img {
+        width: 200px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -73,48 +114,8 @@ body {
         font-size: 14px;
         padding: 8px 15px;
     }
-}
 
-
-/* buy버튼 */
-/* 공통 버튼 스타일 */
-.product-actions button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px; /* 아이콘이나 텍스트 간격 */
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 8px;
-    border: 2px solid transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 기본 그림자 */
-}
-
-/* Buy Now 버튼 스타일 */
-.product-actions .buy-btn {
-    background-color: white; /* 기본 흰색 배경 */
-    color: #007aff; /* 기본 파란 텍스트 */
-}
-
-.product-actions .buy-btn:hover {
-    background-color: #007aff; /* 호버 시 파란색 배경 */
-    color: white; /* 호버 시 흰 텍스트 */
-    border: 2px solid #007aff;
-    box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4); /* 강조된 그림자 */
-}
-
-/* Add to Cart 버튼 스타일 */
-.product-actions .cart-btn {
-    background-color: white; /* 기본 흰색 배경 */
-    color: #007aff; /* 기본 파란 텍스트 */
-}
-
-.product-actions .cart-btn:hover {
-    background-color: #007aff; /* 호버 시 파란색 배경 */
-    color: white; /* 호버 시 흰 텍스트 */
-    border: 2px solid #007aff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 강조된 그림자 */
+    .product-image img {
+        width: 150px;
+    }
 }

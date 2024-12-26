@@ -38,58 +38,21 @@
         </button>
     </div>
 
-    <div class="product iPhone" id="iPhone">
-        <h2>iPhone 16 Pro</h2>
-
-        <div class="product-item">
-            <img src="/project/shop/images/iPhone/iPhone_16_black.jpg" alt="Titanium Black">
-            <div class="product-details">
-                <h3>Titanium Gold</h3>
-                <p>Experience the premium look and feel of titanium in gold.</p>
-                <div class="product-actions">
-                    <button class="buy-btn">Buy Now</button>
-                    <button class="cart-btn">Add to Cart</button>
-                </div>
+    <div>
+        <!-- iPhone 제품 섹션 -->
+        <div class="product iPhone" id="iPhone">
+            <h2>iPhone 16 Pro</h2>
+            <div class="product-image">
+                <img id="productImg" src="/project/shop/images/iPhone/iphone_16_pro.jpg" alt="iPhone 16">
             </div>
-        </div>
-
-        <div class="product-item">
-            <img src="/project/shop/images/iPhone/iPhone_16_desert.jpg" alt="Titanium Desert">
-            <div class="product-details">
-                <h3>Titanium White</h3>
-                <p>Sleek and sophisticated titanium in a pristine white finish.</p>
-                <div class="product-actions">
-                    <button class="buy-btn">Buy Now</button>
-                    <button class="cart-btn">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-item">
-            <img src="/project/shop/images/iPhone/iPhone_16_natural.jpg" alt="Titanium Natural">
-            <div class="product-details">
-                <h3>Titanium Black</h3>
-                <p>A bold and modern design in titanium black.</p>
-                <div class="product-actions">
-                    <button class="buy-btn">Buy Now</button>
-                    <button class="cart-btn">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-item">
-            <img src="/project/shop/images/iPhone/iPhone_16_white.jpg" alt="Titanium White">
-            <div class="product-details">
-                <h3>Titanium Desert</h3>
-                <p>Unique and adventurous titanium in a desert-inspired tone.</p>
-                <div class="product-actions">
-                    <button class="buy-btn">Buy Now</button>
-                    <button class="cart-btn">Add to Cart</button>
-                </div>
+            <div class="color-options">
+                <button onclick="changeImage('black')">Black</button>
+                <button onclick="changeImage('natural')">Natural</button>
+                <button onclick="changeImage('white')">White</button>
+                <button onclick="changeImage('desert')">Desert</button>
             </div>
         </div>
     </div>
-
 
     <div class="product Mac" id="Mac">
         <p>Mac 상품 목록</p>
@@ -123,6 +86,17 @@
             if (selectedProduct) {
                 selectedProduct.style.display = "block";
             }
+        }
+
+        function changeImage(color) {
+            const productImg = document.getElementById("productImg");
+            const images = {
+                black: "/project/shop/images/iPhone/black.png",
+                natural: "/project/shop/images/iPhone/natural.png",
+                white: "/project/shop/images/iPhone/white.png",
+                desert: "/project/shop/images/iPhone/desert.png",
+            };
+            productImg.src = images[color];
         }
     </script>
 </body>
