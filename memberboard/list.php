@@ -29,74 +29,80 @@
         </li>
 
         <?php
+            // 페이지 번호 처리
+            $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
-        // 페이지 번호 처리
-        $page = isset($_GET["page"]) ? $_GET["page"] : 1;
+            // 검색어 처리
+            $search = isset($_GET["search"]) ? $_GET["search"] : "";
 
-        $search = isset($_GET["search"]) ? $_GET["search"] : "";
+            $config = require '../config.php';  // 루트에 있는 config.php 파일 불러옴
 
-        $config = require '../config.php';  // 루트에 있는 config.php 파일 불러옴
+            // config.php에서 가져온 정보를 변수에 저장
+            $db_host = $config['DB_HOST'];
+            $db_user = $config['DB_USER'];
+            $db_password = $config['DB_PASSWORD'];
+            $db_name = $config['DB_NAME'];
 
-        // config.php에서 가져온 정보를 변수에 저장
-        $db_host = $config['DB_HOST'];
-        $db_user = $config['DB_USER'];
-        $db_password = $config['DB_PASSWORD'];
-        $db_name = $config['DB_NAME'];
+            // DB 연결
+            $con = mysqli_connect($db_host, $db_user, $db_password, $db_name);
 
-        // DB 연결
-        $con = mysqli_connect($db_host, $db_user, $db_password, $db_name);
+            if (!$con) {
+                die("DB 연결 실패: " . mysqli_connect_error());
+            }
 
-        if (!empty($search)) {
-            // 검색어를 안전하게 처리
-            $search = mysqli_real_escape_string($con, $search);
-        
-            // SQL 쿼리 수정: 제목(subject) 또는 내용(content)에 검색어가 포함된 경우 조회
-            $sql = "SELECT * FROM memberboard 
-                    WHERE subject LIKE '%$search%' OR content LIKE '%$search%' 
-                    ORDER BY num DESC";
-        } else {
-            // 검색어가 없는 경우 모든 게시글 조회
-            $sql = "SELECT * FROM memberboard ORDER BY num DESC";
-        }
+            if (!empty($search)) {
+                // 검색어를 검증하지 않고 그대로 SQL에 포함
+                $sql = "SELECT * FROM memberboard 
+                        WHERE subject LIKE '%$search%' OR content LIKE '%$search%' 
+                        ORDER BY num DESC";
+            } else {
+                // 검색어가 없는 경우 모든 게시글 조회
+                $sql = "SELECT * FROM memberboard ORDER BY num DESC";
+            }
 
-        //$sql = "SELECT * FROM memberboard ORDER BY num DESC";
-        $result = mysqli_query($con, $sql);
+            $result = mysqli_query($con, $sql);
 
-        $total_record = mysqli_num_rows($result); // 전체 글 수
-        $scale = 4; // 한 화면에 표시되는 글 수
+            if (!$result) {
+                die("쿼리 실행 오류: " . mysqli_error($con));
+            }
 
-        // 전체 페이지 수 계산
-        $total_page = ceil($total_record / $scale);
+            // 전체 레코드 수
+            $total_record = mysqli_num_rows($result);
+            $scale = 4; // 한 화면에 표시할 글 수
 
-        // 시작 레코드 계산
-        $start = ($page - 1) * $scale;
+            // 전체 페이지 수 계산
+            $total_page = ceil($total_record / $scale);
 
-        // 레코드 번호 계산
-        $number = $total_record - $start;
+            // 시작 레코드 계산
+            $start = ($page - 1) * $scale;
 
-        for ($i = $start; $i < $start + $scale && $i < $total_record; $i++) {
-            mysqli_data_seek($result, $i);
-            $row = mysqli_fetch_assoc($result);
+            // 레코드 번호 계산
+            $number = $total_record - $start;
 
-            // 데이터 할당
-            $num = $row["num"];
-            $name = $row["name"]; // 작성자의 ID
-            $subject = $row["subject"];
-            $regist_day = $row["regist_day"];
-            $file_image = $row["file_name"] ? "<img src='./file.png' alt='파일'>" : "&nbsp&nbsp;";
-        ?>
-        <li>
-            <span class="col1"><?= $number ?></span>
-            <span class="col2"><a href="view.php?num=<?= $num ?>&page=<?= $page ?>"><?= $subject ?></a></span>
-            <span class="col3"><?= $name ?></span>
-            <span class="col4"><?= $file_image ?></span>
-            <span class="col5"><?= $regist_day ?></span>
-        </li>
-        <?php
-            $number--;
-        }
-        mysqli_close($con);
-        ?>
+            // 결과 출력
+            for ($i = $start; $i < $start + $scale && $i < $total_record; $i++) {
+                mysqli_data_seek($result, $i);
+                $row = mysqli_fetch_assoc($result);
+            
+                // 데이터 할당
+                $num = $row["num"];
+                $name = $row["name"];
+                $subject = $row["subject"];
+                $regist_day = $row["regist_day"];
+                $file_image = $row["file_name"] ? "<img src='./file.png' alt='파일'>" : "&nbsp&nbsp;";
+                echo "<li>
+                    <span class='col1'>$number</span>
+                    <span class='col2'><a href='view.php?num=$num&page=$page'>$subject</a></span>
+                    <span class='col3'>$name</span>
+                    <span class='col4'>$file_image</span>
+                    <span class='col5'>$regist_day</span>
+                </li>";
+                $number--;
+            }
+
+            mysqli_close($con);
+            ?>
+
     </ul>
 
     <!-- 페이지 번호 -->

@@ -12,6 +12,17 @@
                     <a href="/project/login/index.php" style="text-decoration: none; color: #fff; font-size: 20px; padding: 10px 15px; display: block;">Home</a>
                 </li>
                 <li class="dropdown" style="position: relative;">
+                    <a href="#" style="text-decoration: none; color: #fff; font-size: 20px; padding: 10px 15px; display: block;">Shop</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/project/shop/categories.php" style="color: #fff;">상품 목록</a>
+                        </li>
+                        <li>
+                            <a href="#" style="color: #fff;">장바구니 (임시)</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" style="position: relative;">
                     <a href="#" style="text-decoration: none; color: #fff; font-size: 20px; padding: 10px 15px; display: block;">Community</a>
                     <ul class="dropdown-menu">
                         <li>
@@ -23,13 +34,13 @@
                     </ul>
                 </li>
                 <li class="dropdown" style="position: relative;">
-                    <a href="#" style="text-decoration: none; color: #fff; font-size: 20px; padding: 10px 15px; display: block;">Shop</a>
+                    <a href="#" style="text-decoration: none; color: #fff; font-size: 20px; padding: 10px 15px; display: block;">Account</a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#" style="color: #fff;">상품 목록 (임시)</a>
+                            <a href="#" style="color: #fff;">구매 목록</a>
                         </li>
                         <li>
-                            <a href="#" style="color: #fff;">장바구니 (임시)</a>
+                            <a href="#" style="color: #fff;">계정 정보 찾기 (임시)</a>
                         </li>
                     </ul>
                 </li>
@@ -45,26 +56,18 @@
                     </ul>
                 </li>
                 <li class="dropdown" style="position: relative;">
-                    <a href="#" style="text-decoration: none; color: #fff; font-size: 20px; padding: 10px 15px; display: block;">Account</a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="/project/login/form.php" style="color: #fff;">회원가입</a>
-                        </li>
-                        <li>
-                            <a href="#" style="color: #fff;">계정 정보 찾기 (임시)</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown" style="position: relative;">
                     <a href="#" style="text-decoration: none; color: #fff; font-size: 20px; padding: 10px 15px; display: block;">Login</a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="/project/login/login_form.php" style="color: #fff;">로그인</a>
                         </li>
                         <li>
-                            <a href="/project/login/logout.php" style="color: #fff;">로그아웃</a>
+                            <a href="/project/login/form.php" style="color: #fff;">회원가입</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="/project/login/logout.php" style="text-decoration: none; color: #fff; font-size: 20px; padding: 10px 15px; display: block;">Logout</a>
                 </li>
             </ul>
         </nav>

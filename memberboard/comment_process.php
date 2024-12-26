@@ -22,9 +22,6 @@ $member_id = isset($_SESSION['user_num']) ? intval($_SESSION['user_num']) : 0;
 $board_num = isset($_POST['num']) ? intval($_POST['num']) : 0; // 게시글 번호
 $comment_content = isset($_POST['comment_content']) ? trim($_POST['comment_content']) : ''; // 댓글 내용
 
-// 디버깅: 입력값 확인
-// echo "board_num: $board_num, comment_content: $comment_content"; exit;
-
 // 입력값 검증
 if ($member_id <= 0) {
     echo "<script>alert('로그인 후 댓글을 작성할 수 있습니다.'); location.href='/project/login/login_form.php';</script>";
@@ -41,20 +38,38 @@ if (empty($comment_content)) {
     exit;
 }
 
-// 댓글 데이터 삽입
 $comment_content = mysqli_real_escape_string($con, $comment_content); // SQL Injection 방지
-$sql = "INSERT INTO comments (board_num, member_id, content) VALUES ($board_num, $member_id, '$comment_content')";
 
-if (!mysqli_query($con, $sql)) {
-    echo "<script>alert('댓글 작성 실패: " . mysqli_error($con) . "'); history.back();</script>";
-    mysqli_close($con);
+// 트랜잭션 시작
+mysqli_begin_transaction($con);
+
+try {
+    // 1. 댓글 데이터 삽입
+    $sql = "INSERT INTO comments (board_num, member_id, content) VALUES ($board_num, $member_id, '$comment_content')";
+    if (!mysqli_query($con, $sql)) {
+        throw new Exception("댓글 작성 실패: " . mysqli_error($con));
+    }
+
+    // 2. 포인트 지급 (10점)
+    $update_sql = "UPDATE members SET points = points + 10 WHERE num = $member_id";
+    if (!mysqli_query($con, $update_sql)) {
+        throw new Exception("포인트 지급 실패: " . mysqli_error($con));
+    }
+
+    // 트랜잭션 커밋
+    mysqli_commit($con);
+
+    // 댓글 작성 후 게시글 페이지로 리디렉션
+    header("Location: view.php?num=$board_num");
     exit;
+} catch (Exception $e) {
+    // 트랜잭션 롤백
+    mysqli_rollback($con);
+
+    echo "<script>alert('" . $e->getMessage() . "'); history.back();</script>";
+    exit;
+} finally {
+    // DB 연결 종료
+    mysqli_close($con);
 }
-
-// DB 연결 종료
-mysqli_close($con);
-
-// 댓글 작성 후 게시글 페이지로 리디렉션
-header("Location: view.php?num=$board_num");
-exit;
 ?>

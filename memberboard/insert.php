@@ -2,15 +2,15 @@
 include "session.php"; // 세션 처리
 
 // 로그인 여부 확인
-// if (!$userid) {
-//     echo "
-//         <script>
-//         alert('게시판 글쓰기는 로그인 후 이용해 주세요!');
-//         history.go(-1);
-//         </script>
-//     ";
-//     exit;
-// }
+if (!$userid) {
+    echo "
+        <script>
+        alert('게시판 글쓰기는 로그인 후 이용해 주세요!');
+        history.go(-1);
+        </script>
+    ";
+    exit;
+}
 
 $subject = $_POST["subject"];
 $content = $_POST["content"];
@@ -26,7 +26,6 @@ $upfile_tmp_name = $_FILES["upfile"]["tmp_name"];
 $upfile_error = $_FILES["upfile"]["error"];
 
 if ($upfile_name && !$upfile_error) {
-    // 확장자 및 파일 크기 검증 제거 (파일 업로드 취약점 허용)
     $uploaded_file = $upload_dir . $upfile_name;
 
     if (!move_uploaded_file($upfile_tmp_name, $uploaded_file)) {
@@ -50,20 +49,42 @@ if (!$con) {
     exit;
 }
 
-// 데이터 삽입 (XSS 허용)
-$sql = "INSERT INTO memberboard (id, name, subject, content, regist_day, file_name)
-        VALUES ('$userid', '$username', '$subject', '$content', '$regist_day', '$upfile_name')";
+// 트랜잭션 시작
+mysqli_begin_transaction($con);
 
+try {
+    // 데이터 삽입 (게시글 저장)
+    $sql = "INSERT INTO memberboard (id, name, subject, content, regist_day, file_name)
+            VALUES ('$userid', '$username', '$subject', '$content', '$regist_day', '$upfile_name')";
 
-if (!mysqli_query($con, $sql)) {
-    echo "<script>alert('게시글 저장 오류: " . mysqli_error($con) . "');</script>";
+    if (!mysqli_query($con, $sql)) {
+        throw new Exception("게시글 저장 오류: " . mysqli_error($con));
+    }
+
+    // 포인트 지급 (100점)
+    $update_sql = "UPDATE members SET points = points + 100 WHERE id = '$userid'";
+    if (!mysqli_query($con, $update_sql)) {
+        throw new Exception("포인트 지급 오류: " . mysqli_error($con));
+    }
+
+    // 트랜잭션 커밋
+    mysqli_commit($con);
+
+    // 글 목록으로 이동
+    echo "<script>
+        alert('게시글이 성공적으로 등록되었습니다! 100 포인트가 지급되었습니다.');
+        location.href = 'list.php';
+    </script>";
+} catch (Exception $e) {
+    // 트랜잭션 롤백
+    mysqli_rollback($con);
+
+    echo "<script>
+        alert('" . $e->getMessage() . "');
+        history.go(-1);
+    </script>";
     exit;
 }
 
 mysqli_close($con);
-
-// 글 목록으로 이동
-echo "<script>
-    location.href = 'list.php';
-</script>";
 ?>
