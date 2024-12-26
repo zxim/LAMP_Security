@@ -1,4 +1,6 @@
 <?php
+include '../memberboard/session.php'; 
+
 // DB 연결 정보 설정
 $config = require '../config.php';
 $db_host = $config['DB_HOST'];
@@ -12,8 +14,10 @@ if (!$con) {
     die("DB 연결 실패: " . mysqli_connect_error());
 }
 
-// 테스트용 사용자 ID (보안 제거)
-$user_num = 1; // 테스트용 회원 ID
+// 로그인한 사용자의 ID가 있는지 확인
+if ($user_num == 0) {
+    die("로그인 후 이용해주세요.");
+}
 
 // 사용자 구매 목록 가져오기
 $query = "

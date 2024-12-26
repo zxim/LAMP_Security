@@ -13,12 +13,12 @@ $db_name = $config['DB_NAME'];
 // DB 연결
 $con = mysqli_connect($db_host, $db_user, $db_password, $db_name);
 if (!$con) {
-    die("DB 연결 실패: " . mysqli_connect_error());
+    die("<script>alert('DB 연결 실패: " . mysqli_connect_error() . "'); window.history.back();</script>");
 }
 
 // 로그인 확인
 if ($user_num == 0) {
-    die("로그인이 필요합니다.");
+    die("<script>alert('로그인이 필요합니다.'); window.history.back();</script>");
 }
 
 // POST 데이터 가져오기
@@ -32,7 +32,7 @@ $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
 $productQuery = "SELECT product_id, price FROM products WHERE name = ?";
 $productStmt = mysqli_prepare($con, $productQuery);
 if (!$productStmt) {
-    die("쿼리 준비 실패: " . mysqli_error($con));
+    die("<script>alert('쿼리 준비 실패: " . mysqli_error($con) . "'); window.history.back();</script>");
 }
 mysqli_stmt_bind_param($productStmt, "s", $productName);
 mysqli_stmt_execute($productStmt);
@@ -42,7 +42,7 @@ if ($row = mysqli_fetch_assoc($productResult)) {
     $product_id = $row['product_id'];
     $base_price = $row['price'];
 } else {
-    die("상품 정보를 찾을 수 없습니다.");
+    die("<script>alert('상품 정보를 찾을 수 없습니다.'); window.history.back();</script>");
 }
 
 // 총 결제 금액 계산
@@ -52,7 +52,7 @@ $total_price = ($base_price + $additionalPrice) * $quantity;
 $pointsQuery = "SELECT points FROM members WHERE num = ?";
 $pointsStmt = mysqli_prepare($con, $pointsQuery);
 if (!$pointsStmt) {
-    die("쿼리 준비 실패: " . mysqli_error($con));
+    die("<script>alert('쿼리 준비 실패: " . mysqli_error($con) . "'); window.history.back();</script>");
 }
 mysqli_stmt_bind_param($pointsStmt, "i", $user_num);
 mysqli_stmt_execute($pointsStmt);
@@ -63,7 +63,7 @@ if ($pointsRow = mysqli_fetch_assoc($pointsResult)) {
 
     // 포인트 부족 여부 확인
     if ($currentPoints < $total_price) {
-        die("포인트가 부족합니다.");
+        die("<script>alert('포인트가 부족합니다.'); window.history.back();</script>");
     }
 
     // 포인트 차감
@@ -72,11 +72,11 @@ if ($pointsRow = mysqli_fetch_assoc($pointsResult)) {
     $updatePointsStmt = mysqli_prepare($con, $updatePointsQuery);
     mysqli_stmt_bind_param($updatePointsStmt, "ii", $newPoints, $user_num);
     if (!mysqli_stmt_execute($updatePointsStmt)) {
-        die("포인트 차감 중 오류: " . mysqli_error($con));
+        die("<script>alert('포인트 차감 중 오류: " . mysqli_error($con) . "'); window.history.back();</script>");
     }
     mysqli_stmt_close($updatePointsStmt);
 } else {
-    die("회원 정보를 찾을 수 없습니다.");
+    die("<script>alert('회원 정보를 찾을 수 없습니다.'); window.history.back();</script>");
 }
 mysqli_stmt_close($pointsStmt);
 
@@ -85,7 +85,7 @@ $orderQuery = "INSERT INTO orders (member_id, product_id, quantity, total_price)
                VALUES (?, ?, ?, ?)";
 $orderStmt = mysqli_prepare($con, $orderQuery);
 if (!$orderStmt) {
-    die("쿼리 준비 실패: " . mysqli_error($con));
+    die("<script>alert('구매 처리 중 오류: " . mysqli_error($con) . "'); window.history.back();</script>");
 }
 mysqli_stmt_bind_param($orderStmt, "iiii", $user_num, $product_id, $quantity, $total_price);
 
@@ -95,7 +95,7 @@ if (mysqli_stmt_execute($orderStmt)) {
         location.href = '/project/shop/categories.php';
     </script>";
 } else {
-    die("구매 처리 중 오류: " . mysqli_error($con));
+    die("<script>alert('구매 처리 중 오류: " . mysqli_error($con) . "'); window.history.back();</script>");
 }
 
 // DB 연결 종료
