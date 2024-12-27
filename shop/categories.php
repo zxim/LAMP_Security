@@ -86,7 +86,14 @@
                     <input type="hidden" name="quantity" value="1">
                     <button type="button" onclick="preparePurchase()">Buy</button>
                 </form>
-                <button>Cart</button>
+                <form action="insert.php" method="POST" id="cartForm">
+                    <input type="hidden" name="productName" id="formCartProductName">
+                    <input type="hidden" name="selectedColor" id="formCartSelectedColor">
+                    <input type="hidden" name="storage" id="formCartStorage">
+                    <input type="hidden" name="additionalPrice" id="formCartAdditionalPrice">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="button" onclick="prepareCart()">Cart</button>
+                </form>
             </div>
 
         </div>
@@ -201,7 +208,23 @@
             // 폼 제출
             document.getElementById('purchaseForm').submit();
         }
+
+        function prepareCart() {
+            // 선택된 옵션 가져오기
+            const selectedColor = document.getElementById('selectedColor').textContent;
+            const storage = document.getElementById('storage').options[document.getElementById('storage').selectedIndex].text;
+            const additionalPrice = parseInt(document.getElementById('storage').value);
+            const productName = document.getElementById('model').options[document.getElementById('model').selectedIndex].text.split('(')[0].trim();
+
+            // 폼 데이터 설정
+            document.getElementById('formCartProductName').value = productName;
+            document.getElementById('formCartSelectedColor').value = selectedColor;
+            document.getElementById('formCartStorage').value = storage;
+            document.getElementById('formCartAdditionalPrice').value = additionalPrice;
+
+            // 폼 제출
+            document.getElementById('cartForm').submit();
+        }
     </script>
 </body>
 </html>
-

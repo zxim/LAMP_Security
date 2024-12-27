@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.cart-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    margin-top: 30px;
+}
+
+.cart-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.cart-table th {
+    background-color: #f1f1f1;
+    color: #333;
+    font-weight: bold;
+}
+
+.cart-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.cart-table .selected {
+    background-color: #f0f8ff; /* 선택된 행 */
+}
+
+.cart-summary {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.cart-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.cart-actions button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: white;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.cart-actions button:hover {
+    background-color: #f9f9f9;
+    color: #0056b3;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.cart-actions .select-all,
+.cart-actions .delete,
+.cart-actions .checkout {
+    display: inline-block;
+    text-align: center;
+}
+
+.cart-actions a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.cart-actions a:hover {
+    background-color: #f9f9f9;
+    color: #0056b3;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}

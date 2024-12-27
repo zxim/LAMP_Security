@@ -18,7 +18,7 @@
                             <a href="/project/shop/categories.php" style="color: #fff;">상품 목록</a>
                         </li>
                         <li>
-                            <a href="#" style="color: #fff;">장바구니 (임시)</a>
+                            <a href="/project/shop/cart.php" style="color: #fff;">장바구니</a>
                         </li>
                     </ul>
                 </li>

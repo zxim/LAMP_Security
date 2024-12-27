@@ -115,7 +115,7 @@ include '../login/header.php'; ?>
         }
 
         $total_record = mysqli_num_rows($result);
-        $scale = 4;
+        $scale = 10;
         $total_page = ceil($total_record / $scale);
         $start = ($page - 1) * $scale;
         $number = $total_record - $start;

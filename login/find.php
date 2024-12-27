@@ -49,13 +49,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $mail->isSMTP();
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
-                    $mail->Username = '';       // 구글 이메일
-                    $mail->Password = '';       // 앱 비밀번호
+                    $mail->Username = 'tlaals7241@gmail.com';
+                    $mail->Password = 'hiwy wakq bfcb zobr';
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                     $mail->Port = 587;
 
-                    $mail->setFrom('', 'Admin');    //구글 이메일, 보내는 사람 이름
-                    $mail->addAddress($userEmail, 'Client');    //받는 사람 이름
+                    $mail->setFrom('tlaals7241@gmail.com', 'Admin');
+                    $mail->addAddress($userEmail, 'Client');
                     $mail->Subject = 'ID/password find authentication number';
                     $mail->Body = "Hello, the authentication number is as follows: $verificationCode";
 
