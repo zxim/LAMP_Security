@@ -88,6 +88,7 @@ include "../memberboard/session.php"; // 세션 포함
     $pass = htmlspecialchars($row["pass"], ENT_QUOTES, 'UTF-8');
     $name = htmlspecialchars($row["name"], ENT_QUOTES, 'UTF-8');
     $email = htmlspecialchars($row["email"], ENT_QUOTES, 'UTF-8');
+    $points = htmlspecialchars($row["points"], ENT_QUOTES, 'UTF-8');
 
     $stmt->close();
     mysqli_close($con);
@@ -116,6 +117,10 @@ include "../memberboard/session.php"; // 세션 포함
                 <li>
                     <span class="col1">이메일</span>
                     <span class="col2"><input type="text" name="email" value="<?= $email ?>"></span>
+                </li>
+                <li>
+                    <span class="col1">포인트</span>
+                    <span class="col2">₩ <?= number_format($points) ?></span>
                 </li>
                     <ul class="buttons">
                     <button type="button" onclick="check_input()">저장하기</button>
