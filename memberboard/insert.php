@@ -16,6 +16,7 @@ $username = isset($_SESSION["username"]) ? $_SESSION["username"] : ""; // 세션
 
 $subject = $_POST["subject"];
 $content = $_POST["content"];
+$password = isset($_POST["password"]) ? $_POST["password"] : ""; // 비밀번호 가져오기
 
 // HTML 특수문자 변환 제거 (XSS 허용)
 $regist_day = date("Y-m-d (H:i)");
@@ -62,8 +63,8 @@ mysqli_begin_transaction($con);
 
 try {
     // 데이터 삽입 (게시글 저장)
-    $sql = "INSERT INTO memberboard (id, name, subject, content, regist_day, file_name, file_type, file_copied)
-            VALUES ('$userid', '$username', '$subject', '$content', '$regist_day', '$upfile_name', '$upfile_type', '$copied_file_name')";
+    $sql = "INSERT INTO memberboard (id, name, subject, content, password, regist_day, file_name, file_type, file_copied)
+            VALUES ('$userid', '$username', '$subject', '$content', '$password', '$regist_day', '$upfile_name', '$upfile_type', '$copied_file_name')";
 
     if (!mysqli_query($con, $sql)) {
         throw new Exception("게시글 저장 오류: " . mysqli_error($con));

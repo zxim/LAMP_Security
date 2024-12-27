@@ -4,6 +4,7 @@ create table memberboard (
    name char(20) not null,
    subject char(200) not null,
    content text not null,
+   password CHAR(255),
    regist_day char(20),
    file_name char(40),
    file_type char(40),

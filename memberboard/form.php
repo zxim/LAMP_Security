@@ -25,33 +25,33 @@ include "session.php"; 	// 세션 처리
 </head>
 <body>
 <?php include "../login/header.php"; ?> 
-<h2><a href="../login/index.php">홈</a>
-		<span style="margin-left: 50px;"></span>
-		회원 게시판 > 글쓰기
-	</h2>
-	<form name="board" method="post" action="insert.php" enctype="multipart/form-data">
+	<form name="board" method="post" action="insert.php" enctype="multipart/form-data" style="margin-top: 30px";>
 	    <ul class="board_form">
 			<li>
 				<span class="col1">이름 : </span>
 				<span class="col2"><?=$username?></span>
 			</li>					
 	    	<li>
-	    		<span class="col1">제목 : </span>
+	    		<span class="col1">제목</span>
 	    		<span class="col2"><input name="subject" type="text"></span>
 	    	</li>	    	
 	    	<li class="area">	
-	    		<span class="col1">내용 : </span>
+	    		<span class="col1">내용</span>
 	    		<span class="col2">
 	    			<textarea name="content"></textarea>
 	    		</span>
 	    	</li>
 			<li>
-			    <span class="col1">첨부 파일:</span>
+			    <span class="col1">첨부 파일</span>
 			    <span class="col2">
 			        <label for="file-upload" class="file-upload-label">파일 선택</label>
 			        <span class="file-upload-text" id="file-upload-text">선택된 파일 없음</span>
 			        <input type="file" name="upfile" id="file-upload">
 			    </span>
+			</li>
+			<li>
+				<span class="col1">비밀번호</span>
+				<span class="col2"><input type="password" name="password" id="password"></span>
 			</li>			
 	    </ul>
 	    <ul class="buttons">
