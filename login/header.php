@@ -40,7 +40,7 @@
                             <a href="/project/shop/orders.php" style="color: #fff;">구매 목록</a>
                         </li>
                         <li>
-                            <a href="#" style="color: #fff;">계정 정보 찾기 (임시)</a>
+                            <a href="/project/login/find.php" style="color: #fff;">계정 정보 찾기</a>
                         </li>
                     </ul>
                 </li>

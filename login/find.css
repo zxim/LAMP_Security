@@ -1,0 +1,100 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.find-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff; /* 흰 배경 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+    border-radius: 10px; /* 둥근 모서리 */
+    text-align: center;
+}
+
+h1 {
+    color: #3d3d3d; /* 파란색 텍스트 */
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.message {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #ff4d4f; /* 빨간 경고 메시지 색상 */
+}
+
+.find-form {
+    margin: 20px 0;
+}
+
+label {
+    font-size: 16px;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 입력 필드 그림자 */
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff; /* 파란색 포커스 테두리 */
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.4); /* 포커스 시 그림자 강조 */
+}
+
+button.btn {
+    display: inline-block;
+    background-color: #fff; /* 흰 배경 */
+    color: #007bff; /* 파란 글씨 */
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* 부드러운 그림자 */
+    transition: all 0.3s ease;
+}
+
+button.btn:hover {
+    background-color: #007bff; /* 파란 배경 */
+    color: #fff; /* 흰 글씨 */
+    border: #007bff;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* 그림자 강조 */
+}
+
+.user-info {
+    display: none; /* 기본값: 숨김 */
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.user-info p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+}
