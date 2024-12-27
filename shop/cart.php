@@ -38,6 +38,55 @@ if (!$result) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Cart</title>
     <link rel="stylesheet" href="cart.css">
+    <script>
+        let selectedItems = [];
+
+        function toggleSelect(row, cartId) {
+            const rowIndex = selectedItems.indexOf(cartId);
+
+            if (rowIndex > -1) {
+                // 이미 선택된 경우 해제
+                selectedItems.splice(rowIndex, 1);
+                row.classList.remove("selected");
+            } else {
+                // 선택되지 않은 경우 추가
+                selectedItems.push(cartId);
+                row.classList.add("selected");
+            }
+
+            console.log(`선택된 항목: ${selectedItems}`);
+        }
+
+        function updateQuantity(cartId, change) {
+            const quantityElement = document.querySelector(`#quantity-${cartId}`);
+            const totalElement = document.querySelector(`#total-${cartId}`);
+            const price = parseInt(totalElement.dataset.unitPrice, 10);
+
+            let quantity = parseInt(quantityElement.textContent, 10);
+            quantity += change;
+
+            if (quantity < 1) {
+                alert("수량은 1개 이상이어야 합니다.");
+                return;
+            }
+
+            quantityElement.textContent = quantity;
+            totalElement.textContent = `${(price * quantity).toLocaleString()}원`;
+
+            // 서버에 수량 업데이트 요청
+            fetch("update_quantity.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ cartId, quantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    alert("수량 업데이트 중 오류가 발생했습니다.");
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <?php include "../login/header.php"; ?>
@@ -61,8 +110,16 @@ if (!$result) {
                             data-cart-id="<?= $row['cart_id'] ?>">
                             <td><?= htmlspecialchars($row['product_name']) ?></td>
                             <td><?= number_format($row['price']) ?>원</td>
-                            <td><?= $row['quantity'] ?></td>
-                            <td><?= number_format($row['total_price']) ?>원</td>
+                            <td>
+                                <div class="quantity-controls">
+                                    <button onclick="event.stopPropagation(); updateQuantity(<?= $row['cart_id'] ?>, -1)">-</button>
+                                    <span id="quantity-<?= $row['cart_id'] ?>"><?= $row['quantity'] ?></span>
+                                    <button onclick="event.stopPropagation(); updateQuantity(<?= $row['cart_id'] ?>, 1)">+</button>
+                                </div>
+                            </td>
+                            <td id="total-<?= $row['cart_id'] ?>" data-unit-price="<?= $row['price'] ?>">
+                                <?= number_format($row['total_price']) ?>원
+                            </td>
                         </tr>
                     <?php endwhile; ?>
                 <?php else: ?>
@@ -72,20 +129,12 @@ if (!$result) {
                 <?php endif; ?>
             </tbody>
         </table>
-
-        <div class="cart-actions">
-            <button onclick="selectAll(document.querySelectorAll('.cart-table tbody tr'))">전체 선택</button>
-            <button onclick="clearSelection(document.querySelectorAll('.cart-table tbody tr'))">선택 해제</button>
-            <button onclick="deleteSelected()">삭제</button>
-            <form id="checkoutForm" action="checkout.php" method="POST" style="display: inline;">
-                <input type="hidden" name="cartIds" id="cartIds">
-                <button type="button" onclick="submitCheckout()">구매하기</button>
-            </form>
-        </div>
     </div>
 </body>
 </html>
 
 <?php
-mysqli_close($con);
+if ($con) {
+    mysqli_close($con);
+}
 ?>
