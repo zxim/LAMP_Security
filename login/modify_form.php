@@ -99,27 +99,27 @@ include "../memberboard/session.php"; // 세션 포함
             <h2>회원 정보 수정</h2>
             <ul class="join_form">
                 <li>
-                    <span class="col1">아이디</span>
+                    <span class="col1" style="font-weight: bold;">아이디</span>
                     <span class="col2"><?= htmlspecialchars($userid, ENT_QUOTES, 'UTF-8') ?></span>
                 </li>
                 <li>
-                    <span class="col1">비밀번호</span>
+                    <span class="col1" style="font-weight: bold;">비밀번호</span>
                     <span class="col2"><input type="password" name="pass"></span>
                 </li>
                 <li>
-                    <span class="col1">비밀번호 확인</span>
+                    <span class="col1" style="font-weight: bold;">비밀번호 확인</span>
                     <span class="col2"><input type="password" name="pass_confirm"></span>
                 </li>
                 <li>
-                    <span class="col1">이름</span>
+                    <span class="col1" style="font-weight: bold;">이름</span>
                     <span class="col2"><input type="text" name="name" value="<?= $name ?>"></span>
                 </li>
                 <li>
-                    <span class="col1">이메일</span>
+                    <span class="col1" style="font-weight: bold;">이메일</span>
                     <span class="col2"><input type="text" name="email" value="<?= $email ?>"></span>
                 </li>
                 <li>
-                    <span class="col1">포인트</span>
+                    <span class="col1" style="font-weight: bold;">포인트</span>
                     <span class="col2">₩ <?= number_format($points) ?></span>
                 </li>
                     <ul class="buttons">

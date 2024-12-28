@@ -126,11 +126,11 @@ h2 {
         <h2>로그인</h2>
         <form name="login" method="post" action="login.php">		       	
             <div class="form-group">
-                <label for="id">아이디</label>
+                <label for="id" style="font-weight: bold;">아이디</label>
                 <input type="text" id="id" name="id" placeholder="아이디를 입력하세요">
             </div>
             <div class="form-group">
-                <label for="pass">비밀번호</label>
+                <label for="pass" style="font-weight: bold;">비밀번호</label>
                 <input type="password" id="pass" name="pass" placeholder="비밀번호를 입력하세요">
             </div>
             <div class="form-actions">

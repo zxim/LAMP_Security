@@ -13,6 +13,8 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border: 1px solid #ddd;
     margin-top: 30px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .cart-container h1 {
@@ -25,6 +27,8 @@ body {
 .cart-table {
     width: 100%;
     border-collapse: collapse;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .cart-table th,
@@ -103,3 +107,53 @@ body {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
+
+/* 삭제 버튼 스타일 */
+button {
+    background-color: white;
+    color: #007BFF; /* 파란 글씨 */
+    border: 1px solid #fFF; /* 파란 테두리 */
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px #007BFF;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #007BFF; /* 파란 배경 */
+    color: white; /* 흰 글씨 */
+}
+
+/* 전체 구매하기 버튼 스타일 */
+.purchase-all-btn {
+    background-color: white;
+    color: #007BFF; /* 파란 글씨 */
+    border: 1px solid #fFF; /* 파란 테두리 */
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.purchase-all-btn:hover {
+    background-color: #007BFF; /* 파란 배경 */
+    color: white; /* 흰 글씨 */
+    border: 1px #007BFF;
+}
+
+.purchase-container {
+    text-align: center; 
+    margin-top: 20px;
+}
+
+.product-image {
+    width: 100px;
+    height: auto;
+}
