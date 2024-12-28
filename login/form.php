@@ -125,6 +125,13 @@
     .buttons button:last-child {
         margin-right: 0;
     }
+    h2 {
+        text-align: center;
+        color: #333;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
 </style>
     <script>
         var isIdChecked = false;
@@ -198,8 +205,9 @@
 <body>
     <?php include "header.php"; ?>
     <form name="member" action="insert.php" method="post">
-        <h2>회원 가입</h2>
+        <!-- <h2>회원 가입</h2> -->
         <ul class="join_form">
+            <h2>회원 가입</h2>
             <li>
                 <span class="col1">아이디</span>
                 <div class="col2">

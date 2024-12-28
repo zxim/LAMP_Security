@@ -96,8 +96,8 @@ include "../memberboard/session.php"; // 세션 포함
 
     <div class="container">
         <form name="member" action="modify.php?id=<?= htmlspecialchars($userid, ENT_QUOTES, 'UTF-8') ?>" method="post">
-            <h2>회원 정보 수정</h2>
             <ul class="join_form">
+            <h2>회원 정보 수정</h2>
                 <li>
                     <span class="col1" style="font-weight: bold;">아이디</span>
                     <span class="col2"><?= htmlspecialchars($userid, ENT_QUOTES, 'UTF-8') ?></span>
