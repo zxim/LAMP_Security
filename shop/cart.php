@@ -15,8 +15,8 @@
     }
 
     // 로그인한 사용자의 ID 확인
-    if ($user_num == 0) {
-        die("<script>alert('로그인 후 이용해주세요.'); window.location.href = '../login/login.php';</script>");
+    if (!isset($user_num) || empty($user_num)) {
+        die("<script>alert('로그인 후 이용해주세요.'); window.location.href = '/project/login/login_form.php';</script>");
     }
 
     // 장바구니 데이터 조회
