@@ -51,7 +51,7 @@
                             <a href="/project/login/modify_form.php" style="color: #fff;">계정 설정</a>
                         </li>
                         <li>
-                            <a href="#" style="color: #fff;">보안 설정 (임시)</a>
+                            <a href="/project/letter/message.php" style="color: #fff;">쪽지</a>
                         </li>
                     </ul>
                 </li>

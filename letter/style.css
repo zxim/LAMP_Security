@@ -1,0 +1,202 @@
+/* 공통 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.message-container {
+    width: 80%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.message-title {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* 버튼 스타일 */
+.message-button, .message-btn {
+    background-color: white;
+    color: #007BFF; /* 파란 글씨 */
+    border: 1px solid #007BFF;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.message-button:hover, .message-btn:hover {
+    background-color: #007BFF; /* 파란 배경 */
+    color: white; /* 흰 글씨 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* 링크 버튼 스타일 */
+a.message-btn {
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+/* 목록 스타일 */
+.message-list {
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.message-list-item {
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.3s;
+}
+
+.message-list-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #f0f8ff;
+}
+
+.message-list-item a {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.message-list-item a:hover {
+    color: #0056b3;
+}
+
+/* 폼 스타일 */
+.message-form {
+    margin: 20px 0;
+}
+
+.message-form label {
+    font-weight: bold;
+    color: #333;
+}
+
+.message-form input[type="text"], .message-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+.message-form textarea {
+    resize: vertical;
+}
+
+.message-form button {
+    display: block;
+    margin: 0 auto;
+}
+
+/* 테이블 스타일 (view.php 등에서 사용 가능) */
+.message-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-table th, .message-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.message-table th {
+    background-color: #f1f1f1;
+    color: #333;
+    font-weight: bold;
+}
+
+.message-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* 메시지 내용 박스 스타일 */
+.message-content {
+    background-color: #f5f5f7; /* 연한 회색 (애플 스타일) */
+    border-radius: 10px;      /* 둥근 모서리 */
+    padding: 15px;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 */
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333; /* 텍스트 색상 */
+    word-break: break-word; /* 긴 단어 줄바꿈 */
+}
+
+/* 사이드바 스타일 */
+.message-sidebar {
+    width: 20%;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-right: 1px solid #ddd;
+    height: 100vh;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-sidebar a {
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: white;
+    color: #007BFF;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.message-sidebar a:hover {
+    background-color: #007BFF;
+    color: white;
+}
+
+/* 삭제 버튼 스타일 */
+.message-delete-form {
+    margin: 0;
+}
+
+.message-delete-form button {
+    background-color: white;
+    color: #d9534f;
+    border: 1px solid #d9534f;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+.message-delete-form button:hover {
+    background-color: #d9534f;
+    color: white;
+}
