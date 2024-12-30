@@ -14,6 +14,14 @@
         <img src="/project/shop/images/store.png" alt="스토어 로고">
     </div>
 
+    <form method="get" action="search_results.php" style="display: inline-block; float: right; margin: 10px;">
+        <input type="text" name="query" placeholder="검색어를 입력하세요" required style="padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
+        <button type="submit" style="padding: 5px 10px; border-radius: 5px; background-color: #007aff; color: #fff; border: none; cursor: pointer;">
+            검색
+        </button>
+    </form>
+
+
     <!-- 카테고리 버튼 -->
     <div class="category-container">
         <button onclick="showProducts('iPhone')">
