@@ -231,3 +231,11 @@ select:focus {
     font-weight: bold;
     color: black;
 }
+
+.search-form {
+    position: absolute; /* 절대 위치 */
+    top: 20px; /* 화면 상단으로부터 20px */
+    right: 20px; /* 화면 우측으로부터 20px */
+    display: flex;
+    align-items: center;
+}
