@@ -27,7 +27,6 @@ if (filter_var($query, FILTER_VALIDATE_URL)) {
     }
 
     curl_close($ch);
-    echo "<h1>SSRF</h1>";
     echo "<pre>" . htmlspecialchars($response) . "</pre>";
     exit();
 } else {
