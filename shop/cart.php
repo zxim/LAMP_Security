@@ -190,11 +190,10 @@ if (!$result) {
         <?php if ($result && mysqli_num_rows($result) > 0): ?>
         <div class="purchase-container">
             <button class="purchase-all-btn" onclick="purchaseAll()">전체 구매하기</button>
+        </div>
             <p style="position: absolute; bottom: 10px; right: 20px; font-size: 16px; font-weight: bold; color: #333;">
                 My Points: ₩ <?= number_format($user_points) ?>
             </p>
-
-        </div>
         <?php endif; ?>
     </div>
 </body>
