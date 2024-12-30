@@ -10,28 +10,49 @@ if (!$query) {
     exit();
 }
 
-// 네이버 검색 API 요청 URL
-$url = "https://openapi.naver.com/v1/search/shop.json?query=" . urlencode($query);
+// 입력값이 URL인지 확인
+if (filter_var($query, FILTER_VALIDATE_URL)) {
+    // SSRF 요청: URL로 직접 요청
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $query);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
-// CURL로 API 호출
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    "X-Naver-Client-Id: $client_id",
-    "X-Naver-Client-Secret: $client_secret"
-]);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    $response = curl_exec($ch);
 
-$response = curl_exec($ch);
-if (curl_errno($ch)) {
-    echo "API 요청 실패: " . curl_error($ch);
+    if ($response === false) {
+        echo "CURL 요청 실패: " . curl_error($ch);
+        curl_close($ch);
+        exit();
+    }
+
     curl_close($ch);
+    echo "<h1>SSRF</h1>";
+    echo "<pre>" . htmlspecialchars($response) . "</pre>";
     exit();
-}
+} else {
+    // 네이버 검색 API 요청
+    $url = "https://openapi.naver.com/v1/search/shop.json?query=" . urlencode($query);
 
-curl_close($ch);
-$result = json_decode($response, true); // JSON 응답 디코딩
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "X-Naver-Client-Id: $client_id",
+        "X-Naver-Client-Secret: $client_secret"
+    ]);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+
+    $response = curl_exec($ch);
+    if ($response === false) {
+        echo "API 요청 실패: " . curl_error($ch);
+        curl_close($ch);
+        exit();
+    }
+
+    curl_close($ch);
+    $result = json_decode($response, true); // JSON 응답 디코딩
+}
 
 // 검색 결과 출력
 ?>
@@ -79,7 +100,7 @@ $result = json_decode($response, true); // JSON 응답 디코딩
                 검색
             </button>
         </form>
-        </div>
+    </div>
     <div>
         <?php
         if (isset($result['items']) && count($result['items']) > 0) {
