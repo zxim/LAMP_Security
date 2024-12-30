@@ -1,0 +1,5 @@
+# search_results.php 파일을 무시
+project/shop/search_results.php
+
+#find 파일 무시
+project/login/find.php

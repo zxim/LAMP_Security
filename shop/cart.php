@@ -19,6 +19,14 @@ if (!isset($user_num) || empty($user_num)) {
     die("<script>alert('로그인 후 이용해주세요.'); window.location.href = '/project/login/login_form.php';</script>");
 }
 
+// 로그인한 사용자의 포인트 조회
+$point_query = "SELECT points FROM members WHERE num = $user_num";
+$point_result = mysqli_query($con, $point_query);
+if (!$point_result) {
+    die("<script>alert('포인트 조회 실패: " . mysqli_error($con) . "');</script>");
+}
+$user_points = mysqli_fetch_assoc($point_result)['points'] ?? 0;
+
 // 장바구니 데이터 조회
 $sql = "SELECT c.cart_id, p.name AS product_name, p.image_url, p.price, c.quantity, 
             (c.quantity * p.price) AS total_price
@@ -182,6 +190,10 @@ if (!$result) {
         <?php if ($result && mysqli_num_rows($result) > 0): ?>
         <div class="purchase-container">
             <button class="purchase-all-btn" onclick="purchaseAll()">전체 구매하기</button>
+            <p style="position: absolute; bottom: 10px; right: 20px; font-size: 16px; font-weight: bold; color: #333;">
+                My Points: ₩ <?= number_format($user_points) ?>
+            </p>
+
         </div>
         <?php endif; ?>
     </div>
