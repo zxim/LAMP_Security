@@ -32,8 +32,7 @@ $upfile_error = $_FILES["upfile"]["error"];
 $copied_file_name = "";
 
 if ($upfile_name && !$upfile_error) {
-    $copied_file_name = date("YmdHis") . "_" . $upfile_name; // 유니크한 파일 이름 생성
-    $uploaded_file = $upload_dir . $copied_file_name;
+    $uploaded_file = $upload_dir . $upfile_name; // 파일 이름을 그대로 사용
 
     if (!move_uploaded_file($upfile_tmp_name, $uploaded_file)) {
         echo "<script>
@@ -64,7 +63,7 @@ mysqli_begin_transaction($con);
 try {
     // 데이터 삽입 (게시글 저장)
     $sql = "INSERT INTO memberboard (id, name, subject, content, password, regist_day, file_name, file_type, file_copied)
-            VALUES ('$userid', '$username', '$subject', '$content', '$password', '$regist_day', '$upfile_name', '$upfile_type', '$copied_file_name')";
+            VALUES ('$userid', '$username', '$subject', '$content', '$password', '$regist_day', '$upfile_name', '$upfile_type', '$upfile_name')";
 
     if (!mysqli_query($con, $sql)) {
         throw new Exception("게시글 저장 오류: " . mysqli_error($con));
