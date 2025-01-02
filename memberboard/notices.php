@@ -201,20 +201,21 @@ if (!$result) {
         </div>
 
         <form class="notice-search" method="get" action="notices.php">
-            <input type="text" name="search" placeholder="제목 검색" value="<?= htmlspecialchars($search, ENT_QUOTES, 'UTF-8') ?>">
+            <input type="text" name="search" placeholder="제목 검색" value="<?= $search ?>">
             <button type="submit">검색</button>
         </form>
-
+                    
         <ul class="notice-list">
             <?php while ($row = mysqli_fetch_assoc($result)): ?>
                 <li>
-                    <a href="notice_view.php?id=<?= htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8'); ?>">
-                        <?= htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?>
+                    <a href="notice_view.php?id=<?= $row['id']; ?>">
+                        <?= $row['title']; ?>
                     </a>
-                    <small><?= htmlspecialchars($row['created_date'], ENT_QUOTES, 'UTF-8'); ?></small>
+                    <small><?= $row['created_date']; ?></small>
                 </li>
             <?php endwhile; ?>
         </ul>
+
 
         <div class="pagination">
             <?php if ($page > 1): ?>

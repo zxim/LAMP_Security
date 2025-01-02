@@ -30,9 +30,9 @@ if ($result->num_rows === 0) {
 }
 
 $row = $result->fetch_assoc();
-$title = htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8');
-$content = nl2br(htmlspecialchars($row['content'], ENT_QUOTES, 'UTF-8'));
-$created_at = htmlspecialchars($row['created_at'], ENT_QUOTES, 'UTF-8');
+$title = $row['title'];
+$content = nl2br($row['content']);
+$created_at = $row['created_at'];
 
 $stmt->close();
 mysqli_close($con);
@@ -69,16 +69,15 @@ mysqli_close($con);
         .notice-buttons {
             margin-top: 20px;
             display: flex;
-            justify-content: center; /* 버튼 가운데 정렬 */
-            align-items: center; /* 버튼 높이 정렬 */
-            gap: 10px; /* 버튼 간 간격 */
+            justify-content: center;
+            gap: 10px;
         }
         .notice-buttons form {
             display: inline-block;
         }
         .notice-buttons button {
-            width: 120px; /* 버튼 너비 고정 */
-            height: 40px; /* 버튼 높이 고정 */
+            width: 120px;
+            height: 40px;
             background-color: #fff;
             font-weight: bold;
             color: #007aff;
@@ -88,13 +87,13 @@ mysqli_close($con);
             cursor: pointer;
             text-align: center;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 약간의 그림자 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
         .notice-buttons button:hover {
             background-color: #007aff; 
-            color: #fff; /* 글씨 파란색으로 변경 */
+            color: #fff;
             border: 1px solid #007aff;
-            box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4); /* 강조된 그림자 */
+            box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4);
         }
     </style>
 </head>
