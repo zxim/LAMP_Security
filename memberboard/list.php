@@ -129,32 +129,25 @@ include '../login/header.php';
         <!-- 페이지 번호 -->
         <ul class="page_num">
             <?php
+            // 이전 페이지 버튼
             if ($page > 1) {
                 $new_page = $page - 1;
                 echo "<li><a href='list.php?page=$new_page'>이전</a></li>";
-            } else {
-                echo "<li>&nbsp;</li>";
             }
-            ?>
-
-            <span class="current">
-            <?php
+        
+            // 페이지 번호 출력
             for ($i = 1; $i <= $total_page; $i++) {
                 if ($page == $i) {
-                    echo "<li><b>$i</b></li>";
+                    echo "<li class='current'>$i</li>"; // 현재 페이지는 'current' 클래스 적용
                 } else {
                     echo "<li><a href='list.php?page=$i'>$i</a></li>";
                 }
             }
-            ?>
-            </span>
-
-            <?php
+        
+            // 다음 페이지 버튼
             if ($page < $total_page) {
                 $new_page = $page + 1;
                 echo "<li><a href='list.php?page=$new_page'>다음</a></li>";
-            } else {
-                echo "<li>&nbsp;</li>";
             }
             ?>
         </ul>
