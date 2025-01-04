@@ -135,7 +135,10 @@ include '../login/header.php';
             } else {
                 echo "<li>&nbsp;</li>";
             }
-        
+            ?>
+
+            <span class="current">
+            <?php
             for ($i = 1; $i <= $total_page; $i++) {
                 if ($page == $i) {
                     echo "<li><b>$i</b></li>";
@@ -143,7 +146,10 @@ include '../login/header.php';
                     echo "<li><a href='list.php?page=$i'>$i</a></li>";
                 }
             }
-        
+            ?>
+            </span>
+
+            <?php
             if ($page < $total_page) {
                 $new_page = $page + 1;
                 echo "<li><a href='list.php?page=$new_page'>다음</a></li>";
