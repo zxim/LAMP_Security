@@ -2,7 +2,7 @@
 $id   = $_POST["id"];               // 아이디
 $pass = $_POST["pass"];             // 비밀번호
 $name = $_POST["name"];             // 이름
-$email  = $_POST["email"];          // 이메일
+$email = $_POST["email"];           // 이메일
 
 // 회원가입 날짜
 $regist_day = date("Y-m-d (H:i)");
@@ -23,28 +23,56 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-// 비밀번호 유효성 검사 (필요 시 유지)
+// 입력값 검증
+if (!preg_match("/^[a-zA-Z0-9!@#$%^&*]{4,15}$/", $id)) {
+    echo "<script>alert('아이디는 4~15자 이내의 영어, 숫자, 특수문자(!@#$%^&*)만 허용됩니다.'); history.back();</script>";
+    mysqli_close($con);
+    exit();
+}
+
+if (!preg_match("/^[가-힣a-zA-Z\s]+$/", $name)) {
+    echo "<script>alert('이름은 한글 또는 영어만 입력 가능합니다.'); history.back();</script>";
+    mysqli_close($con);
+    exit();
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "<script>alert('올바른 이메일 형식을 입력해 주세요.'); history.back();</script>";
+    mysqli_close($con);
+    exit();
+}
+
+// 비밀번호 유효성 검사
 if (!preg_match("/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/", $pass)) {
     echo "<script>alert('비밀번호는 최소 8자리 이상이며, 영어(대문자 또는 소문자), 숫자, 특수기호를 포함해야 합니다.'); history.back();</script>";
     mysqli_close($con); // DB 연결 종료
     exit();
 }
 
-// 이메일 중복 확인
-$email_check_sql = "SELECT * FROM members WHERE email = '$email'";
-$email_check_result = mysqli_query($con, $email_check_sql);
+// 비밀번호 해시화
+$hashed_pass = password_hash($pass, PASSWORD_BCRYPT);
 
-if (mysqli_num_rows($email_check_result) > 0) {
+// 이메일 중복 확인 (Prepared Statement 사용)
+$email_check_sql = "SELECT * FROM members WHERE email = ?";
+$stmt = $con->prepare($email_check_sql);
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$email_check_result = $stmt->get_result();
+
+if ($email_check_result->num_rows > 0) {
     echo "<script>alert('이미 가입된 이메일 주소입니다. 다른 이메일을 사용해 주세요.'); history.back();</script>";
+    $stmt->close();
     mysqli_close($con); // DB 연결 종료
     exit();
 }
+$stmt->close();
 
-// 데이터베이스에 회원 정보 삽입
-$sql = "INSERT INTO members (id, pass, name, email, regist_day) ";
-$sql .= "VALUES ('$id', '$pass', '$name', '$email', '$regist_day')";
+// 데이터베이스에 회원 정보 삽입 (Prepared Statement 사용)
+$sql = "INSERT INTO members (id, pass, name, email, regist_day) VALUES (?, ?, ?, ?, ?)";
+$stmt = $con->prepare($sql);
+$stmt->bind_param("sssss", $id, $hashed_pass, $name, $email, $regist_day);
 
-if (mysqli_query($con, $sql)) {
+if ($stmt->execute()) {
     // 회원가입 성공 시 알림 메시지 출력
     echo "<script>
               alert('회원가입에 성공했습니다!');
@@ -58,5 +86,6 @@ if (mysqli_query($con, $sql)) {
           </script>";
 }
 
+$stmt->close();
 mysqli_close($con);  // DB 연결 종료
 ?>

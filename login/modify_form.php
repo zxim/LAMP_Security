@@ -1,5 +1,10 @@
 <?php
 include "../memberboard/session.php"; // 세션 포함
+
+// CSRF 토큰 생성
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -9,41 +14,45 @@ include "../memberboard/session.php"; // 세션 포함
     <link rel="stylesheet" href="./css/style.css">
     <style>
         .join_form .col2 {
-    flex: 2;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* 왼쪽 정렬 */
-}
+            flex: 2;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* 왼쪽 정렬 */
+        }
 
-.join_form .col2 span {
-    display: inline-block;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    width: 100%; /* 입력 필드와 동일한 너비로 설정 */
-    box-sizing: border-box;
-}
-
+        .join_form .col2 span {
+            display: inline-block;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 100%; /* 입력 필드와 동일한 너비로 설정 */
+            box-sizing: border-box;
+        }
     </style>
     <script>
         function check_input() {
             const form = document.member;
 
-            if (!form.pass.value) {
-                alert("비밀번호를 입력하세요!");
-                form.pass.focus();
+            if (!form.current_pass.value) {
+                alert("현재 비밀번호를 입력하세요!");
+                form.current_pass.focus();
                 return;
             }
-            if (!form.pass_confirm.value) {
-                alert("비밀번호 확인을 입력하세요!");
-                form.pass_confirm.focus();
+            if (!form.new_pass.value) {
+                alert("새로운 비밀번호를 입력하세요!");
+                form.new_pass.focus();
                 return;
             }
-            if (form.pass.value !== form.pass_confirm.value) {
-                alert("비밀번호가 일치하지 않습니다!");
-                form.pass.focus();
+            if (!form.new_pass_confirm.value) {
+                alert("새로운 비밀번호 확인을 입력하세요!");
+                form.new_pass_confirm.focus();
+                return;
+            }
+            if (form.new_pass.value !== form.new_pass_confirm.value) {
+                alert("새로운 비밀번호가 일치하지 않습니다!");
+                form.new_pass.focus();
                 return;
             }
             form.submit();
@@ -51,11 +60,12 @@ include "../memberboard/session.php"; // 세션 포함
 
         function reset_form() {
             const form = document.member;
-            form.pass.value = "";
-            form.pass_confirm.value = "";
+            form.current_pass.value = "";
+            form.new_pass.value = "";
+            form.new_pass_confirm.value = "";
             form.name.value = "";
             form.email.value = "";
-            form.pass.focus();
+            form.current_pass.focus();
         }
 
         function go_back() {
@@ -74,6 +84,11 @@ include "../memberboard/session.php"; // 세션 포함
         die("데이터베이스 연결 실패: " . mysqli_connect_error());
     }
 
+    $userid = $_SESSION['userid'] ?? null;
+    if (!$userid) {
+        die("로그인을 해주세요.");
+    }
+
     // Prepared Statement를 사용하여 SQL 인젝션 방지
     $stmt = $con->prepare("SELECT * FROM members WHERE id = ?");
     $stmt->bind_param("s", $userid);
@@ -81,11 +96,10 @@ include "../memberboard/session.php"; // 세션 포함
     $result = $stmt->get_result();
 
     if ($result->num_rows === 0) {
-        die("로그인을 해주세요.");
+        die("사용자 정보를 찾을 수 없습니다.");
     }
 
     $row = $result->fetch_assoc();
-    $pass = htmlspecialchars($row["pass"], ENT_QUOTES, 'UTF-8');
     $name = htmlspecialchars($row["name"], ENT_QUOTES, 'UTF-8');
     $email = htmlspecialchars($row["email"], ENT_QUOTES, 'UTF-8');
     $points = htmlspecialchars($row["points"], ENT_QUOTES, 'UTF-8');
@@ -103,12 +117,16 @@ include "../memberboard/session.php"; // 세션 포함
                     <span class="col2"><?= htmlspecialchars($userid, ENT_QUOTES, 'UTF-8') ?></span>
                 </li>
                 <li>
-                    <span class="col1" style="font-weight: bold;">비밀번호</span>
-                    <span class="col2"><input type="password" name="pass"></span>
+                    <span class="col1" style="font-weight: bold;">현재 비밀번호</span>
+                    <span class="col2"><input type="password" name="current_pass"></span>
                 </li>
                 <li>
-                    <span class="col1" style="font-weight: bold;">비밀번호 확인</span>
-                    <span class="col2"><input type="password" name="pass_confirm"></span>
+                    <span class="col1" style="font-weight: bold;">새로운 비밀번호</span>
+                    <span class="col2"><input type="password" name="new_pass"></span>
+                </li>
+                <li>
+                    <span class="col1" style="font-weight: bold;">새로운 비밀번호 확인</span>
+                    <span class="col2"><input type="password" name="new_pass_confirm"></span>
                 </li>
                 <li>
                     <span class="col1" style="font-weight: bold;">이름</span>
@@ -122,6 +140,7 @@ include "../memberboard/session.php"; // 세션 포함
                     <span class="col1" style="font-weight: bold;">포인트</span>
                     <span class="col2">₩ <?= number_format($points) ?></span>
                 </li>
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                     <ul class="buttons">
                     <button type="button" onclick="check_input()">저장하기</button>
                     <button type="button" onclick="reset_form()">지우기</button>

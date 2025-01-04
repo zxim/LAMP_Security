@@ -1,48 +1,72 @@
 <?php
-    $id   = $_GET["id"];               // 아이디는 GET 방식으로 전달
-    $pass = $_POST["pass"];            // 비밀번호
-    $name = $_POST["name"];            // 이름
-    $email  = $_POST["email"];         // 이메일
+session_start();
 
-    $config = require '../config.php';  // 루트에 있는 config.php 파일 불러옴
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    die("잘못된 접근입니다.");
+}
 
-    // config.php에서 가져온 정보를 변수에 저장
-    $db_host = $config['DB_HOST'];
-    $db_user = $config['DB_USER'];
-    $db_password = $config['DB_PASSWORD'];
-    $db_name = $config['DB_NAME'];
+$id = $_GET["id"] ?? null;
+$current_pass = $_POST["current_pass"] ?? null;
+$new_pass = $_POST["new_pass"] ?? null;
+$name = $_POST["name"] ?? null;
+$email = $_POST["email"] ?? null;
+$csrf_token = $_POST["csrf_token"] ?? null;
 
-    // DB 접속
-    $con = mysqli_connect($db_host, $db_user, $db_password, $db_name);
+$config = require '../config.php'; // config.php 파일 로드
 
-    if (mysqli_connect_errno()) {
-        echo "<script>alert('데이터베이스 연결에 실패하였습니다. 다시 시도해 주세요.'); history.back();</script>";
-        exit();
-    }
+// DB 연결
+$con = mysqli_connect($config['DB_HOST'], $config['DB_USER'], $config['DB_PASSWORD'], $config['DB_NAME']);
+if (!$con) {
+    die("<script>alert('데이터베이스 연결 실패. 다시 시도해 주세요.'); history.back();</script>");
+}
 
-    // 비밀번호 유효성 검사
-    if (!preg_match("/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/", $pass)) {
-        echo "<script>alert('비밀번호는 최소 8자리 이상이며, 영어(대문자 또는 소문자), 숫자, 특수기호를 포함해야 합니다.'); history.back();</script>";
-        exit();
-    }
+// CSRF 토큰 검증
+if (!isset($_SESSION['csrf_token']) || $csrf_token !== $_SESSION['csrf_token']) {
+    die("<script>alert('잘못된 요청입니다. (CSRF 토큰 검증 실패)'); history.back();</script>");
+}
 
-    // 이메일 유효성 검사
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "<script>alert('유효한 이메일 주소를 입력하세요.'); history.back();</script>";
-        exit();
-    }
+// 기존 비밀번호 확인
+$stmt = $con->prepare("SELECT pass FROM members WHERE id = ?");
+$stmt->bind_param("s", $id);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    // Prepared Statement 사용해서 SQL 인젝션 방지
-    $stmt = $con->prepare("UPDATE members SET pass=?, name=?, email=? WHERE id=?");
-    $stmt->bind_param("ssss", $pass, $name, $email, $id);
+if ($result->num_rows === 0) {
+    die("<script>alert('존재하지 않는 사용자입니다.'); history.back();</script>");
+}
 
-    if ($stmt->execute()) {
-        echo "<script>location.href = 'index.php';</script>";  // 수정 완료 후 메인 페이지로 이동
-    } else {
-        echo "<script>alert('회원정보 수정에 실패하였습니다. 다시 시도해 주세요.'); history.back();</script>";
-    }
+$row = $result->fetch_assoc();
+$db_pass = $row["pass"];
 
-    // 자원 해제 및 DB 연결 종료
-    $stmt->close();
-    mysqli_close($con);
+// 비밀번호 해싱 비교
+if (!password_verify($current_pass, $db_pass)) {
+    die("<script>alert('현재 비밀번호가 올바르지 않습니다.'); history.back();</script>");
+}
+
+// 비밀번호 유효성 검사
+if (!empty($new_pass) && !preg_match("/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/", $new_pass)) {
+    die("<script>alert('새 비밀번호는 최소 8자리 이상, 영어, 숫자, 특수기호를 포함해야 합니다.'); history.back();</script>");
+}
+
+// 이메일 유효성 검사
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    die("<script>alert('유효한 이메일 형식을 입력하세요.'); history.back();</script>");
+}
+
+// 새 비밀번호 해싱
+$new_pass_hashed = !empty($new_pass) ? password_hash($new_pass, PASSWORD_DEFAULT) : $db_pass;
+
+// 회원 정보 업데이트
+$stmt = $con->prepare("UPDATE members SET pass = ?, name = ?, email = ? WHERE id = ?");
+$stmt->bind_param("ssss", $new_pass_hashed, $name, $email, $id);
+
+if ($stmt->execute()) {
+    echo "<script>alert('회원 정보가 성공적으로 수정되었습니다.'); location.href = 'index.php';</script>";
+} else {
+    echo "<script>alert('회원 정보 수정에 실패하였습니다. 다시 시도해 주세요.'); history.back();</script>";
+}
+
+// 자원 해제 및 DB 연결 종료
+$stmt->close();
+mysqli_close($con);
 ?>
