@@ -1,5 +1,11 @@
 <?php
-include "session.php"; 	// 세션 처리
+include "session.php"; // 세션 처리
+
+// CSRF 방지 토큰 생성
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$csrf_token = $_SESSION['csrf_token'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,10 +32,11 @@ include "session.php"; 	// 세션 처리
 <body>
 <?php include "../login/header.php"; ?> 
 	<form name="board" method="post" action="insert.php" enctype="multipart/form-data" style="margin-top: 30px";>
+	    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8') ?>">
 	    <ul class="board_form">
 			<li>
 				<span class="col1">이름 : </span>
-				<span class="col2"><?=$username?></span>
+				<span class="col2"><?= htmlspecialchars($username, ENT_QUOTES, 'UTF-8') ?></span>
 			</li>					
 	    	<li>
 	    		<span class="col1">제목</span>

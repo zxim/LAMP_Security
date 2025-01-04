@@ -16,7 +16,8 @@ $isAdmin = isset($_SESSION["admin"]) && $_SESSION["admin"] == 1;
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($id <= 0) {
-    die("잘못된 요청입니다.");
+    echo "<script>alert('잘못된 요청입니다.'); location.href = 'notices.php';</script>";
+    exit();
 }
 
 // 공지사항 데이터 가져오기
@@ -26,13 +27,14 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows === 0) {
-    die("해당 공지사항을 찾을 수 없습니다.");
+    echo "<script>alert('해당 공지사항을 찾을 수 없습니다.'); location.href = 'notices.php';</script>";
+    exit();
 }
 
 $row = $result->fetch_assoc();
-$title = $row['title'];
-$content = nl2br($row['content']);
-$created_at = $row['created_at'];
+$title = htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8');
+$content = nl2br(htmlspecialchars($row['content'], ENT_QUOTES, 'UTF-8'));
+$created_at = htmlspecialchars($row['created_at'], ENT_QUOTES, 'UTF-8');
 
 $stmt->close();
 mysqli_close($con);

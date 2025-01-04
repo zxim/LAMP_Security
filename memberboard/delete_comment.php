@@ -33,34 +33,46 @@ if ($comment_id <= 0 || $board_num <= 0) {
     exit;
 }
 
-// 댓글 작성자 확인 (comments.member_id와 현재 로그인된 user_num 비교)
-$sql = "SELECT member_id FROM comments WHERE comment_id = $comment_id AND board_num = $board_num";
-$result = mysqli_query($con, $sql);
-if (!$result || mysqli_num_rows($result) === 0) {
-    echo "<script>alert('해당 댓글을 찾을 수 없습니다.'); history.back();</script>";
+try {
+    // 댓글 작성자 확인 (Prepared Statement 사용)
+    $sql = "SELECT member_id FROM comments WHERE comment_id = ? AND board_num = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("ii", $comment_id, $board_num);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        echo "<script>alert('해당 댓글을 찾을 수 없습니다.'); history.back();</script>";
+        exit;
+    }
+
+    $row = $result->fetch_assoc();
+
+    // 댓글 작성자와 현재 로그인 사용자의 member_id 비교
+    if ((int)$row['member_id'] !== $member_id) {
+        echo "<script>alert('댓글을 삭제할 권한이 없습니다.'); history.back();</script>";
+        exit;
+    }
+
+    // 댓글 삭제 (Prepared Statement 사용)
+    $delete_sql = "DELETE FROM comments WHERE comment_id = ?";
+    $delete_stmt = $con->prepare($delete_sql);
+    $delete_stmt->bind_param("i", $comment_id);
+
+    if (!$delete_stmt->execute()) {
+        throw new Exception("댓글 삭제 실패: " . $delete_stmt->error);
+    }
+
+    // 성공적으로 삭제 후 게시글 페이지로 리디렉션
+    header("Location: view.php?num=$board_num");
     exit;
-}
-
-$row = mysqli_fetch_assoc($result);
-
-// 댓글 작성자와 현재 로그인 사용자의 member_id 비교
-if ((int)$row['member_id'] !== $member_id) {
-    echo "<script>alert('댓글을 삭제할 권한이 없습니다.'); history.back();</script>";
+} catch (Exception $e) {
+    echo "<script>alert('" . $e->getMessage() . "'); history.back();</script>";
     exit;
-}
-
-// 댓글 삭제
-$sql = "DELETE FROM comments WHERE comment_id = $comment_id";
-if (!mysqli_query($con, $sql)) {
-    echo "<script>alert('댓글 삭제 실패: " . mysqli_error($con) . "'); history.back();</script>";
+} finally {
+    // 자원 해제 및 DB 연결 종료
+    if (isset($stmt)) $stmt->close();
+    if (isset($delete_stmt)) $delete_stmt->close();
     mysqli_close($con);
-    exit;
 }
-
-// DB 연결 종료
-mysqli_close($con);
-
-// 댓글 삭제 후 게시글 페이지로 리디렉션
-header("Location: view.php?num=$board_num");
-exit;
 ?>

@@ -38,22 +38,24 @@ if (empty($comment_content)) {
     exit;
 }
 
-$comment_content = mysqli_real_escape_string($con, $comment_content); // SQL Injection 방지
-
 // 트랜잭션 시작
 mysqli_begin_transaction($con);
 
 try {
-    // 1. 댓글 데이터 삽입
-    $sql = "INSERT INTO comments (board_num, member_id, content) VALUES ($board_num, $member_id, '$comment_content')";
-    if (!mysqli_query($con, $sql)) {
-        throw new Exception("댓글 작성 실패: " . mysqli_error($con));
+    // 1. 댓글 데이터 삽입 (Prepared Statement 사용)
+    $sql = "INSERT INTO comments (board_num, member_id, content, regist_day) VALUES (?, ?, ?, NOW())";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("iis", $board_num, $member_id, $comment_content);
+    if (!$stmt->execute()) {
+        throw new Exception("댓글 작성 실패: " . $stmt->error);
     }
 
     // 2. 포인트 지급 (10점)
-    $update_sql = "UPDATE members SET points = points + 10 WHERE num = $member_id";
-    if (!mysqli_query($con, $update_sql)) {
-        throw new Exception("포인트 지급 실패: " . mysqli_error($con));
+    $update_sql = "UPDATE members SET points = points + 10 WHERE num = ?";
+    $update_stmt = $con->prepare($update_sql);
+    $update_stmt->bind_param("i", $member_id);
+    if (!$update_stmt->execute()) {
+        throw new Exception("포인트 지급 실패: " . $update_stmt->error);
     }
 
     // 트랜잭션 커밋
@@ -69,7 +71,9 @@ try {
     echo "<script>alert('" . $e->getMessage() . "'); history.back();</script>";
     exit;
 } finally {
-    // DB 연결 종료
+    // 자원 해제 및 DB 연결 종료
+    if (isset($stmt)) $stmt->close();
+    if (isset($update_stmt)) $update_stmt->close();
     mysqli_close($con);
 }
 ?>

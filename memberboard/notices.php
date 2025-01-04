@@ -1,5 +1,5 @@
 <?php
-include "session.php";
+include "session.php"; // 세션 처리
 
 // 세션에서 사용자 정보 가져오기
 $userid = isset($_SESSION["userid"]) ? $_SESSION["userid"] : "";
@@ -24,27 +24,43 @@ $offset = ($page - 1) * $limit;
 
 // 검색 조건 추가
 $where = "";
+$params = [];
 if (!empty($search)) {
-    $search = mysqli_real_escape_string($con, $search);
-    $where = "WHERE title LIKE '%$search%'";
+    $where = "WHERE title LIKE ?";
+    $params[] = "%$search%";
 }
 
-// 공지사항 가져오기
+// 공지사항 총 개수 가져오기
 $sql_count = "SELECT COUNT(*) as total FROM notices $where";
-$result_count = mysqli_query($con, $sql_count);
-$total = mysqli_fetch_assoc($result_count)['total'];
-
+$stmt_count = $con->prepare($sql_count);
+if (!empty($params)) {
+    $stmt_count->bind_param(str_repeat("s", count($params)), ...$params);
+}
+$stmt_count->execute();
+$result_count = $stmt_count->get_result();
+$total = $result_count->fetch_assoc()['total'];
 $total_pages = ceil($total / $limit);
 
+// 공지사항 가져오기
 $sql = "SELECT id, title, DATE(created_at) as created_date 
         FROM notices 
         $where 
         ORDER BY created_at DESC 
-        LIMIT $limit OFFSET $offset";
-$result = mysqli_query($con, $sql);
+        LIMIT ? OFFSET ?";
+$stmt = $con->prepare($sql);
+
+if (!empty($params)) {
+    $params[] = $limit;
+    $params[] = $offset;
+    $stmt->bind_param(str_repeat("s", count($params) - 2) . "ii", ...$params);
+} else {
+    $stmt->bind_param("ii", $limit, $offset);
+}
+$stmt->execute();
+$result = $stmt->get_result();
 
 if (!$result) {
-    die("쿼리 실행 실패: " . mysqli_error($con));
+    die("쿼리 실행 실패: " . $stmt->error);
 }
 ?>
 <!DOCTYPE html>
@@ -201,21 +217,20 @@ if (!$result) {
         </div>
 
         <form class="notice-search" method="get" action="notices.php">
-            <input type="text" name="search" placeholder="제목 검색" value="<?= $search ?>">
+            <input type="text" name="search" placeholder="제목 검색" value="<?= htmlspecialchars($search, ENT_QUOTES, 'UTF-8') ?>">
             <button type="submit">검색</button>
         </form>
                     
         <ul class="notice-list">
-            <?php while ($row = mysqli_fetch_assoc($result)): ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
                 <li>
-                    <a href="notice_view.php?id=<?= $row['id']; ?>">
-                        <?= $row['title']; ?>
+                    <a href="notice_view.php?id=<?= htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') ?>">
+                        <?= htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8') ?>
                     </a>
-                    <small><?= $row['created_date']; ?></small>
+                    <small><?= htmlspecialchars($row['created_date'], ENT_QUOTES, 'UTF-8') ?></small>
                 </li>
             <?php endwhile; ?>
         </ul>
-
 
         <div class="pagination">
             <?php if ($page > 1): ?>

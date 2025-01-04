@@ -3,7 +3,7 @@ include "session.php";
 
 // 관리자인지 확인
 if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
-    echo "<script>alert('관리자만 접근 가능합니다.'); history.back();</script>";
+    echo "<script>alert('관리자만 접근 가능합니다.'); location.href = 'notices.php';</script>";
     exit();
 }
 
@@ -19,18 +19,24 @@ if (mysqli_connect_errno()) {
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($id <= 0) {
-    echo "<script>alert('잘못된 요청입니다.'); history.back();</script>";
+    echo "<script>alert('잘못된 요청입니다.'); location.href = 'notices.php';</script>";
     exit();
 }
 
-// 공지사항 삭제
-$sql = "DELETE FROM notices WHERE id = $id";
-
-if (mysqli_query($con, $sql)) {
-    echo "<script>alert('공지사항이 삭제되었습니다.'); location.href = 'notices.php';</script>";
-} else {
-    echo "<script>alert('공지사항 삭제에 실패했습니다. 다시 시도하세요.'); history.back();</script>";
+// Prepared Statement를 사용하여 공지사항 삭제
+$stmt = $con->prepare("DELETE FROM notices WHERE id = ?");
+if (!$stmt) {
+    echo "<script>alert('쿼리 준비 실패: " . mysqli_error($con) . "'); location.href = 'notices.php';</script>";
+    exit();
 }
 
+$stmt->bind_param("i", $id);
+if ($stmt->execute()) {
+    echo "<script>alert('공지사항이 삭제되었습니다.'); location.href = 'notices.php';</script>";
+} else {
+    echo "<script>alert('공지사항 삭제에 실패했습니다. 다시 시도하세요.'); location.href = 'notices.php';</script>";
+}
+
+$stmt->close();
 mysqli_close($con);
 ?>

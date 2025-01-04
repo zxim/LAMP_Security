@@ -23,21 +23,32 @@ if (empty($_POST["subject"]) || empty($_POST["content"])) {
     exit();
 }
 
-$subject = htmlspecialchars($_POST["subject"], ENT_QUOTES); // HTML 특수문자 처리
-$content = htmlspecialchars($_POST["content"], ENT_QUOTES); // HTML 특수문자 처리
+$subject = htmlspecialchars(trim($_POST["subject"]), ENT_QUOTES, 'UTF-8'); // HTML 특수문자 처리
+$content = htmlspecialchars(trim($_POST["content"]), ENT_QUOTES, 'UTF-8'); // HTML 특수문자 처리
 $regist_day = date("Y-m-d (H:i)");  // 수정 시간
 
 $upload_dir = './data/'; // 업로드 디렉토리
 
 // 파일 업로드 처리
-$upfile_name = $_FILES["upfile"]["name"];
-$upfile_tmp_name = $_FILES["upfile"]["tmp_name"];
-$upfile_error = $_FILES["upfile"]["error"];
+$upfile_name = $_FILES["upfile"]["name"] ?? null;
+$upfile_tmp_name = $_FILES["upfile"]["tmp_name"] ?? null;
+$upfile_error = $_FILES["upfile"]["error"] ?? null;
 
 if ($upfile_name && !$upfile_error) {
-    $uploaded_file = $upload_dir . $upfile_name; // 파일명을 그대로 사용
+    $file_ext = strtolower(pathinfo($upfile_name, PATHINFO_EXTENSION)); // 확장자 추출
+    $allowed_ext = ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'txt']; // 허용된 확장자
 
-    // **취약점: 파일 크기 제한 없음, 확장자 검증 없음**
+    if (!in_array($file_ext, $allowed_ext)) {
+        echo "<script>
+        alert('허용되지 않은 파일 형식입니다.');
+        history.back();  // 잘못된 확장자일 경우 이전 페이지로 이동
+        </script>";
+        exit();
+    }
+
+    $unique_file_name = md5(uniqid(rand(), true)) . "." . $file_ext; // 고유한 파일 이름 생성
+    $uploaded_file = $upload_dir . $unique_file_name;
+
     if (!move_uploaded_file($upfile_tmp_name, $uploaded_file)) {
         echo "<script>
         alert('파일 업로드에 실패했습니다.');
@@ -46,7 +57,7 @@ if ($upfile_name && !$upfile_error) {
         exit();
     }
 } else {
-    $upfile_name = ""; // 파일이 없는 경우 처리
+    $unique_file_name = ""; // 파일이 없는 경우 처리
 }
 
 $config = require '../config.php';  // DB 설정 불러오기
@@ -62,10 +73,10 @@ if (!$con) {
     exit();
 }
 
-// 글 수정 쿼리 (Prepared statement 사용)
+// 글 수정 쿼리 (Prepared Statement 사용)
 $sql = "UPDATE memberboard SET subject = ?, content = ?, regist_day = ?, file_name = ? WHERE num = ?";
 $stmt = mysqli_prepare($con, $sql);
-mysqli_stmt_bind_param($stmt, "ssssi", $subject, $content, $regist_day, $upfile_name, $num);
+mysqli_stmt_bind_param($stmt, "ssssi", $subject, $content, $regist_day, $unique_file_name, $num);
 $execute_result = mysqli_stmt_execute($stmt);
 
 // 수정 성공 여부 확인

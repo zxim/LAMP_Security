@@ -3,7 +3,7 @@ include "session.php";
 
 // 관리자인지 확인
 if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
-    echo "<script>alert('관리자만 접근 가능합니다.'); history.back();</script>";
+    echo "<script>alert('관리자만 접근 가능합니다.'); location.href = 'notices.php';</script>";
     exit();
 }
 
@@ -11,36 +11,40 @@ $config = require '../config.php'; // DB 설정 가져오기
 
 // DB 연결
 $con = mysqli_connect($config['DB_HOST'], $config['DB_USER'], $config['DB_PASSWORD'], $config['DB_NAME']);
-if (mysqli_connect_errno()) {
+if (!$con) {
     die("DB 연결 실패: " . mysqli_connect_error());
 }
 
 // 작성 폼 제출 처리
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // 사용자 입력값 가져오기
     $title = trim($_POST["title"]);
     $content = trim($_POST["content"]);
 
+    // 입력값 검증
     if (empty($title) || empty($content)) {
-        echo "<script>alert('제목과 내용을 입력하세요.'); history.back();</script>";
+        echo "<script>alert('제목과 내용을 입력하세요.'); location.href = 'notice_write.php';</script>";
         exit();
     }
 
+    // Prepared Statement를 사용하여 안전하게 데이터 삽입
     $stmt = $con->prepare("INSERT INTO notices (title, content) VALUES (?, ?)");
+    if (!$stmt) {
+        die("쿼리 준비 실패: " . $con->error);
+    }
     $stmt->bind_param("ss", $title, $content);
 
     if ($stmt->execute()) {
         // 작성 성공 시 목록으로 리디렉션
         echo "<script>alert('공지사항이 작성되었습니다.'); location.href = 'notices.php';</script>";
     } else {
-        echo "<script>alert('공지사항 작성에 실패했습니다. 다시 시도하세요.'); history.back();</script>";
+        echo "<script>alert('공지사항 작성에 실패했습니다. 다시 시도하세요.'); location.href = 'notice_write.php';</script>";
     }
 
     $stmt->close();
     mysqli_close($con);
     exit();
 }
-
-// HTML 시작
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -112,13 +116,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             cursor: pointer;
             text-align: center;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 약간의 그림자 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
         .notice-write-buttons .btn:hover {
             background-color: #007aff; 
-            color: #fff; /* 글씨 파란색으로 변경 */
+            color: #fff;
             border: 1px solid #007aff;
-            box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4); /* 강조된 그림자 */
+            box-shadow: 0 4px 8px rgba(0, 122, 255, 0.4);
         }
     </style>
 </head>
