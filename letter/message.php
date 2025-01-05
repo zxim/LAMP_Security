@@ -10,33 +10,41 @@ if (!$con) {
 }
 
 // 세션에서 로그인 사용자 정보 가져오기
-$user_id = isset($_SESSION['userid']) ? $_SESSION['userid'] : null;
+$user_id = $_SESSION['userid'] ?? null;
 
 if (!$user_id) {
     echo "<script>alert('로그인 후 이용 가능합니다.'); location.href='/project/login/login_form.php';</script>";
     exit;
 }
 
-// 받은 쪽지 목록
+// 받은 쪽지 목록 쿼리
 $received_query = "
-    SELECT m.*, s.name AS sender_name 
+    SELECT m.id, m.subject, m.sent_at, s.name AS sender_name 
     FROM messages AS m
     JOIN members AS s ON m.sender_id = s.id
-    WHERE m.receiver_id = '$user_id' 
-    ORDER BY m.sent_at DESC";
-$received_result = mysqli_query($con, $received_query);
+    WHERE m.receiver_id = ?
+    ORDER BY m.sent_at DESC
+";
+$received_stmt = mysqli_prepare($con, $received_query);
+mysqli_stmt_bind_param($received_stmt, "s", $user_id);
+mysqli_stmt_execute($received_stmt);
+$received_result = mysqli_stmt_get_result($received_stmt);
 
-// 보낸 쪽지 목록
+// 보낸 쪽지 목록 쿼리
 $sent_query = "
-    SELECT m.*, r.name AS receiver_name 
+    SELECT m.id, m.subject, m.sent_at, r.name AS receiver_name 
     FROM messages AS m
     JOIN members AS r ON m.receiver_id = r.id
-    WHERE m.sender_id = '$user_id' 
-    ORDER BY m.sent_at DESC";
-$sent_result = mysqli_query($con, $sent_query);
+    WHERE m.sender_id = ?
+    ORDER BY m.sent_at DESC
+";
+$sent_stmt = mysqli_prepare($con, $sent_query);
+mysqli_stmt_bind_param($sent_stmt, "s", $user_id);
+mysqli_stmt_execute($sent_stmt);
+$sent_result = mysqli_stmt_get_result($sent_stmt);
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <title>쪽지함</title>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -147,13 +155,13 @@ $sent_result = mysqli_query($con, $sent_query);
                 <?php while ($row = mysqli_fetch_assoc($received_result)) { ?>
                     <div class="message-list-item">
                         <div>
-                            <a href="view.php?id=<?= $row['id'] ?>">
+                            <a href="view.php?id=<?= htmlspecialchars($row['id']) ?>">
                                 [<?= htmlspecialchars($row['subject']) ?>] 
-                                <span class="message-meta">- <?= htmlspecialchars($row['sender_name']) ?> (<?= $row['sent_at'] ?>)</span>
+                                <span class="message-meta">- <?= htmlspecialchars($row['sender_name']) ?> (<?= htmlspecialchars($row['sent_at']) ?>)</span>
                             </a>
                         </div>
                         <form action="delete.php" method="post" class="message-delete-form">
-                            <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>">
                             <button type="submit">삭제</button>
                         </form>
                     </div>
@@ -168,13 +176,13 @@ $sent_result = mysqli_query($con, $sent_query);
                 <?php while ($row = mysqli_fetch_assoc($sent_result)) { ?>
                     <div class="message-list-item">
                         <div>
-                            <a href="view.php?id=<?= $row['id'] ?>">
+                            <a href="view.php?id=<?= htmlspecialchars($row['id']) ?>">
                                 [<?= htmlspecialchars($row['subject']) ?>] 
-                                <span class="message-meta">- <?= htmlspecialchars($row['receiver_name']) ?> (<?= $row['sent_at'] ?>)</span>
+                                <span class="message-meta">- <?= htmlspecialchars($row['receiver_name']) ?> (<?= htmlspecialchars($row['sent_at']) ?>)</span>
                             </a>
                         </div>
                         <form action="delete.php" method="post" class="message-delete-form">
-                            <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>">
                             <button type="submit">삭제</button>
                         </form>
                     </div>
@@ -185,4 +193,8 @@ $sent_result = mysqli_query($con, $sent_query);
 </div>
 </body>
 </html>
-<?php mysqli_close($con); ?>
+<?php
+mysqli_stmt_close($received_stmt);
+mysqli_stmt_close($sent_stmt);
+mysqli_close($con);
+?>

@@ -12,10 +12,15 @@ if (!$con) {
 
 // 쪽지 데이터 가져오기
 $message_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-$user_id = isset($_SESSION['userid']) ? $_SESSION['userid'] : null;
+$user_id = $_SESSION['userid'] ?? null;
 
 if (!$user_id) {
     echo "<script>alert('로그인 후 이용 가능합니다.'); location.href='/project/login/login_form.php';</script>";
+    exit;
+}
+
+if ($message_id <= 0) {
+    echo "<script>alert('유효하지 않은 메시지 ID입니다.'); history.back();</script>";
     exit;
 }
 
@@ -26,9 +31,12 @@ $query = "
         s.name AS sender_name 
     FROM messages AS m
     JOIN members AS s ON m.sender_id = s.id
-    WHERE m.id = $message_id AND (m.receiver_id = '$user_id' OR m.sender_id = '$user_id')
+    WHERE m.id = ? AND (m.receiver_id = ? OR m.sender_id = ?)
 ";
-$result = mysqli_query($con, $query);
+$stmt = mysqli_prepare($con, $query);
+mysqli_stmt_bind_param($stmt, "iss", $message_id, $user_id, $user_id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 if (!$result || mysqli_num_rows($result) === 0) {
     echo "<script>alert('메시지를 찾을 수 없습니다.'); history.back();</script>";
@@ -36,9 +44,10 @@ if (!$result || mysqli_num_rows($result) === 0) {
 }
 
 $message = mysqli_fetch_assoc($result);
+mysqli_stmt_close($stmt);
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <title>쪽지 보기</title>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -54,10 +63,12 @@ $message = mysqli_fetch_assoc($result);
         <?= nl2br(htmlspecialchars($message['content'])) ?>
     </div>
     <div style="text-align: center; margin-top: 20px;">
-        <a class="message-btn" href="message.php" style="margin-right: 20px;">목록으로 돌아가기</a>
+        <a class="message-btn" href="message.php">목록으로 돌아가기</a>
         <a class="message-btn" href="reply.php?receiver_id=<?= htmlspecialchars($message['sender_id']) ?>">답장하기</a>
     </div>
 </div>
 </body>
 </html>
-<?php mysqli_close($con); ?>
+<?php
+mysqli_close($con);
+?>

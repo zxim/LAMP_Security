@@ -11,31 +11,60 @@ if (!$con) {
 
 // 쪽지 작성 처리
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $sender_id = isset($_SESSION['userid']) ? $_SESSION['userid'] : null;
-    $receiver_id = $_POST['receiver_id'];
-    $subject = mysqli_real_escape_string($con, $_POST['subject']);
-    $content = mysqli_real_escape_string($con, $_POST['content']);
+    $sender_id = $_SESSION['userid'] ?? null;
+    $receiver_id = trim($_POST['receiver_id']);
+    $subject = trim($_POST['subject']);
+    $content = trim($_POST['content']);
 
     if (!$sender_id) {
         echo "<script>alert('로그인 후 이용 가능합니다.'); location.href='/project/login/login_form.php';</script>";
         exit;
     }
 
-    // 메시지 삽입
-    $query = "INSERT INTO messages (sender_id, receiver_id, subject, content) VALUES ('$sender_id', '$receiver_id', '$subject', '$content')";
-    if (!mysqli_query($con, $query)) {
-        echo "<script>alert('쪽지 보내기 실패: " . mysqli_error($con) . "'); history.back();</script>";
+    // 입력값 검증
+    if (empty($receiver_id) || empty($subject) || empty($content)) {
+        echo "<script>alert('모든 필드를 입력해주세요.'); history.back();</script>";
         exit;
     }
 
-    echo "<script>alert('쪽지가 성공적으로 전송되었습니다.'); location.href='message.php';</script>";
+    if (mb_strlen($subject) > 100) {
+        echo "<script>alert('제목은 100자 이내로 입력해주세요.'); history.back();</script>";
+        exit;
+    }
+
+    // 받는 사람 ID 확인
+    $receiver_query = "SELECT id FROM members WHERE id = ?";
+    $stmt = mysqli_prepare($con, $receiver_query);
+    mysqli_stmt_bind_param($stmt, "s", $receiver_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+
+    if (mysqli_stmt_num_rows($stmt) === 0) {
+        echo "<script>alert('받는 사람 ID가 존재하지 않습니다.'); history.back();</script>";
+        mysqli_stmt_close($stmt);
+        exit;
+    }
+    mysqli_stmt_close($stmt);
+
+    // 메시지 삽입
+    $insert_query = "INSERT INTO messages (sender_id, receiver_id, subject, content) VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_prepare($con, $insert_query);
+    mysqli_stmt_bind_param($stmt, "ssss", $sender_id, $receiver_id, $subject, $content);
+
+    if (mysqli_stmt_execute($stmt)) {
+        echo "<script>alert('쪽지가 성공적으로 전송되었습니다.'); location.href='message.php';</script>";
+    } else {
+        echo "<script>alert('쪽지 보내기 실패: " . htmlspecialchars(mysqli_stmt_error($stmt)) . "'); history.back();</script>";
+    }
+
+    mysqli_stmt_close($stmt);
     exit;
 }
 mysqli_close($con);
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <title>쪽지 보내기</title>
     <link rel="stylesheet" type="text/css" href="style.css">
