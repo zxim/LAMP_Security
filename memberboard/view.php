@@ -6,6 +6,8 @@ $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1; // 페이지 번호
 
 $config = require '../config.php'; // DB 설정 불러오기
 
+$is_admin = isset($_SESSION["admin"]) && $_SESSION["admin"] == 1;
+
 // 비밀번호 입력 제한 확인 및 초기화
 if (isset($_SESSION["password_attempts"][$num])) {
     $attempts = $_SESSION["password_attempts"][$num];
@@ -57,7 +59,7 @@ $password = $row["password"];
 $is_secret = !empty($password);
 
 // 비밀번호 확인
-if ($is_secret) {
+if ($is_secret && !$is_admin) {
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $input_password = $_POST["input_password"];
         if ($input_password !== $password) { // 평문 비교
@@ -246,3 +248,4 @@ $stmt->close();
     </div>
 </body>
 </html>
+

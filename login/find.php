@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
                     $mail->Username = 'tlaals7241@gmail.com'; // Gmail 주소
-                    $mail->Password = '';   // 요청된 비밀번호 유지
+                    $mail->Password = '';   // 비번 입력
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                     $mail->Port = 587;
 
