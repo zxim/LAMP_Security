@@ -1,7 +1,7 @@
 <?php
 // 네이버 API 정보
-$client_id = "L03yDaGTVG8V0L4dDlcZ"; 
-$client_secret = "1IMPLcywV1"; 
+$client_id = ""; 
+$client_secret = ""; 
 
 // 검색어 가져오기 및 검증
 $query = isset($_GET['query']) ? trim($_GET['query']) : '';
