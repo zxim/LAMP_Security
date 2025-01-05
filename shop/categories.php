@@ -1,3 +1,13 @@
+<?php
+// CSRF 토큰 생성
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$csrf_token = $_SESSION['csrf_token'];
+?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -87,6 +97,7 @@
 
             <div class="color-options">
                 <form action="purchase.php" method="POST" id="purchaseForm">
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                     <input type="hidden" name="productName" id="formProductName">
                     <input type="hidden" name="selectedColor" id="formSelectedColor">
                     <input type="hidden" name="storage" id="formStorage">
@@ -95,6 +106,7 @@
                     <button type="button" onclick="preparePurchase()">Buy</button>
                 </form>
                 <form action="insert.php" method="POST" id="cartForm">
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                     <input type="hidden" name="productName" id="formCartProductName">
                     <input type="hidden" name="selectedColor" id="formCartSelectedColor">
                     <input type="hidden" name="storage" id="formCartStorage">

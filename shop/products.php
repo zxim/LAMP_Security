@@ -9,16 +9,27 @@ if (!$con) {
     exit;
 }
 
-// 카테고리 가져오기
-$category = isset($_GET['category']) ? mysqli_real_escape_string($con, $_GET['category']) : '';
+// 카테고리 가져오기 및 검증
+$category = $_GET['category'] ?? '';
 if (empty($category)) {
     echo "<script>alert('유효한 카테고리를 선택해주세요.'); history.back();</script>";
     exit;
 }
 
-// 해당 카테고리 상품 데이터 가져오기
-$sql = "SELECT * FROM products WHERE category = '$category'";
-$result = mysqli_query($con, $sql);
+// SQL 인젝션 방지: Prepared Statement 사용
+$sql = "SELECT * FROM products WHERE category = ?";
+$stmt = mysqli_prepare($con, $sql);
+if (!$stmt) {
+    echo "<script>alert('쿼리 준비 실패: " . mysqli_error($con) . "'); history.back();</script>";
+    exit;
+}
+mysqli_stmt_bind_param($stmt, 's', $category);
+if (!mysqli_stmt_execute($stmt)) {
+    echo "<script>alert('쿼리 실행 실패: " . mysqli_stmt_error($stmt) . "'); history.back();</script>";
+    exit;
+}
+$result = mysqli_stmt_get_result($stmt);
+
 if (!$result || mysqli_num_rows($result) === 0) {
     echo "<script>alert('해당 카테고리에 상품이 없습니다.'); history.back();</script>";
     exit;
@@ -76,11 +87,11 @@ if (!$result || mysqli_num_rows($result) === 0) {
     <div class="product-container">
         <?php while ($row = mysqli_fetch_assoc($result)): ?>
             <div class="product-card">
-                <img src="./images/<?= $row['product_id'] ?>.jpg" alt="<?= htmlspecialchars($row['name']) ?>">
+                <img src="./images/<?= htmlspecialchars($row['product_id']) ?>.jpg" alt="<?= htmlspecialchars($row['name']) ?>">
                 <h3><?= htmlspecialchars($row['name']) ?></h3>
-                <p>가격: <?= htmlspecialchars($row['price']) ?> 포인트</p>
+                <p>가격: <?= number_format(htmlspecialchars($row['price'])) ?> 포인트</p>
                 <form action="purchase.php" method="post">
-                    <input type="hidden" name="product_id" value="<?= $row['product_id'] ?>">
+                    <input type="hidden" name="product_id" value="<?= htmlspecialchars($row['product_id']) ?>">
                     <button type="submit">구매하기</button>
                 </form>
             </div>
@@ -90,5 +101,7 @@ if (!$result || mysqli_num_rows($result) === 0) {
 </html>
 
 <?php
+// DB 연결 종료
+mysqli_stmt_close($stmt);
 mysqli_close($con);
 ?>

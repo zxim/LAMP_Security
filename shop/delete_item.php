@@ -16,18 +16,39 @@ if (!$con) {
     exit;
 }
 
+// 요청 데이터 가져오기 및 검증
 $data = json_decode(file_get_contents("php://input"), true);
-$cartId = $data['cartId'] ?? 0;
+$cartId = $data['cartId'] ?? null;
+$csrfToken = $data['csrf_token'] ?? null;
 
-if ($cartId) {
-    $sql = "DELETE FROM cart WHERE cart_id = $cartId AND member_id = $user_num";
-    if (mysqli_query($con, $sql)) {
+// CSRF 토큰 검증
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (empty($csrfToken) || $csrfToken !== $_SESSION['csrf_token']) {
+    echo json_encode(["success" => false, "message" => "CSRF 토큰 검증 실패"]);
+    exit;
+}
+
+// 입력값 검증
+if (!is_numeric($cartId) || $cartId <= 0) {
+    echo json_encode(["success" => false, "message" => "잘못된 요청"]);
+    exit;
+}
+
+// SQL 인젝션 방지: Prepared Statement 사용
+$sql = "DELETE FROM cart WHERE cart_id = ? AND member_id = ?";
+$stmt = mysqli_prepare($con, $sql);
+if ($stmt) {
+    mysqli_stmt_bind_param($stmt, "ii", $cartId, $user_num);
+    if (mysqli_stmt_execute($stmt)) {
         echo json_encode(["success" => true]);
     } else {
-        echo json_encode(["success" => false, "message" => mysqli_error($con)]);
+        echo json_encode(["success" => false, "message" => "쿼리 실행 실패"]);
     }
+    mysqli_stmt_close($stmt);
 } else {
-    echo json_encode(["success" => false, "message" => "잘못된 요청"]);
+    echo json_encode(["success" => false, "message" => "쿼리 준비 실패"]);
 }
 
 mysqli_close($con);

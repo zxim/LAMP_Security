@@ -11,12 +11,12 @@ $db_name = $config['DB_NAME'];
 // DB 연결
 $con = mysqli_connect($db_host, $db_user, $db_password, $db_name);
 if (!$con) {
-    die("DB 연결 실패: " . mysqli_connect_error());
+    die("<script>alert('DB 연결 실패: " . mysqli_connect_error() . "'); history.back();</script>");
 }
 
 // 로그인한 사용자의 ID가 있는지 확인
-if ($user_num == 0) {
-    die("로그인 후 이용해주세요.");
+if (empty($user_num)) {
+    die("<script>alert('로그인 후 이용해주세요.'); history.back();</script>");
 }
 
 // 사용자 구매 목록 가져오기
@@ -28,13 +28,14 @@ $query = "
     ORDER BY o.order_date DESC
 ";
 $stmt = mysqli_prepare($con, $query);
-mysqli_stmt_bind_param($stmt, "i", $user_num);
-mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt);
-
-if (!$result) {
-    die("쿼리 실행 중 오류 발생: " . mysqli_error($con));
+if (!$stmt) {
+    die("<script>alert('쿼리 준비 실패: " . mysqli_error($con) . "'); history.back();</script>");
 }
+mysqli_stmt_bind_param($stmt, "i", $user_num);
+if (!mysqli_stmt_execute($stmt)) {
+    die("<script>alert('쿼리 실행 실패: " . mysqli_stmt_error($stmt) . "'); history.back();</script>");
+}
+$result = mysqli_stmt_get_result($stmt);
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -61,11 +62,15 @@ if (!$result) {
             <tbody>
                 <?php while ($row = mysqli_fetch_assoc($result)): ?>
                     <tr>
-                        <td><img src="<?php echo htmlspecialchars($row['image_url']); ?>" alt="<?php echo htmlspecialchars($row['product_name']); ?>" style="width: 100px; height: auto; border-radius: 10px;"></td>
+                        <td>
+                            <img src="<?php echo htmlspecialchars($row['image_url'] ?? '/project/images/default.jpg'); ?>" 
+                                 alt="<?php echo htmlspecialchars($row['product_name']); ?>" 
+                                 style="width: 100px; height: auto; border-radius: 10px;">
+                        </td>
                         <td><?php echo htmlspecialchars($row['product_name']); ?></td>
-                        <td><?php echo $row['quantity']; ?></td>
+                        <td><?php echo htmlspecialchars($row['quantity']); ?></td>
                         <td>₩<?php echo number_format($row['total_price']); ?></td>
-                        <td><?php echo $row['order_date']; ?></td>
+                        <td><?php echo htmlspecialchars($row['order_date']); ?></td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>
@@ -80,4 +85,3 @@ if (!$result) {
 mysqli_stmt_close($stmt);
 mysqli_close($con);
 ?>
-
